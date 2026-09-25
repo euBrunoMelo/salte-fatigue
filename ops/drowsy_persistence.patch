@@ -1,0 +1,316 @@
+--- a/main.py
++++ b/main.py
+@@ -6,6 +6,8 @@
+ import queue
+ import threading
+ import argparse
++import json
++import uuid
+ import numpy as np
+ 
+ _RISK_BEHAVIORS = [
+@@ -76,23 +78,75 @@
+ seatbelt_detector = SeatbeltDetector()
+ smoking_detector  = SmokingDetector()
+ 
++
++def _publish_closed_file(temporary_path, final_path):
++    """Publish a fully written file without replacing an existing event."""
++    with open(temporary_path, "rb") as source:
++        os.fsync(source.fileno())
++    os.link(temporary_path, final_path)
++    os.unlink(temporary_path)
++    directory_fd = os.open(os.path.dirname(final_path), os.O_RDONLY | os.O_DIRECTORY)
++    try:
++        os.fsync(directory_fd)
++    finally:
++        os.close(directory_fd)
++
++
++def _write_final_bytes(final_path, content):
++    os.makedirs(os.path.dirname(final_path), exist_ok=True)
++    temporary_path = final_path + ".partial"
++    with open(temporary_path, "xb") as output:
++        output.write(content)
++        output.flush()
++        os.fsync(output.fileno())
++    _publish_closed_file(temporary_path, final_path)
++
++
++def _finish_video(writer, temporary_path, final_path):
++    writer.release()
++    capture = cv2.VideoCapture(temporary_path)
++    valid = capture.isOpened() and capture.read()[0]
++    capture.release()
++    if not valid:
++        raise RuntimeError(f"Video incompleto preservado: {temporary_path}")
++    _publish_closed_file(temporary_path, final_path)
++
++
++def _free_bytes(directory):
++    filesystem = os.statvfs(directory)
++    return filesystem.f_bavail * filesystem.f_frsize
++
++
+ class _AsyncVideoWriter:
+     """Encodes and writes frames in a background thread so the main loop never blocks on disk I/O."""
+ 
+     def __init__(self):
+         self._writer = None
++        self._error = None
+         self._q = queue.Queue(maxsize=10)
+         threading.Thread(target=self._worker, daemon=True).start()
+ 
+     def _worker(self):
+         while True:
+             writer, frame = self._q.get()
+-            writer.write(frame)
+-            self._q.task_done()
++            try:
++                if self._error is None:
++                    writer.write(frame)
++            except Exception as error:
++                self._error = error
++            finally:
++                self._q.task_done()
+ 
+     def open(self, path, fourcc, fps, size):
++        self._error = None
++        if self._writer is not None:
++            self._writer.release()
+         self._writer = cv2.VideoWriter(path, fourcc, fps, size)
+-        return self._writer.isOpened()
++        if not self._writer.isOpened():
++            self._writer.release()
++            self._writer = None
++            return False
++        return True
+ 
+     def write(self, frame):
+         if self._writer is not None:
+@@ -106,15 +160,31 @@
+             self._q.join()  # flush all pending frames before closing
+             self._writer.release()
+             self._writer = None
++            if self._error is not None:
++                raise RuntimeError(f"Falha ao gravar video: {self._error}")
+ 
+     def isOpened(self):
+         return self._writer is not None and self._writer.isOpened()
+ 
+ 
+-def initialize_picamera2(camera_num=1):
+-    """Inicializa a câmera usando Picamera2 (funciona no Pi 5)"""
++CAM0_ID = "88000"
++
++
++def initialize_picamera2():
++    """Inicializa somente a CAM0 fisica destinada ao detector de pose."""
++    camera = None
+     try:
+-        picam2 = Picamera2(camera_num=camera_num)
++        available = Picamera2.global_camera_info()
++        matches = [index for index, info in enumerate(available)
++                   if CAM0_ID in str(info.get("Id", ""))]
++        if len(matches) != 1:
++            raise RuntimeError(
++                f"CAM0 {CAM0_ID} indisponivel ou ambigua; "
++                f"IDs detectados: {[info.get('Id') for info in available]}"
++            )
++        camera = Picamera2(camera_num=matches[0])
++        picam2 = camera
++        print(f"📷 Detector de pose vinculado a {available[matches[0]]['Id']}")
+ 
+         # Configuração otimizada para o Pi 5
+         config = picam2.create_video_configuration(
+@@ -123,9 +193,7 @@
+                 "size": (640, 480)       # Resolução balanceada para performance
+             },
+             controls={
+-                "FrameRate": 30.0,       # Limita FPS para estabilidade
+-                "AwbMode": 0,            # Auto white balance
+-                "AnalogueGain": 1.0      # Ganho padrão
++                "FrameRate": 30.0,       # Limita FPS; exposição e ganho seguem automáticos
+             }
+         )
+ 
+@@ -145,14 +213,11 @@
+         return picam2, True
+ 
+     except Exception as e:
++        if camera is not None:
++            camera.close()
+         print(f"❌ Erro ao inicializar Picamera2: {e}")
+         print("\n📋 Diagnóstico rápido:")
+-        print("   1. Verifique o cabo da câmera:")
+-        print("      libcamera-hello --list-cameras")
+-        print("   2. Teste a câmera manualmente:")
+-        print("      libcamera-hello -t 5")
+-        print("   3. Reinicie o serviço de câmera:")
+-        print("      sudo systemctl restart rpicam-apps")
++        print("   Verifique a CAM0: rpicam-hello --list-cameras")
+         return None, False
+ 
+ def initialize_opencv_fallback():
+@@ -191,8 +256,6 @@
+     parser = argparse.ArgumentParser(description="DrowsyDriving Monitor")
+     parser.add_argument("--venv", action="store_true",
+                         help="Modo venv: abre janela com câmera e diagnóstico em texto (sem caixas)")
+-    parser.add_argument("--camera", type=int, default=0,
+-                        help="Índice da câmera Picamera2 a usar (padrão: 1)")
+     args = parser.parse_args()
+ 
+     # --- INICIALIZAÇÃO DA CÂMERA ---
+@@ -201,19 +264,18 @@
+ 
+     if PICAMERA_AVAILABLE and IS_RASPBERRY_PI:
+         # PRIORIDADE 1: Picamera2 (funciona com câmera CSI no Pi 5)
+-        print(f"📷 Usando câmera {args.camera}")
+-        picam2, success = initialize_picamera2(camera_num=args.camera)
++        picam2, success = initialize_picamera2()
+         if success:
+             # Função que retorna frame já em formato BGR para o OpenCV
+             def get_frame_picamera2():
+                 return picam2.capture_array()  # BGR888 → already BGR for OpenCV
+             get_frame = get_frame_picamera2
+         else:
+-            print("\n⚠️  Picamera2 falhou. Tentando fallback...")
+-            PICAMERA_AVAILABLE = False
++            print("\n❌ CAM0 indisponivel: detector de pose nao iniciara em outra camera.")
++            return
+ 
+-    if not PICAMERA_AVAILABLE or get_frame is None:
+-        # PRIORIDADE 2: OpenCV (para webcams USB ou ambiente não-RPi)
++    if not IS_RASPBERRY_PI:
++        # OpenCV fica restrito a webcams USB fora do Raspberry Pi.
+         cap_opencv, success = initialize_opencv_fallback()
+         if success:
+             get_frame = lambda: cap_opencv.read()[1]
+@@ -253,11 +315,18 @@
+     DETECT_SLOW_N = 15        # seatbelt/smoking interval (changes slowly)
+     SNAPSHOT_COOLDOWN = 5.0  # seconds between snapshots
+     SNAPSHOT_DIR = os.path.join(os.path.dirname(__file__), "logs")
++    os.makedirs(SNAPSHOT_DIR, exist_ok=True)
+ 
+     # --- GRAVAÇÃO DE VÍDEO (desative mudando para False) ---
+     RECORD_VIDEO = True
+     video_writer = _AsyncVideoWriter() if RECORD_VIDEO else None
+     video_path = None
++    video_partial_path = None
++    video_started_at = None
++    video_retry_after = 0.0
++    low_disk_reported = False
++    VIDEO_SEGMENT_SECONDS = 60.0
++    VIDEO_MIN_FREE_BYTES = 10 * 1024**3
+     # Debounce: require consecutive frames before starting/stopping recording
+     # At ~20 FPS: START=15 ≈ 0.75 s,  STOP=50 ≈ 2.5 s
+     FACE_START_FRAMES = 15
+@@ -332,7 +401,7 @@
+                 "smoking":           smoking,
+             }
+             stable_score = risk_tracker.update(events, frame_start)
+-            state = classify_from_score(stable_score)
++            state = classify_from_score(stable_score) if nose is not None else "INDEFINIDO"
+ 
+             # --- ALERTAS ATIVOS (construído uma vez por frame) ---
+             alerts = []
+@@ -361,6 +430,11 @@
+             if RECORD_VIDEO:
+                 face_visible = nose is not None
+                 h, w = frame.shape[:2]
++                video_now = time.monotonic()
++                low_disk = _free_bytes(SNAPSHOT_DIR) < VIDEO_MIN_FREE_BYTES
++                if low_disk and not low_disk_reported:
++                    print("⚠️ Espaço livre abaixo de 10 GiB; gravação de vídeo suspensa")
++                low_disk_reported = low_disk
+ 
+                 if face_visible:
+                     face_present_count += 1
+@@ -369,19 +443,32 @@
+                     face_absent_count += 1
+                     face_present_count = 0
+ 
+-                if not video_writer.isOpened() and face_present_count >= FACE_START_FRAMES:
++                if video_writer.isOpened() and (
++                    face_absent_count >= FACE_STOP_FRAMES
++                    or video_now - video_started_at >= VIDEO_SEGMENT_SECONDS
++                    or low_disk
++                ):
++                    _finish_video(video_writer, video_partial_path, video_path)
++                    print(f"🎥 Segmento encerrado: {video_path}")
++                    video_path = None
++                    video_partial_path = None
++                    video_started_at = None
++
++                if (not video_writer.isOpened()
++                        and face_present_count >= FACE_START_FRAMES
++                        and video_now >= video_retry_after and not low_disk):
+                     ts = time.strftime("%Y%m%d_%H%M%S")
+-                    video_path = os.path.join(SNAPSHOT_DIR, f"{ts}_video.avi")
++                    video_path = os.path.join(SNAPSHOT_DIR, f"{ts}_{uuid.uuid4().hex[:8]}_video.avi")
++                    video_partial_path = video_path.removesuffix(".avi") + ".partial.avi"
+                     fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+-                    if not video_writer.open(video_path, fourcc, 20.0, (w, h)):
+-                        print(f"❌ Falha ao abrir VideoWriter: {video_path}")
++                    if not video_writer.open(video_partial_path, fourcc, 20.0, (w, h)):
++                        print(f"❌ Falha ao abrir VideoWriter: {video_partial_path}")
+                         video_path = None
++                        video_partial_path = None
++                        video_retry_after = video_now + 60.0
+                     else:
+-                        print(f"🎥 Gravação iniciada: {video_path}")
+-                elif video_writer.isOpened() and face_absent_count >= FACE_STOP_FRAMES:
+-                    video_writer.release()
+-                    print(f"🎥 Gravação encerrada: {video_path}")
+-                    video_path = None
++                        video_started_at = video_now
++                        print(f"🎥 Gravação iniciada: {video_partial_path}")
+ 
+                 if video_writer.isOpened():
+                     video_writer.write(frame)
+@@ -394,10 +481,26 @@
+             elif current_alerts != last_snapshot_alerts and (now - last_snapshot_time) >= SNAPSHOT_COOLDOWN:
+                 ts = time.strftime("%Y%m%d_%H%M%S")
+                 tag = alerts[0].replace(" ", "_")
+-                filename = os.path.join(SNAPSHOT_DIR, f"{ts}_{tag}.jpg")
+-                cv2.imwrite(filename, frame)
++                event_id = uuid.uuid4().hex
++                filename = os.path.join(SNAPSHOT_DIR, f"{ts}_{event_id[:8]}_{tag}.jpg")
++                encoded_ok, encoded_image = cv2.imencode(".jpg", frame)
++                if not encoded_ok:
++                    raise RuntimeError("Falha ao codificar snapshot JPEG")
++                _write_final_bytes(filename, encoded_image.tobytes())
+                 log_file = os.path.join(SNAPSHOT_DIR, "eventos.csv")
+                 dbg = risk_tracker.debug_info()
++                event_path = os.path.join(SNAPSHOT_DIR, "events", f"{ts}_{event_id}.json")
++                _write_final_bytes(event_path, json.dumps({
++                    "event_id": event_id,
++                    "timestamp": ts,
++                    "alerts": alerts,
++                    "score": stable_score,
++                    "state": state,
++                    "snapshot": os.path.basename(filename),
++                    "risk_detail": dbg,
++                }, ensure_ascii=False,
++                   default=lambda value: value.item() if hasattr(value, "item") else str(value)
++                ).encode("utf-8"))
+                 risk_cols = []
+                 for b in _RISK_BEHAVIORS:
+                     risk_cols += [dbg[b]["active_secs"], dbg[b]["recent_count"]]
+@@ -486,10 +589,14 @@
+         # --- LIMPEZA DE RECURSOS ---
+         print("\n🧹 Limpando recursos...")
+         if video_writer is not None and video_writer.isOpened():
+-            video_writer.release()
+-            print(f"   ✓ Vídeo salvo: {video_path}")
++            try:
++                _finish_video(video_writer, video_partial_path, video_path)
++                print(f"   ✓ Vídeo salvo: {video_path}")
++            except Exception as error:
++                print(f"   ❌ Vídeo incompleto: {error}")
+         if picam2 is not None:
+             picam2.stop()
++            picam2.close()
+             print("   ✓ Picamera2 liberada")
+         if cap_opencv is not None:
+             cap_opencv.release()

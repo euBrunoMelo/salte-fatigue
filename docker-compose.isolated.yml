@@ -1,0 +1,3 @@
+services:
+  salte-fatigue:
+    network_mode: host

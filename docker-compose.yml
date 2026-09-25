@@ -1,0 +1,87 @@
+# docker-compose.yml — SALTE EAR/PERCLOS (Raspberry Pi 5 + IMX500)
+#
+# Uso:
+#   docker compose up              (foreground)
+#   docker compose up -d           (detached)
+#   docker compose logs -f         (follow logs)
+#   docker compose down            (stop)
+#
+# Para rodar com --display (HUD OpenCV) ou --no-picamera (webcam USB dev),
+# edite o bloco `command:` abaixo.
+
+services:
+  salte-fatigue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: salte-fatigue:latest
+    container_name: salte-fatigue
+
+    # ── Acesso à câmera ────────────────────────────────────────────────
+    # IMX500 no Pi 5 cria um pipeline de devices que o libcamera enumera via
+    # /run/udev:
+    #   /dev/media0..3       — rp1-cfe + codec + pisp_be
+    #   /dev/video0..27      — nós de processamento pisp_be
+    #   /dev/v4l-subdev0..N  — controle do sensor
+    #   /dev/dma_heap/*      — alocadores DMA-BUF (cma, system, vidbuf_cached)
+    #   /dev/dri/*           — DRM/KMS render
+    #
+    # Listar cada dispositivo em `devices:` é frágil (números mudam com kernel
+    # e o firmware IMX500 cria 20+ nós de vídeo). Bind-mount de /dev + cgroup
+    # para char devices é menos invasivo que `privileged: true`.
+    device_cgroup_rules:
+      - 'c *:* rmw'        # rw/mknod em todos char devices
+
+    # ── Volumes ─────────────────────────────────────────────────────────
+    # /dev             → nós de câmera/codec/dma_heap/dri (pareado com cgroup rule)
+    # /run/udev        → read-only, libcamera enumera câmeras a partir daí
+    # ./logs           → contrato unico: events/, incidents/ e runs/
+    volumes:
+      - /dev:/dev
+      - /run/udev:/run/udev:ro
+      - ./logs:/app/logs
+      - ./config:/app/config
+
+    # ── Segurança ───────────────────────────────────────────────────────
+    # Necessário para ioctls DRM/KMS do libcamera.
+    # Se falhar, substitua por: privileged: true
+    security_opt:
+      - seccomp:unconfined
+
+    # ── Ambiente ────────────────────────────────────────────────────────
+    environment:
+      - PYTHONUNBUFFERED=1
+
+    # ── Restart ─────────────────────────────────────────────────────────
+    restart: unless-stopped
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    # ── Comando ─────────────────────────────────────────────────────────
+    # Produção: headless, picamera2 (IMX500 como câmera comum).
+    # A IMX500 destinada ao FATIGUE fica na CAM/DISP1 (barramento 70000); CAM/DISP0 é
+    # reservada ao outro detector. O trecho vale nas IDs libcamera 0.5 e 0.7.
+    # A calibracao aberta/fechada deve existir em /app/config/eye_calibration.json.
+    # Sem arquivo valido o processo continua vivo, mas reporta UNKNOWN e nao arma.
+    # --no-danger-record: primeiro cut de producao com gravacao de incidentes
+    # DESLIGADA (valida o detector limpo; o VideoWriter ainda não foi validado
+    # ao vivo — codec/permissão). Para ligar: remova esta flag e rode antes
+    # `sudo chown -R 1000:1000 logs` no Pi.
+    command: ["python3", "wait_for_camera.py", "--camera-id-contains", "70000", "--", "python3", "run_host.py", "--camera-id-contains", "70000", "--no-danger-record", "--logs-dir", "/app/logs", "--log-frame-every", "5", "--log-assessment-every", "5", "--danger-output-dir", "/app/logs/incidents"]
+
+    # ── Override de comando (exemplos) ──────────────────────────────────
+    # Default do Dockerfile: aguarda CAM/DISP1 e inicia run_host.py na ID 70000
+    #
+    # Exemplos:
+    #   comando interno: python3 run_host.py --camera-id-contains 70000 --fallback-ear-threshold 0.15
+    #
+    # Para --display é preciso também expor o X do host (descomente environment/volumes):
+    # environment:
+    #   - DISPLAY=${DISPLAY}
+    # volumes:
+    #   - /tmp/.X11-unix:/tmp/.X11-unix
+    # comando interno: python3 run_host.py --camera-id-contains 70000 --display

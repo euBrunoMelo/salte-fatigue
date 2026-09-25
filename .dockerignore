@@ -1,0 +1,30 @@
+# Vídeos de regressão (só usados no host para testes manuais)
+*.mp4
+
+# Ambiente virtual do host (Docker instala deps próprias via pip)
+.venv/
+.ai-jail
+.claude/
+tests/
+ops/
+
+# Cadernos e materiais de pesquisa nao entram na imagem.
+*.ipynb
+*.pdf
+
+# Cache Python (gerado em runtime)
+__pycache__/
+*.pyc
+*.pyo
+
+# Documentos de sessão e notas de desenvolvimento
+*.md
+*.txt
+
+# Scripts de operação do host (não precisam ir para a imagem)
+sync/
+
+# Saída do sistema (gerada em runtime pelo container)
+DETECCAO_DANGER/
+logs/
+runs/

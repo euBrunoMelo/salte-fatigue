@@ -1,0 +1,15 @@
+<<'EOF'
+     .venv/
+     __pycache__/
+     *.pyc
+     .claude/
+     .ai-jail
+     logs/
+     runs/
+     config/eye_calibration.json
+     .env
+     .env.*
+     *.mp4
+     *.avi
+     *.264
+     EOF

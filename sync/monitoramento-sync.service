@@ -1,0 +1,16 @@
+[Unit]
+Description=Generic Monitoramento log offload
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/mnt/nvme/Monitoramento
+ConditionPathIsDirectory=/mnt/nvme/Monitoramento
+
+[Service]
+Type=oneshot
+User=raspberrypi5
+Group=raspberrypi5
+StateDirectory=monitoramento-sync
+StateDirectoryMode=0750
+UMask=0027
+ExecStart=/usr/local/sbin/monitoramento-sync.sh
+TimeoutStartSec=5min
