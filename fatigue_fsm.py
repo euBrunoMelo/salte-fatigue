@@ -75,10 +75,13 @@ class FatigueFsm:
     def _target_state(
         self, closure: EyeClosureEvent, perclos: PerclosMeasurement
     ) -> FatigueState:
-        perclos_value = perclos.value
+        # _target_state so e chamado com observacao atual READY. O minimo
+        # historico de olhos do fechamento nao limita nenhuma via critica.
+        perclos_value = (
+            perclos.value if perclos.observation_state == ObservationState.READY else None
+        )
         critical_perclos = perclos_value is not None and perclos_value >= self.config.critical_perclos
-        prolonged = closure.event_type == EyeClosureEventType.PROLONGED_CLOSURE
-        if closure.valid_eye_count == 2 and (prolonged or critical_perclos):
+        if closure.binocular_prolonged or critical_perclos:
             return FatigueState.CRITICAL
         warning_perclos = perclos_value is not None and perclos_value >= self.config.warning_perclos
         if self._warning_evidence(closure) or warning_perclos:

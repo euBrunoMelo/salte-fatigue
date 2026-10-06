@@ -1,0 +1,9 @@
+test_inicio_monocular_recupera_critical_em_1_1s (test_binocular_recovery.TestBinocularReproductions.test_inicio_monocular_recupera_critical_em_1_1s) ... ok
+test_perclos_real_promove_apesar_do_historico_monocular (test_binocular_recovery.TestBinocularReproductions.test_perclos_real_promove_apesar_do_historico_monocular) ... ok
+test_perda_depois_de_critical_permite_nova_promocao (test_binocular_recovery.TestBinocularReproductions.test_perda_depois_de_critical_permite_nova_promocao) ... ok
+test_perda_em_600ms_recupera_critical_em_1_7s (test_binocular_recovery.TestBinocularReproductions.test_perda_em_600ms_recupera_critical_em_1_7s) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.065s
+
+OK

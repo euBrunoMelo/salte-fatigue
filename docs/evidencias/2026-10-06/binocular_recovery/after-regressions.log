@@ -1,0 +1,28 @@
+test_assimetria_nao_usa_media_dos_ears (test_binocular_recovery.TestBinocularEvidence.test_assimetria_nao_usa_media_dos_ears) ... ok
+test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) ... ok
+test_gap_antes_de_reabrir_nao_finaliza_trecho (test_binocular_recovery.TestBinocularEvidence.test_gap_antes_de_reabrir_nao_finaliza_trecho) ... ok
+test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) ... ok
+test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) ... ok
+test_monocular_antigo_nao_promove_imediatamente (test_binocular_recovery.TestBinocularEvidence.test_monocular_antigo_nao_promove_imediatamente) ... ok
+test_reabertura_no_limiar_finaliza_trecho_valido (test_binocular_recovery.TestBinocularEvidence.test_reabertura_no_limiar_finaliza_trecho_valido) ... ok
+test_reabertura_transporta_evento_e_histerese_nao_e_evidencia (test_binocular_recovery.TestBinocularEvidence.test_reabertura_transporta_evento_e_histerese_nao_e_evidencia) ... ok
+test_recuperar_olho_ja_aberto_nao_finaliza_binocular (test_binocular_recovery.TestBinocularEvidence.test_recuperar_olho_ja_aberto_nao_finaliza_binocular) ... ok
+test_timestamps_invalidos_preservam_rejeicao_e_contador (test_binocular_recovery.TestBinocularEvidence.test_timestamps_invalidos_preservam_rejeicao_e_contador) ... ok
+test_timestamps_repetidos_nao_acumulam_e_reset_limpa (test_binocular_recovery.TestBinocularEvidence.test_timestamps_repetidos_nao_acumulam_e_reset_limpa) ... ok
+test_trechos_de_600ms_nao_sao_somados (test_binocular_recovery.TestBinocularEvidence.test_trechos_de_600ms_nao_sao_somados) ... ok
+test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) ... ok
+test_inicio_monocular_recupera_critical_em_1_1s (test_binocular_recovery.TestBinocularReproductions.test_inicio_monocular_recupera_critical_em_1_1s) ... ok
+test_perclos_real_promove_apesar_do_historico_monocular (test_binocular_recovery.TestBinocularReproductions.test_perclos_real_promove_apesar_do_historico_monocular) ... ok
+test_perda_depois_de_critical_permite_nova_promocao (test_binocular_recovery.TestBinocularReproductions.test_perda_depois_de_critical_permite_nova_promocao) ... ok
+test_perda_em_600ms_recupera_critical_em_1_7s (test_binocular_recovery.TestBinocularReproductions.test_perda_em_600ms_recupera_critical_em_1_7s) ... ok
+test_defaults_preservam_construcao_posicional (test_binocular_recovery.TestBinocularSerialization.test_defaults_preservam_construcao_posicional) ... ok
+test_registros_serializados_e_manifesto (test_binocular_recovery.TestBinocularSerialization.test_registros_serializados_e_manifesto) ... ok
+test_degraded_e_unknown_preservados_com_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_degraded_e_unknown_preservados_com_evidencia) ... ok
+test_indisponibilidade_nao_substitui_recuperacao_da_fsm (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_indisponibilidade_nao_substitui_recuperacao_da_fsm) ... ok
+test_limiar_critico_configurado_independe_do_historico (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_limiar_critico_configurado_independe_do_historico) ... ok
+test_valor_indisponivel_nao_e_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_valor_indisponivel_nao_e_evidencia) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.042s
+
+OK

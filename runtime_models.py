@@ -105,18 +105,26 @@ class EyeCalibration:
 
 @dataclass(frozen=True)
 class EyeClosureEvent:
-    """Estado temporal do fechamento e eventual evento de borda."""
+    """Fechamento geral e evidencia do trecho binocular continuo atual.
+
+    valid_eye_count e o minimo historico durante o fechamento, nao a qualidade
+    atual nem um requisito de CRITICAL. Na reabertura, os campos binoculares
+    transportam o trecho encerrado somente nesse evento. Frames abertos
+    seguintes voltam a zero/False, independentemente da histerese da FSM.
+    """
 
     event_type: EyeClosureEventType
     active: bool
     duration_ms: float
     valid_eye_count: int
     using_fallback: bool = False
+    binocular_duration_ms: float = 0.0
+    binocular_prolonged: bool = False
 
 
 @dataclass(frozen=True)
 class PerclosMeasurement:
-    """PERCLOS temporal e seus indicadores de disponibilidade."""
+    """PERCLOS disponivel somente com observation_state READY e value nao nulo."""
 
     observation_state: ObservationState
     value: Optional[float]

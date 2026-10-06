@@ -1,0 +1,57 @@
+CORRECAO LOCAL — RECUPERACAO BINOCULAR E EVIDENCIA CRITICA
+=======================================================
+
+Base: commit b0d8acc (hash completo em baseline.json e validation.json).
+Origem: checkout local, .venv, FatigueRuntime real e unittest. As observacoes
+sao sinteticas; nenhuma camera/MediaPipe foi executada nas reproducoes.
+Nenhuma consulta, alteracao, transferencia, build ou reinicio no Raspberry
+foi realizada nesta etapa de implementacao.
+
+RESULTADO
+- Duracao geral e trecho binocular continuo agora sao independentes.
+- Invalidade, abertura e gap >500 ms interrompem o trecho binocular.
+- A reabertura transporta o trecho encerrado; o frame aberto seguinte emite
+  zero/False. A FSM pode manter CRITICAL pela histerese de 500 ms.
+- PERCLOS exige disponibilidade explicita e nao depende do minimo historico
+  de olhos do fechamento. DEGRADED/UNKNOWN e a histerese foram preservados.
+- Campos adicionados: binocular_duration_ms e binocular_prolonged; nos logs,
+  closure_binocular_ms e closure_binocular_prolonged.
+
+REPRODUCOES FUNCIONAIS: ANTES -> DEPOIS
+- Inicio monocular e recuperacao em 0.1 s: WARNING -> CRITICAL em 1.1 s.
+- Perda em 0.6 s, recuperacao em 0.7 s: WARNING -> CRITICAL em 1.7 s.
+- Perda depois de CRITICAL e recuperacao em 1.3 s: WARNING -> CRITICAL em 2.3 s.
+- PERCLOS real >=30%, com limiar de fechamento 100 s para isolar a metrica:
+  WARNING -> CRITICAL em 78.2 s, mesmo com minimo historico monocular.
+
+As mesmas quatro reproducoes falharam antes (4 falhas funcionais, zero erros
+por ausencia de campos) e passaram depois. O arquivo de testes ficou identico
+entre essas duas coletas, conferido por SHA-256.
+
+VALIDACAO
+- 23 novos testes aprovados; suite completa: 175 testes, zero falhas/erros.
+- Cobertura adicional: EARs 0.10/0.20 e invertidos; bordas 999/1000,
+  749/750 e 1499/1500 ms; trechos de 600 ms nao somados; reabertura;
+  gaps 0.5/0.6/34 s; invalidez antes de finalizar; timestamps repetidos,
+  regressivos e nao finitos; origem nao zero; PERCLOS indisponivel numerico;
+  limiar PERCLOS configurado; DEGRADED/UNKNOWN; histerese e reset.
+- StructuredLogger: campos serializados e contagens de manifesto conferidos.
+- py_compile, docker compose config --quiet, sintaxe dos scripts de sync
+  e git diff --check aprovados.
+
+ARQUIVOS
+- change.patch: diff completo da correcao, documentacao e testes, incluindo
+  o arquivo novo. Exclui alteracoes preexistentes de .ai-jail/.claude.
+- before-reproductions.log / after-reproductions.log: mesmas quatro reproducoes.
+- before-regressions.log: bateria nova antes da correcao; inclui erros esperados
+  por campos ainda inexistentes, alem das falhas de comportamento.
+- after-regressions.log: os 23 testes novos aprovados.
+- full-suite.log: saida completa dos 175 testes aprovados.
+- serialized-sample.json: amostras das avaliacoes serializadas; artefato
+  sintetico do runtime, nao registros coletados da camera ou de uma run remota.
+- baseline.json / validation.json: proveniencia, comandos anteriores,
+  hashes dos fontes e resultado final.
+- MANIFEST.sha256: integridade dos artefatos desta pasta.
+
+Para repetir a suite:
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v

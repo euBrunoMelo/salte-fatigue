@@ -1,0 +1,45 @@
+test_inicio_monocular_recupera_critical_em_1_1s (test_binocular_recovery.TestBinocularReproductions.test_inicio_monocular_recupera_critical_em_1_1s) ... FAIL
+test_perclos_real_promove_apesar_do_historico_monocular (test_binocular_recovery.TestBinocularReproductions.test_perclos_real_promove_apesar_do_historico_monocular) ... FAIL
+test_perda_depois_de_critical_permite_nova_promocao (test_binocular_recovery.TestBinocularReproductions.test_perda_depois_de_critical_permite_nova_promocao) ... FAIL
+test_perda_em_600ms_recupera_critical_em_1_7s (test_binocular_recovery.TestBinocularReproductions.test_perda_em_600ms_recupera_critical_em_1_7s) ... FAIL
+
+======================================================================
+FAIL: test_inicio_monocular_recupera_critical_em_1_1s (test_binocular_recovery.TestBinocularReproductions.test_inicio_monocular_recupera_critical_em_1_1s)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 42, in test_inicio_monocular_recupera_critical_em_1_1s
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_perclos_real_promove_apesar_do_historico_monocular (test_binocular_recovery.TestBinocularReproductions.test_perclos_real_promove_apesar_do_historico_monocular)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 82, in test_perclos_real_promove_apesar_do_historico_monocular
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_perda_depois_de_critical_permite_nova_promocao (test_binocular_recovery.TestBinocularReproductions.test_perda_depois_de_critical_permite_nova_promocao)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 65, in test_perda_depois_de_critical_permite_nova_promocao
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_perda_em_600ms_recupera_critical_em_1_7s (test_binocular_recovery.TestBinocularReproductions.test_perda_em_600ms_recupera_critical_em_1_7s)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 55, in test_perda_em_600ms_recupera_critical_em_1_7s
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.066s
+
+FAILED (failures=4)

@@ -48,6 +48,8 @@ def assessment_log_record(result: RuntimeAssessment) -> dict[str, Any]:
         "closure_ms": fatigue.closure.duration_ms,
         "closure_event": fatigue.closure.event_type.value,
         "closure_valid_eye_count": fatigue.closure.valid_eye_count,
+        "closure_binocular_ms": fatigue.closure.binocular_duration_ms,
+        "closure_binocular_prolonged": fatigue.closure.binocular_prolonged,
         "using_fallback": fatigue.closure.using_fallback,
         "perclos_p80": None,
         "perclos_ear": fatigue.perclos.value,

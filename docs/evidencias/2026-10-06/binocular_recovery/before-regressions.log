@@ -1,0 +1,424 @@
+test_assimetria_nao_usa_media_dos_ears (test_binocular_recovery.TestBinocularEvidence.test_assimetria_nao_usa_media_dos_ears) ... 
+  test_assimetria_nao_usa_media_dos_ears (test_binocular_recovery.TestBinocularEvidence.test_assimetria_nao_usa_media_dos_ears) (left=0.1, right=0.2) ... ERROR
+  test_assimetria_nao_usa_media_dos_ears (test_binocular_recovery.TestBinocularEvidence.test_assimetria_nao_usa_media_dos_ears) (left=0.2, right=0.1) ... ERROR
+test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) ... 
+  test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) (threshold=750) ... ERROR
+  test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) (threshold=1000) ... ERROR
+  test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) (threshold=1500) ... ERROR
+test_gap_antes_de_reabrir_nao_finaliza_trecho (test_binocular_recovery.TestBinocularEvidence.test_gap_antes_de_reabrir_nao_finaliza_trecho) ... ERROR
+test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) ... 
+  test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) (gap=0.5) ... ERROR
+  test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) (gap=0.6) ... ERROR
+  test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) (gap=34) ... ERROR
+test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) ... 
+  test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=0.3, right=None, face=True) ... ERROR
+  test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=None, right=0.3, face=True) ... ERROR
+  test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=0.1, right=0.1, face=False) ... ERROR
+  test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=None, right=None, face=True) ... ERROR
+test_monocular_antigo_nao_promove_imediatamente (test_binocular_recovery.TestBinocularEvidence.test_monocular_antigo_nao_promove_imediatamente) ... ERROR
+test_reabertura_no_limiar_finaliza_trecho_valido (test_binocular_recovery.TestBinocularEvidence.test_reabertura_no_limiar_finaliza_trecho_valido) ... ERROR
+test_reabertura_transporta_evento_e_histerese_nao_e_evidencia (test_binocular_recovery.TestBinocularEvidence.test_reabertura_transporta_evento_e_histerese_nao_e_evidencia) ... ERROR
+test_recuperar_olho_ja_aberto_nao_finaliza_binocular (test_binocular_recovery.TestBinocularEvidence.test_recuperar_olho_ja_aberto_nao_finaliza_binocular) ... ERROR
+test_timestamps_invalidos_preservam_rejeicao_e_contador (test_binocular_recovery.TestBinocularEvidence.test_timestamps_invalidos_preservam_rejeicao_e_contador) ... ERROR
+test_timestamps_repetidos_nao_acumulam_e_reset_limpa (test_binocular_recovery.TestBinocularEvidence.test_timestamps_repetidos_nao_acumulam_e_reset_limpa) ... ERROR
+test_trechos_de_600ms_nao_sao_somados (test_binocular_recovery.TestBinocularEvidence.test_trechos_de_600ms_nao_sao_somados) ... ERROR
+test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) ... 
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=None, side='left') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=None, side='right') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=nan, side='left') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=nan, side='right') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=inf, side='left') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=inf, side='right') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=0, side='left') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=0, side='right') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=1.01, side='left') ... ERROR
+  test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=1.01, side='right') ... ERROR
+test_inicio_monocular_recupera_critical_em_1_1s (test_binocular_recovery.TestBinocularReproductions.test_inicio_monocular_recupera_critical_em_1_1s) ... FAIL
+test_perclos_real_promove_apesar_do_historico_monocular (test_binocular_recovery.TestBinocularReproductions.test_perclos_real_promove_apesar_do_historico_monocular) ... FAIL
+test_perda_depois_de_critical_permite_nova_promocao (test_binocular_recovery.TestBinocularReproductions.test_perda_depois_de_critical_permite_nova_promocao) ... FAIL
+test_perda_em_600ms_recupera_critical_em_1_7s (test_binocular_recovery.TestBinocularReproductions.test_perda_em_600ms_recupera_critical_em_1_7s) ... FAIL
+test_defaults_preservam_construcao_posicional (test_binocular_recovery.TestBinocularSerialization.test_defaults_preservam_construcao_posicional) ... ERROR
+test_registros_serializados_e_manifesto (test_binocular_recovery.TestBinocularSerialization.test_registros_serializados_e_manifesto) ... ERROR
+test_degraded_e_unknown_preservados_com_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_degraded_e_unknown_preservados_com_evidencia) ... ERROR
+test_indisponibilidade_nao_substitui_recuperacao_da_fsm (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_indisponibilidade_nao_substitui_recuperacao_da_fsm) ... FAIL
+test_limiar_critico_configurado_independe_do_historico (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_limiar_critico_configurado_independe_do_historico) ... 
+  test_limiar_critico_configurado_independe_do_historico (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_limiar_critico_configurado_independe_do_historico) (value=0.4) ... FAIL
+test_valor_indisponivel_nao_e_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_valor_indisponivel_nao_e_evidencia) ... 
+  test_valor_indisponivel_nao_e_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_valor_indisponivel_nao_e_evidencia) (availability=<ObservationState.UNAVAILABLE: 'unavailable'>, value=0.35) ... FAIL
+  test_valor_indisponivel_nao_e_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_valor_indisponivel_nao_e_evidencia) (availability=<ObservationState.UNAVAILABLE: 'unavailable'>, value=0.2) ... FAIL
+
+======================================================================
+ERROR: test_assimetria_nao_usa_media_dos_ears (test_binocular_recovery.TestBinocularEvidence.test_assimetria_nao_usa_media_dos_ears) (left=0.1, right=0.2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 95, in test_assimetria_nao_usa_media_dos_ears
+    self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_assimetria_nao_usa_media_dos_ears (test_binocular_recovery.TestBinocularEvidence.test_assimetria_nao_usa_media_dos_ears) (left=0.2, right=0.1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 95, in test_assimetria_nao_usa_media_dos_ears
+    self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) (threshold=750)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 121, in test_bordas_configuradas_e_origem_temporal_nao_zero
+    self.assertAlmostEqual(before.fatigue.closure.binocular_duration_ms, threshold - 1)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) (threshold=1000)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 121, in test_bordas_configuradas_e_origem_temporal_nao_zero
+    self.assertAlmostEqual(before.fatigue.closure.binocular_duration_ms, threshold - 1)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_bordas_configuradas_e_origem_temporal_nao_zero (test_binocular_recovery.TestBinocularEvidence.test_bordas_configuradas_e_origem_temporal_nao_zero) (threshold=1500)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 121, in test_bordas_configuradas_e_origem_temporal_nao_zero
+    self.assertAlmostEqual(before.fatigue.closure.binocular_duration_ms, threshold - 1)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_gap_antes_de_reabrir_nao_finaliza_trecho (test_binocular_recovery.TestBinocularEvidence.test_gap_antes_de_reabrir_nao_finaliza_trecho)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 190, in test_gap_antes_de_reabrir_nao_finaliza_trecho
+    self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) (gap=0.5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 201, in test_gaps_de_500_600ms_e_34s
+    self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, expected)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) (gap=0.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 201, in test_gaps_de_500_600ms_e_34s
+    self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, expected)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_gaps_de_500_600ms_e_34s (test_binocular_recovery.TestBinocularEvidence.test_gaps_de_500_600ms_e_34s) (gap=34)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 201, in test_gaps_de_500_600ms_e_34s
+    self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, expected)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=0.3, right=None, face=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 212, in test_invalidez_antes_de_finalizar_e_perda_de_face
+    self.assertEqual(ended.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=None, right=0.3, face=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 212, in test_invalidez_antes_de_finalizar_e_perda_de_face
+    self.assertEqual(ended.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=0.1, right=0.1, face=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 212, in test_invalidez_antes_de_finalizar_e_perda_de_face
+    self.assertEqual(ended.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_invalidez_antes_de_finalizar_e_perda_de_face (test_binocular_recovery.TestBinocularEvidence.test_invalidez_antes_de_finalizar_e_perda_de_face) (left=None, right=None, face=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 212, in test_invalidez_antes_de_finalizar_e_perda_de_face
+    self.assertEqual(ended.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_monocular_antigo_nao_promove_imediatamente (test_binocular_recovery.TestBinocularEvidence.test_monocular_antigo_nao_promove_imediatamente)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 145, in test_monocular_antigo_nao_promove_imediatamente
+    self.assertEqual(restored.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_reabertura_no_limiar_finaliza_trecho_valido (test_binocular_recovery.TestBinocularEvidence.test_reabertura_no_limiar_finaliza_trecho_valido)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 180, in test_reabertura_no_limiar_finaliza_trecho_valido
+    self.assertAlmostEqual(reopened.fatigue.closure.binocular_duration_ms, 1000)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_reabertura_transporta_evento_e_histerese_nao_e_evidencia (test_binocular_recovery.TestBinocularEvidence.test_reabertura_transporta_evento_e_histerese_nao_e_evidencia)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 166, in test_reabertura_transporta_evento_e_histerese_nao_e_evidencia
+    self.assertAlmostEqual(reopened.fatigue.closure.binocular_duration_ms, 1100)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_recuperar_olho_ja_aberto_nao_finaliza_binocular (test_binocular_recovery.TestBinocularEvidence.test_recuperar_olho_ja_aberto_nao_finaliza_binocular)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 157, in test_recuperar_olho_ja_aberto_nao_finaliza_binocular
+    self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_timestamps_invalidos_preservam_rejeicao_e_contador (test_binocular_recovery.TestBinocularEvidence.test_timestamps_invalidos_preservam_rejeicao_e_contador)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 249, in test_timestamps_invalidos_preservam_rejeicao_e_contador
+    self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, 1000)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_timestamps_repetidos_nao_acumulam_e_reset_limpa (test_binocular_recovery.TestBinocularEvidence.test_timestamps_repetidos_nao_acumulam_e_reset_limpa)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 235, in test_timestamps_repetidos_nao_acumulam_e_reset_limpa
+    self.assertAlmostEqual(repeated.fatigue.closure.binocular_duration_ms, 500)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_trechos_de_600ms_nao_sao_somados (test_binocular_recovery.TestBinocularEvidence.test_trechos_de_600ms_nao_sao_somados)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 134, in test_trechos_de_600ms_nao_sao_somados
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=None, side='left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=None, side='right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=nan, side='left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=nan, side='right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=inf, side='left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=inf, side='right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=0, side='left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=0, side='right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=1.01, side='left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_valores_invalidos_interrompem_qualquer_olho (test_binocular_recovery.TestBinocularEvidence.test_valores_invalidos_interrompem_qualquer_olho) (invalid=1.01, side='right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 225, in test_valores_invalidos_interrompem_qualquer_olho
+    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_defaults_preservam_construcao_posicional (test_binocular_recovery.TestBinocularSerialization.test_defaults_preservam_construcao_posicional)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 303, in test_defaults_preservam_construcao_posicional
+    self.assertEqual(event.binocular_duration_ms, 0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EyeClosureEvent' object has no attribute 'binocular_duration_ms'
+
+======================================================================
+ERROR: test_registros_serializados_e_manifesto (test_binocular_recovery.TestBinocularSerialization.test_registros_serializados_e_manifesto)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 322, in test_registros_serializados_e_manifesto
+    self.assertAlmostEqual(row['closure_binocular_ms'], expected)
+                           ~~~^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'closure_binocular_ms'
+
+======================================================================
+ERROR: test_degraded_e_unknown_preservados_com_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_degraded_e_unknown_preservados_com_evidencia)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 290, in test_degraded_e_unknown_preservados_com_evidencia
+    event = EyeClosureEvent(EyeClosureEventType.PROLONGED_CLOSURE, True, 1000, 1,
+                            binocular_duration_ms=1000, binocular_prolonged=True)
+TypeError: EyeClosureEvent.__init__() got an unexpected keyword argument 'binocular_duration_ms'
+
+======================================================================
+FAIL: test_inicio_monocular_recupera_critical_em_1_1s (test_binocular_recovery.TestBinocularReproductions.test_inicio_monocular_recupera_critical_em_1_1s)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 42, in test_inicio_monocular_recupera_critical_em_1_1s
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_perclos_real_promove_apesar_do_historico_monocular (test_binocular_recovery.TestBinocularReproductions.test_perclos_real_promove_apesar_do_historico_monocular)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 82, in test_perclos_real_promove_apesar_do_historico_monocular
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_perda_depois_de_critical_permite_nova_promocao (test_binocular_recovery.TestBinocularReproductions.test_perda_depois_de_critical_permite_nova_promocao)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 65, in test_perda_depois_de_critical_permite_nova_promocao
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_perda_em_600ms_recupera_critical_em_1_7s (test_binocular_recovery.TestBinocularReproductions.test_perda_em_600ms_recupera_critical_em_1_7s)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 55, in test_perda_em_600ms_recupera_critical_em_1_7s
+    self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_indisponibilidade_nao_substitui_recuperacao_da_fsm (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_indisponibilidade_nao_substitui_recuperacao_da_fsm)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 282, in test_indisponibilidade_nao_substitui_recuperacao_da_fsm
+    self.assertEqual(fsm.update(0, ObservationState.READY, self.no_closure(), available).state,
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     FatigueState.CRITICAL)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_limiar_critico_configurado_independe_do_historico (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_limiar_critico_configurado_independe_do_historico) (value=0.4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 276, in test_limiar_critico_configurado_independe_do_historico
+    self.assertEqual(result.state, expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.CRITICAL: 'critical'>
+
+======================================================================
+FAIL: test_valor_indisponivel_nao_e_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_valor_indisponivel_nao_e_evidencia) (availability=<ObservationState.UNAVAILABLE: 'unavailable'>, value=0.35)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 268, in test_valor_indisponivel_nao_e_evidencia
+    self.assertEqual(result.state, FatigueState.SAFE)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.CRITICAL: 'critical'> != <FatigueState.SAFE: 'safe'>
+
+======================================================================
+FAIL: test_valor_indisponivel_nao_e_evidencia (test_binocular_recovery.TestPerclosAvailabilityAndFsm.test_valor_indisponivel_nao_e_evidencia) (availability=<ObservationState.UNAVAILABLE: 'unavailable'>, value=0.2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/tests/test_binocular_recovery.py", line 268, in test_valor_indisponivel_nao_e_evidencia
+    self.assertEqual(result.state, FatigueState.SAFE)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <FatigueState.WARNING: 'warning'> != <FatigueState.SAFE: 'safe'>
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.073s
+
+FAILED (failures=8, errors=33)

@@ -75,7 +75,12 @@ def closure(
     active: bool = False,
     eyes: int = 2,
 ) -> EyeClosureEvent:
-    return EyeClosureEvent(event_type, active, 1000.0 if active else 0.0, eyes)
+    binocular_prolonged = event_type == EyeClosureEventType.PROLONGED_CLOSURE and eyes == 2
+    return EyeClosureEvent(
+        event_type, active, 1000.0 if active else 0.0, eyes,
+        binocular_duration_ms=1000.0 if binocular_prolonged else 0.0,
+        binocular_prolonged=binocular_prolonged,
+    )
 
 
 class TestRuntimeModels(unittest.TestCase):

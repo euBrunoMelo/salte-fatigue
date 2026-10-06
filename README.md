@@ -25,16 +25,34 @@ Com dois olhos válidos, os estados aparecem como **ativo**, **fadiga** e **sono
 | Rótulo | Código preservado | Critério da FSM |
 |---|---|---|
 | ativo | `safe` | Sem evidência de fadiga |
-| fadiga | `warning` | Fechamento > 400 ms ou PERCLOS >= 15% |
-| sono | `critical` | Fechamento >= 1 s ou PERCLOS >= 30% |
+| fadiga | `warning` | Fechamento > 400 ms ou PERCLOS disponível >= 15% |
+| sono | `critical` | Fechamento binocular contínuo >= 1 s ou PERCLOS disponível >= 30% |
 | unknown | `unknown` | Observação indisponível ou insuficiente |
 
 Sono tem prioridade e exige dois olhos válidos; um olho permite no máximo
-fadiga. A recuperação de sono exige 500 ms contínuos sem evidência crítica.
+fadiga. A duração geral pode continuar com um olho válido, mas o trecho
+binocular só começa quando ambos os olhos válidos estão individualmente
+fechados. Perder um olho interrompe esse trecho; recuperar os dois exige um
+novo trecho contínuo de 1 s para evidência crítica por fechamento. Os trechos
+não são somados e o limiar segue `--prolonged-closure-ms` quando configurado.
+A recuperação de sono exige 500 ms contínuos sem evidência crítica: o estado
+`critical` pode permanecer durante a histerese sem nova evidência binocular.
 Intervalos entre observações maiores que 0,5 s interrompem o episódio ocular e
 a contagem de recuperação, sem tratar a pausa como olhos fechados.
 O PERCLOS mantém janela de 60 s, cobertura binocular mínima de 80% e exclusão
-de piscadas até 400 ms. Nos logs, `fatigue_label` apresenta o rótulo;
+de piscadas até 400 ms. A FSM usa a métrica somente quando seu
+`observation_state` é `ready` e seu valor não é nulo. PERCLOS disponível no
+limiar crítico configurado permite promoção imediata com dois olhos atuais
+válidos, sem esperar outro segundo de fechamento.
+
+Nos logs, `closure_ms` mantém a duração geral e `closure_valid_eye_count`
+mantém o mínimo histórico de olhos válidos durante o fechamento; esse mínimo
+não representa a qualidade atual nem limita a promoção crítica.
+`closure_binocular_ms` e `closure_binocular_prolonged` descrevem o trecho
+binocular atual. Na reabertura válida, somente o evento correspondente
+transporta o trecho encerrado; no próximo frame aberto esses campos voltam
+a zero/`false`. Invalidez ou gap impedem finalização através da interrupção.
+`fatigue_label` apresenta o rótulo;
 `perclos_ear` contém o PERCLOS absoluto e `perclos_p80` permanece `null`.
 Pose bruta continua nos logs; opções dependentes de pose neutra foram retiradas.
 A FSM temporal EAR/PERCLOS foi mantida, sem adotar três faixas diretas de EAR.

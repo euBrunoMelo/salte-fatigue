@@ -1,0 +1,617 @@
+diff --git a/README.md b/README.md
+index a8ecc22..4c35627 100644
+--- a/README.md
++++ b/README.md
+@@ -25,16 +25,34 @@ Com dois olhos válidos, os estados aparecem como **ativo**, **fadiga** e **sono
+ | Rótulo | Código preservado | Critério da FSM |
+ |---|---|---|
+ | ativo | `safe` | Sem evidência de fadiga |
+-| fadiga | `warning` | Fechamento > 400 ms ou PERCLOS >= 15% |
+-| sono | `critical` | Fechamento >= 1 s ou PERCLOS >= 30% |
++| fadiga | `warning` | Fechamento > 400 ms ou PERCLOS disponível >= 15% |
++| sono | `critical` | Fechamento binocular contínuo >= 1 s ou PERCLOS disponível >= 30% |
+ | unknown | `unknown` | Observação indisponível ou insuficiente |
+ 
+ Sono tem prioridade e exige dois olhos válidos; um olho permite no máximo
+-fadiga. A recuperação de sono exige 500 ms contínuos sem evidência crítica.
++fadiga. A duração geral pode continuar com um olho válido, mas o trecho
++binocular só começa quando ambos os olhos válidos estão individualmente
++fechados. Perder um olho interrompe esse trecho; recuperar os dois exige um
++novo trecho contínuo de 1 s para evidência crítica por fechamento. Os trechos
++não são somados e o limiar segue `--prolonged-closure-ms` quando configurado.
++A recuperação de sono exige 500 ms contínuos sem evidência crítica: o estado
++`critical` pode permanecer durante a histerese sem nova evidência binocular.
+ Intervalos entre observações maiores que 0,5 s interrompem o episódio ocular e
+ a contagem de recuperação, sem tratar a pausa como olhos fechados.
+ O PERCLOS mantém janela de 60 s, cobertura binocular mínima de 80% e exclusão
+-de piscadas até 400 ms. Nos logs, `fatigue_label` apresenta o rótulo;
++de piscadas até 400 ms. A FSM usa a métrica somente quando seu
++`observation_state` é `ready` e seu valor não é nulo. PERCLOS disponível no
++limiar crítico configurado permite promoção imediata com dois olhos atuais
++válidos, sem esperar outro segundo de fechamento.
++
++Nos logs, `closure_ms` mantém a duração geral e `closure_valid_eye_count`
++mantém o mínimo histórico de olhos válidos durante o fechamento; esse mínimo
++não representa a qualidade atual nem limita a promoção crítica.
++`closure_binocular_ms` e `closure_binocular_prolonged` descrevem o trecho
++binocular atual. Na reabertura válida, somente o evento correspondente
++transporta o trecho encerrado; no próximo frame aberto esses campos voltam
++a zero/`false`. Invalidez ou gap impedem finalização através da interrupção.
++`fatigue_label` apresenta o rótulo;
+ `perclos_ear` contém o PERCLOS absoluto e `perclos_p80` permanece `null`.
+ Pose bruta continua nos logs; opções dependentes de pose neutra foram retiradas.
+ A FSM temporal EAR/PERCLOS foi mantida, sem adotar três faixas diretas de EAR.
+diff --git a/TESTE REGRECAO.txt b/TESTE REGRECAO.txt
+index 338c2a6..c43e3f5 100644
+--- a/TESTE REGRECAO.txt	
++++ b/TESTE REGRECAO.txt	
+@@ -21,6 +21,12 @@ O pacote produtivo deve conter apenas os modulos atuais e face_landmarker.task.
+ - Um olho valido: DEGRADED; aberto fica UNKNOWN e fechamento no maximo WARNING.
+ - Dois olhos validos: requisito para PERCLOS e CRITICAL.
+ - Fechamento binocular: ambos os olhos validos com EAR <= limiar.
++- Trecho binocular atual independente da duracao geral; nao somar trechos.
++- Perder um olho reinicia o trecho binocular; recuperar nao promove retroativamente.
++- Minimo historico closure_valid_eye_count nao representa qualidade atual nem limita CRITICAL.
++- Evidencia critica: observacao READY e (binocular_prolonged ou PERCLOS disponivel >= limiar).
++- PERCLOS disponivel: estado da metrica READY e valor nao nulo; valor isolado nao e evidencia.
++- Evento de reabertura transporta o trecho encerrado; frame aberto seguinte tem zero/False.
+ - Gap >0.5 s interrompe fechamento, promocao de piscada e recuperacao critica.
+ - Pausas de 0.6 e 34 s nunca estabelecem sono continuo.
+ - Piscadas de ate 400 ms sao excluidas; fechamento prolongado comeca em 1000 ms.
+@@ -37,6 +43,8 @@ Nao e necessario gerar eye_calibration.json. Arquivos antigos sao ignorados e
+ preservados. Conferir closure_method=absolute_ear, closed_ear_threshold=0.17 e
+ max_sample_gap_seconds=0.5 em run-start.json; calibration_loaded=false e esperado.
+ Conferir fatigue_label e perclos_ear nas avaliacoes; perclos_p80 deve ser null.
++Conferir closure_binocular_ms e closure_binocular_prolonged; o estado pode
++continuar critical por histerese mesmo com esses campos em zero/False.
+ 
+ 4. HIL/SHADOW NO CM5
+ 
+@@ -52,6 +60,16 @@ Cenarios obrigatorios:
+ - Fechamento >400 ms: WARNING/fadiga; borda de 400 ms ainda e piscada.
+ - Piscadas curtas: sem CRITICAL.
+ - Fechamento bilateral continuo >=1000 ms: CRITICAL/sono.
++- Recuperacao de dois olhos em 0.1 s: evidencia binocular e CRITICAL em 1.1 s.
++- Perda em 0.6 s e recuperacao em 0.7 s: nova evidencia somente em 1.7 s.
++- EARs 0.10/0.20 e 0.20/0.10: sem fechamento binocular, apesar da media 0.15.
++- Bordas binoculares 999/1000, 749/750 e 1499/1500 ms conforme limiar configurado.
++- Trechos de 600 ms separados por invalidez nao somam 1200 ms.
++- Reabertura apos gap >500 ms nao finaliza fechamento usando a lacuna.
++- Timestamps repetidos nao acumulam; regressivos/nao finitos continuam rejeitados.
++- Verificar duracao e booleano de evidencia, nao apenas estado mantido pela histerese.
++- PERCLOS critico com READY promove mesmo com minimo historico monocular.
++- PERCLOS numerico acima do limiar, mas indisponivel, nao gera evidencia critica.
+ - Recuperacao critica: 500 ms continuos; gap reinicia a contagem.
+ - Pausas >0.5 s: reiniciar episodio ocular, sem falso sono.
+ - Apenas um olho valido e fechado: WARNING no maximo.
+diff --git a/eye_closure.py b/eye_closure.py
+index e1c1915..8ed70b4 100644
+--- a/eye_closure.py
++++ b/eye_closure.py
+@@ -54,6 +54,7 @@ class EyeClosureDetector:
+         self.max_sample_gap_seconds = max_sample_gap_seconds
+         self._last_timestamp: Optional[float] = None
+         self._closed_since: Optional[float] = None
++        self._binocular_closed_since: Optional[float] = None
+         self._episode_eye_count = 0
+ 
+     def reset(self) -> None:
+@@ -63,6 +64,7 @@ class EyeClosureDetector:
+ 
+     def _end_episode(self) -> None:
+         self._closed_since = None
++        self._binocular_closed_since = None
+         self._episode_eye_count = 0
+ 
+     def update(
+@@ -81,6 +83,10 @@ class EyeClosureDetector:
+             if gap > self.max_sample_gap_seconds + 1e-9:
+                 self._end_episode()
+         self._last_timestamp = timestamp
++        # Invalidez interrompe o trecho antes de qualquer finalizacao por
++        # reabertura. A duracao geral pode continuar com um olho valido.
++        if quality.valid_eye_count != 2:
++            self._binocular_closed_since = None
+         closed = self._closed(observation, quality)
+         using_fallback = False
+         if closed is None:
+@@ -122,6 +128,8 @@ class EyeClosureDetector:
+             self._episode_eye_count = min(
+                 self._episode_eye_count, quality.valid_eye_count
+             )
++        if quality.valid_eye_count == 2 and self._binocular_closed_since is None:
++            self._binocular_closed_since = timestamp_s
+         duration_ms = max(0.0, (timestamp_s - self._closed_since) * 1000.0)
+         event_type = EyeClosureEventType.NONE
+         if duration_ms >= self.config.prolonged_closure_ms - 1e-6:
+@@ -130,6 +138,7 @@ class EyeClosureDetector:
+         return self._event(
+             event_type, active, duration_ms,
+             self._episode_eye_count, using_fallback,
++            self._binocular_duration_ms(timestamp_s),
+         )
+ 
+     def _while_open(
+@@ -142,12 +151,20 @@ class EyeClosureDetector:
+             )
+         duration_ms = max(0.0, (timestamp_s - self._closed_since) * 1000.0)
+         episode_eye_count = self._episode_eye_count
+-        self._closed_since = None
+-        self._episode_eye_count = 0
+         event_type = self._completed_event_type(duration_ms)
+-        return self._event(
+-            event_type, False, duration_ms, episode_eye_count, using_fallback
++        event = self._event(
++            event_type, False, duration_ms, episode_eye_count, using_fallback,
++            self._binocular_duration_ms(timestamp_s),
+         )
++        # O evento transporta o trecho encerrado; frames abertos seguintes
++        # nao reutilizam sua evidencia, mesmo que a FSM mantenha CRITICAL.
++        self._end_episode()
++        return event
++
++    def _binocular_duration_ms(self, timestamp_s: float) -> Optional[float]:
++        if self._binocular_closed_since is None:
++            return None
++        return max(0.0, (timestamp_s - self._binocular_closed_since) * 1000.0)
+ 
+     def _completed_event_type(self, duration_ms: float) -> EyeClosureEventType:
+         if duration_ms >= self.config.prolonged_closure_ms - 1e-6:
+@@ -156,13 +173,14 @@ class EyeClosureDetector:
+             return EyeClosureEventType.EXTENDED_CLOSURE
+         return EyeClosureEventType.BLINK
+ 
+-    @staticmethod
+     def _event(
++        self,
+         event_type: EyeClosureEventType,
+         active: bool,
+         duration_ms: float,
+         valid_eye_count: int,
+         using_fallback: bool,
++        binocular_duration_ms: Optional[float] = None,
+     ) -> EyeClosureEvent:
+         return EyeClosureEvent(
+             event_type=event_type,
+@@ -170,4 +188,11 @@ class EyeClosureDetector:
+             duration_ms=duration_ms,
+             valid_eye_count=valid_eye_count,
+             using_fallback=using_fallback,
++            binocular_duration_ms=(
++                binocular_duration_ms if binocular_duration_ms is not None else 0.0
++            ),
++            binocular_prolonged=(
++                binocular_duration_ms is not None
++                and binocular_duration_ms >= self.config.prolonged_closure_ms - 1e-6
++            ),
+         )
+diff --git a/fatigue_fsm.py b/fatigue_fsm.py
+index caa3939..1667d44 100644
+--- a/fatigue_fsm.py
++++ b/fatigue_fsm.py
+@@ -75,10 +75,13 @@ class FatigueFsm:
+     def _target_state(
+         self, closure: EyeClosureEvent, perclos: PerclosMeasurement
+     ) -> FatigueState:
+-        perclos_value = perclos.value
++        # _target_state so e chamado com observacao atual READY. O minimo
++        # historico de olhos do fechamento nao limita nenhuma via critica.
++        perclos_value = (
++            perclos.value if perclos.observation_state == ObservationState.READY else None
++        )
+         critical_perclos = perclos_value is not None and perclos_value >= self.config.critical_perclos
+-        prolonged = closure.event_type == EyeClosureEventType.PROLONGED_CLOSURE
+-        if closure.valid_eye_count == 2 and (prolonged or critical_perclos):
++        if closure.binocular_prolonged or critical_perclos:
+             return FatigueState.CRITICAL
+         warning_perclos = perclos_value is not None and perclos_value >= self.config.warning_perclos
+         if self._warning_evidence(closure) or warning_perclos:
+diff --git a/runtime_models.py b/runtime_models.py
+index ba43cd9..0759d1f 100644
+--- a/runtime_models.py
++++ b/runtime_models.py
+@@ -105,18 +105,26 @@ class EyeCalibration:
+ 
+ @dataclass(frozen=True)
+ class EyeClosureEvent:
+-    """Estado temporal do fechamento e eventual evento de borda."""
++    """Fechamento geral e evidencia do trecho binocular continuo atual.
++
++    valid_eye_count e o minimo historico durante o fechamento, nao a qualidade
++    atual nem um requisito de CRITICAL. Na reabertura, os campos binoculares
++    transportam o trecho encerrado somente nesse evento. Frames abertos
++    seguintes voltam a zero/False, independentemente da histerese da FSM.
++    """
+ 
+     event_type: EyeClosureEventType
+     active: bool
+     duration_ms: float
+     valid_eye_count: int
+     using_fallback: bool = False
++    binocular_duration_ms: float = 0.0
++    binocular_prolonged: bool = False
+ 
+ 
+ @dataclass(frozen=True)
+ class PerclosMeasurement:
+-    """PERCLOS temporal e seus indicadores de disponibilidade."""
++    """PERCLOS disponivel somente com observation_state READY e value nao nulo."""
+ 
+     observation_state: ObservationState
+     value: Optional[float]
+diff --git a/runtime_observability.py b/runtime_observability.py
+index 36de991..49796ef 100644
+--- a/runtime_observability.py
++++ b/runtime_observability.py
+@@ -48,6 +48,8 @@ def assessment_log_record(result: RuntimeAssessment) -> dict[str, Any]:
+         "closure_ms": fatigue.closure.duration_ms,
+         "closure_event": fatigue.closure.event_type.value,
+         "closure_valid_eye_count": fatigue.closure.valid_eye_count,
++        "closure_binocular_ms": fatigue.closure.binocular_duration_ms,
++        "closure_binocular_prolonged": fatigue.closure.binocular_prolonged,
+         "using_fallback": fatigue.closure.using_fallback,
+         "perclos_p80": None,
+         "perclos_ear": fatigue.perclos.value,
+diff --git a/tests/test_deterministic_runtime.py b/tests/test_deterministic_runtime.py
+index 0582af8..8804d2a 100644
+--- a/tests/test_deterministic_runtime.py
++++ b/tests/test_deterministic_runtime.py
+@@ -75,7 +75,12 @@ def closure(
+     active: bool = False,
+     eyes: int = 2,
+ ) -> EyeClosureEvent:
+-    return EyeClosureEvent(event_type, active, 1000.0 if active else 0.0, eyes)
++    binocular_prolonged = event_type == EyeClosureEventType.PROLONGED_CLOSURE and eyes == 2
++    return EyeClosureEvent(
++        event_type, active, 1000.0 if active else 0.0, eyes,
++        binocular_duration_ms=1000.0 if binocular_prolonged else 0.0,
++        binocular_prolonged=binocular_prolonged,
++    )
+ 
+ 
+ class TestRuntimeModels(unittest.TestCase):
+diff --git a/tests/test_binocular_recovery.py b/tests/test_binocular_recovery.py
+new file mode 100644
+index 0000000..cfd78ba
+--- /dev/null
++++ b/tests/test_binocular_recovery.py
+@@ -0,0 +1,339 @@
++"""Regressoes de evidencia binocular, disponibilidade PERCLOS e histerese."""
++
++import json
++from pathlib import Path
++import tempfile
++import unittest
++
++import _bootstrap  # noqa: F401
++
++from eye_closure import EyeClosureConfig
++from fatigue_fsm import FatigueFsm, FatigueFsmConfig
++from fatigue_runtime import FatigueRuntime, FatigueRuntimeConfig
++from runtime_models import (
++    EyeClosureEvent, EyeClosureEventType, EyeFrameObservation, FatigueState,
++    ObservationState, PerclosMeasurement,
++)
++from runtime_observability import assessment_log_record, frame_log_record
++from structured_logger import StructuredLogger
++
++
++def observe(runtime, t, left=.10, right=.10, face=True):
++    return runtime.evaluate(EyeFrameObservation(t, round(t * 1000), face, left, right))
++
++
++def feed(runtime, start, end, left=.10, right=.10):
++    """Amostras intermediarias evitam atravessar o limite de gap dos testes."""
++    count = round((end - start) * 10)
++    for step in range(count + 1):
++        result = observe(runtime, start + step / 10, left, right)
++    return result
++
++
++class TestBinocularReproductions(unittest.TestCase):
++    """Falhas funcionais verificadas antes de acessar os campos novos."""
++
++    def test_inicio_monocular_recupera_critical_em_1_1s(self):
++        runtime = FatigueRuntime()
++        observe(runtime, 0, right=None)
++        self.assertEqual(feed(runtime, .1, 1).fatigue.state, FatigueState.WARNING)
++        self.assertEqual(observe(runtime, 1.099).fatigue.state, FatigueState.WARNING)
++        result = observe(runtime, 1.1)
++        self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
++        self.assertIsNone(result.fatigue.perclos.value)
++        self.assertEqual(result.quality.valid_eye_count, 2)
++        self.assertEqual(result.fatigue.closure.valid_eye_count, 1)
++        self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, 1000)
++        self.assertTrue(result.fatigue.closure.binocular_prolonged)
++
++    def test_perda_em_600ms_recupera_critical_em_1_7s(self):
++        runtime = FatigueRuntime()
++        feed(runtime, 0, .5)
++        observe(runtime, .6, right=None)
++        self.assertEqual(feed(runtime, .7, 1.6).fatigue.state, FatigueState.WARNING)
++        result = observe(runtime, 1.7)
++        self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
++        self.assertIsNone(result.fatigue.perclos.value)
++        self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, 1000)
++
++    def test_perda_depois_de_critical_permite_nova_promocao(self):
++        runtime = FatigueRuntime()
++        self.assertEqual(feed(runtime, 0, 1.1).fatigue.state, FatigueState.CRITICAL)
++        self.assertEqual(observe(runtime, 1.2, right=None).fatigue.state, FatigueState.WARNING)
++        self.assertEqual(feed(runtime, 1.3, 2.2).fatigue.state, FatigueState.WARNING)
++        result = observe(runtime, 2.3)
++        self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
++        self.assertTrue(result.fatigue.closure.binocular_prolonged)
++        self.assertIsNone(result.fatigue.perclos.value)
++
++    def test_perclos_real_promove_apesar_do_historico_monocular(self):
++        # Limiar longo isola PERCLOS: nenhum fechamento chega a 100 segundos.
++        runtime = FatigueRuntime(FatigueRuntimeConfig(
++            eye_closure=EyeClosureConfig(prolonged_closure_ms=100000),
++        ))
++        feed(runtime, 0, 60, .30, .30)
++        observe(runtime, 60.1, right=None)
++        before = feed(runtime, 60.2, 78.1)
++        self.assertLess(before.fatigue.perclos.value, .30)
++        self.assertEqual(before.fatigue.state, FatigueState.WARNING)
++        result = observe(runtime, 78.2)
++        self.assertGreaterEqual(result.fatigue.perclos.value, .30)
++        self.assertEqual(result.fatigue.perclos.observation_state, ObservationState.READY)
++        self.assertEqual(result.fatigue.state, FatigueState.CRITICAL)
++        self.assertEqual(result.quality.valid_eye_count, 2)
++        self.assertEqual(result.fatigue.closure.valid_eye_count, 1)
++        self.assertFalse(result.fatigue.closure.binocular_prolonged)
++
++
++class TestBinocularEvidence(unittest.TestCase):
++    def test_assimetria_nao_usa_media_dos_ears(self):
++        for left, right in ((.10, .20), (.20, .10)):
++            with self.subTest(left=left, right=right):
++                runtime = FatigueRuntime()
++                result = feed(runtime, 0, 1.2, left, right)
++                self.assertEqual(result.fatigue.state, FatigueState.SAFE)
++                self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
++                self.assertFalse(result.fatigue.closure.binocular_prolonged)
++                self.assertIsNone(result.fatigue.perclos.value)
++                # A assimetria tambem encerra um trecho anterior: somente seu
++                # evento de reabertura pode transportar a duracao final.
++                runtime = FatigueRuntime()
++                feed(runtime, 0, .6)
++                ended = observe(runtime, .7, left, right)
++                self.assertAlmostEqual(ended.fatigue.closure.binocular_duration_ms, 700)
++                result = observe(runtime, .8, left, right)
++                self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
++                self.assertFalse(result.fatigue.closure.binocular_prolonged)
++
++    def test_bordas_configuradas_e_origem_temporal_nao_zero(self):
++        for threshold in (750, 1000, 1500):
++            with self.subTest(threshold=threshold):
++                runtime = FatigueRuntime(FatigueRuntimeConfig(
++                    eye_closure=EyeClosureConfig(prolonged_closure_ms=threshold),
++                ))
++                start = 10.4
++                end = start + threshold / 1000
++                for i in range(threshold // 100 + 1):
++                    t = start + i / 10
++                    if t < end - .001:
++                        observe(runtime, t)
++                before = observe(runtime, end - .001)
++                self.assertAlmostEqual(before.fatigue.closure.binocular_duration_ms, threshold - 1)
++                self.assertFalse(before.fatigue.closure.binocular_prolonged)
++                self.assertEqual(before.fatigue.state, FatigueState.WARNING)
++                at = observe(runtime, end)
++                self.assertAlmostEqual(at.fatigue.closure.binocular_duration_ms, threshold)
++                self.assertTrue(at.fatigue.closure.binocular_prolonged)
++                self.assertEqual(at.fatigue.state, FatigueState.CRITICAL)
++                self.assertIsNone(at.fatigue.perclos.value)
++
++    def test_trechos_de_600ms_nao_sao_somados(self):
++        runtime = FatigueRuntime()
++        feed(runtime, 0, .6)
++        lost = observe(runtime, .7, right=None)
++        self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
++        result = feed(runtime, .8, 1.4)
++        self.assertAlmostEqual(result.fatigue.closure.duration_ms, 1400)
++        self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, 600)
++        self.assertFalse(result.fatigue.closure.binocular_prolonged)
++        self.assertEqual(result.fatigue.state, FatigueState.WARNING)
++
++    def test_monocular_antigo_nao_promove_imediatamente(self):
++        runtime = FatigueRuntime()
++        feed(runtime, 0, 3, right=None)
++        restored = observe(runtime, 3.1)
++        self.assertEqual(restored.fatigue.closure.binocular_duration_ms, 0)
++        self.assertFalse(restored.fatigue.closure.binocular_prolonged)
++        self.assertEqual(restored.fatigue.state, FatigueState.WARNING)
++        feed(runtime, 3.2, 4)
++        self.assertFalse(observe(runtime, 4.099).fatigue.closure.binocular_prolonged)
++        self.assertEqual(observe(runtime, 4.1).fatigue.state, FatigueState.CRITICAL)
++
++    def test_recuperar_olho_ja_aberto_nao_finaliza_binocular(self):
++        runtime = FatigueRuntime()
++        feed(runtime, 0, 1, right=None)
++        result = observe(runtime, 1.1, .30, .30)
++        self.assertEqual(result.fatigue.state, FatigueState.WARNING)
++        self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
++        self.assertFalse(result.fatigue.closure.binocular_prolonged)
++        self.assertEqual(result.fatigue.closure.valid_eye_count, 1)
++
++    def test_reabertura_transporta_evento_e_histerese_nao_e_evidencia(self):
++        runtime = FatigueRuntime()
++        observe(runtime, 0, right=None)
++        feed(runtime, .1, 1.1)
++        reopened = observe(runtime, 1.2, .30, .30)
++        self.assertAlmostEqual(reopened.fatigue.closure.binocular_duration_ms, 1100)
++        self.assertTrue(reopened.fatigue.closure.binocular_prolonged)
++        self.assertFalse(reopened.fatigue.closure.active)
++        next_open = observe(runtime, 1.3, .30, .30)
++        self.assertEqual(next_open.fatigue.closure.binocular_duration_ms, 0)
++        self.assertFalse(next_open.fatigue.closure.binocular_prolonged)
++        self.assertEqual(next_open.fatigue.state, FatigueState.CRITICAL)
++        self.assertEqual(observe(runtime, 1.799, .30, .30).fatigue.state, FatigueState.CRITICAL)
++        self.assertEqual(observe(runtime, 1.8, .30, .30).fatigue.state, FatigueState.SAFE)
++
++    def test_reabertura_no_limiar_finaliza_trecho_valido(self):
++        runtime = FatigueRuntime()
++        feed(runtime, 0, .5)
++        reopened = observe(runtime, 1, .30, .30)
++        self.assertAlmostEqual(reopened.fatigue.closure.binocular_duration_ms, 1000)
++        self.assertTrue(reopened.fatigue.closure.binocular_prolonged)
++        self.assertEqual(reopened.fatigue.state, FatigueState.CRITICAL)
++        self.assertFalse(observe(runtime, 1.1, .30, .30).fatigue.closure.binocular_prolonged)
++
++    def test_gap_antes_de_reabrir_nao_finaliza_trecho(self):
++        runtime = FatigueRuntime()
++        feed(runtime, 0, .5)
++        result = observe(runtime, 1.1, .30, .30)
++        self.assertEqual(result.fatigue.closure.duration_ms, 0)
++        self.assertEqual(result.fatigue.closure.binocular_duration_ms, 0)
++        self.assertFalse(result.fatigue.closure.binocular_prolonged)
++        self.assertEqual(result.fatigue.state, FatigueState.SAFE)
++
++    def test_gaps_de_500_600ms_e_34s(self):
++        for gap in (.5, .6, 34):
++            with self.subTest(gap=gap):
++                runtime = FatigueRuntime()
++                feed(runtime, 0, .5)
++                result = observe(runtime, .5 + gap)
++                expected = 1000 if gap == .5 else 0
++                self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, expected)
++                self.assertEqual(result.fatigue.closure.binocular_prolonged, gap == .5)
++                self.assertIsNone(result.fatigue.perclos.value)
++
++    def test_invalidez_antes_de_finalizar_e_perda_de_face(self):
++        for left, right, face in ((.30, None, True), (None, .30, True),
++                                  (.10, .10, False), (None, None, True)):
++            with self.subTest(left=left, right=right, face=face):
++                runtime = FatigueRuntime()
++                feed(runtime, 0, .6)
++                ended = observe(runtime, .7, left, right, face)
++                self.assertEqual(ended.fatigue.closure.binocular_duration_ms, 0)
++                self.assertFalse(ended.fatigue.closure.binocular_prolonged)
++                restored = observe(runtime, .8)
++                self.assertEqual(restored.fatigue.closure.binocular_duration_ms, 0)
++
++    def test_valores_invalidos_interrompem_qualquer_olho(self):
++        for invalid in (None, float('nan'), float('inf'), 0, 1.01):
++            for side in ('left', 'right'):
++                with self.subTest(invalid=invalid, side=side):
++                    runtime = FatigueRuntime()
++                    feed(runtime, 0, .6)
++                    eyes = {side: invalid}
++                    lost = observe(runtime, .7, **eyes)
++                    self.assertEqual(lost.fatigue.closure.binocular_duration_ms, 0)
++                    result = feed(runtime, .8, 1.4)
++                    self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, 600)
++                    self.assertFalse(result.fatigue.closure.binocular_prolonged)
++
++    def test_timestamps_repetidos_nao_acumulam_e_reset_limpa(self):
++        runtime = FatigueRuntime()
++        observe(runtime, 10.4)
++        for _ in range(5):
++            repeated = observe(runtime, 10.9)
++            self.assertAlmostEqual(repeated.fatigue.closure.binocular_duration_ms, 500)
++            self.assertFalse(repeated.fatigue.closure.binocular_prolonged)
++        self.assertTrue(observe(runtime, 11.4).fatigue.closure.binocular_prolonged)
++        runtime.reset()
++        self.assertEqual(observe(runtime, 11.5).fatigue.closure.binocular_duration_ms, 0)
++
++    def test_timestamps_invalidos_preservam_rejeicao_e_contador(self):
++        runtime = FatigueRuntime()
++        observe(runtime, 10.4)
++        observe(runtime, 10.9)
++        for t in (10.8, float('nan'), float('inf'), -float('inf')):
++            with self.subTest(t=t), self.assertRaises(ValueError):
++                runtime.evaluate(EyeFrameObservation(t, 0, True, .10, .10))
++        result = observe(runtime, 11.4)
++        self.assertAlmostEqual(result.fatigue.closure.binocular_duration_ms, 1000)
++        self.assertTrue(result.fatigue.closure.binocular_prolonged)
++
++
++class TestPerclosAvailabilityAndFsm(unittest.TestCase):
++    @staticmethod
++    def no_closure():
++        return EyeClosureEvent(EyeClosureEventType.NONE, False, 0, 1)
++
++    def test_valor_indisponivel_nao_e_evidencia(self):
++        for availability, value in ((ObservationState.UNAVAILABLE, .35),
++                                    (ObservationState.UNAVAILABLE, .20),
++                                    (ObservationState.READY, None)):
++            with self.subTest(availability=availability, value=value):
++                # eyes=2 reproduz tambem a falha antiga de disponibilidade,
++                # separada do minimo historico de olhos.
++                closure = EyeClosureEvent(EyeClosureEventType.NONE, False, 0, 2)
++                result = FatigueFsm().update(0, ObservationState.READY, closure,
++                    PerclosMeasurement(availability, value, .5, 30, 60))
++                self.assertEqual(result.state, FatigueState.SAFE)
++
++    def test_limiar_critico_configurado_independe_do_historico(self):
++        for value, expected in ((.39999, FatigueState.WARNING), (.40, FatigueState.CRITICAL)):
++            with self.subTest(value=value):
++                result = FatigueFsm(FatigueFsmConfig(critical_perclos=.40)).update(
++                    0, ObservationState.READY, self.no_closure(),
++                    PerclosMeasurement(ObservationState.READY, value, 1, 60, 60))
++                self.assertEqual(result.state, expected)
++
++    def test_indisponibilidade_nao_substitui_recuperacao_da_fsm(self):
++        fsm = FatigueFsm()
++        available = PerclosMeasurement(ObservationState.READY, .35, 1, 60, 60)
++        unavailable = PerclosMeasurement(ObservationState.UNAVAILABLE, .35, .5, 30, 60)
++        self.assertEqual(fsm.update(0, ObservationState.READY, self.no_closure(), available).state,
++                         FatigueState.CRITICAL)
++        self.assertEqual(fsm.update(.1, ObservationState.READY, self.no_closure(), unavailable).state,
++                         FatigueState.CRITICAL)
++        self.assertEqual(fsm.update(.6, ObservationState.READY, self.no_closure(), unavailable).state,
++                         FatigueState.SAFE)
++
++    def test_degraded_e_unknown_preservados_com_evidencia(self):
++        event = EyeClosureEvent(EyeClosureEventType.PROLONGED_CLOSURE, True, 1000, 1,
++                                binocular_duration_ms=1000, binocular_prolonged=True)
++        metric = PerclosMeasurement(ObservationState.READY, .35, 1, 60, 60)
++        for state, expected in ((ObservationState.DEGRADED, FatigueState.WARNING),
++                                (ObservationState.UNAVAILABLE, FatigueState.UNKNOWN)):
++            with self.subTest(state=state):
++                self.assertEqual(FatigueFsm().update(0, state, event, metric).state, expected)
++
++
++class TestBinocularSerialization(unittest.TestCase):
++    def test_defaults_preservam_construcao_posicional(self):
++        event = EyeClosureEvent(EyeClosureEventType.PROLONGED_CLOSURE, True, 1000, 2, True)
++        self.assertTrue(event.using_fallback)
++        self.assertEqual(event.binocular_duration_ms, 0)
++        self.assertFalse(event.binocular_prolonged)
++
++    def test_registros_serializados_e_manifesto(self):
++        runtime = FatigueRuntime()
++        sequence = [(0, .10, None), (.1, .10, .10), (.4, .10, .10),
++                    (.7, .10, .10), (1.1, .10, .10), (1.2, .30, .30),
++                    (1.3, .30, .30), (1.4, .10, None), (1.5, .10, .10),
++                    (2.1, .10, .10)]
++        with tempfile.TemporaryDirectory() as tmp:
++            logger = StructuredLogger(Path(tmp))
++            for t, left, right in sequence:
++                result = observe(runtime, t, left, right)
++                logger.log_frame_and_assessment(frame_log_record(result), assessment_log_record(result))
++            logger.close()
++            path = next(Path(tmp).rglob('assessments.jsonl'))
++            rows = [json.loads(line) for line in path.read_text().splitlines()]
++            self.assertEqual(len(rows), len(sequence))
++            for row, expected in zip(rows, (0, 0, 300, 600, 1000, 1100, 0, 0, 0, 0)):
++                self.assertAlmostEqual(row['closure_binocular_ms'], expected)
++                self.assertEqual(row['closure_binocular_prolonged'], expected >= 1000)
++                self.assertIsNone(row['perclos_ear'])
++                self.assertIsNone(row['perclos_p80'])
++            self.assertEqual(rows[4]['fatigue_state'], 'critical')
++            self.assertEqual(rows[4]['fatigue_label'], 'sono')
++            self.assertEqual(rows[4]['valid_eye_count'], 2)
++            self.assertEqual(rows[4]['closure_valid_eye_count'], 1)
++            self.assertAlmostEqual(rows[4]['closure_ms'], 1100)
++            self.assertFalse(rows[6]['closure_binocular_prolonged'])
++            self.assertEqual(rows[6]['fatigue_state'], 'critical')
++            manifest = json.loads((path.parent / 'manifest.json').read_text())
++            self.assertEqual(manifest['frame_count'], len(sequence))
++            self.assertEqual(manifest['assessment_count'], len(sequence))
++
++
++if __name__ == '__main__':
++    unittest.main()

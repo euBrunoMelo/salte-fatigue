@@ -1,0 +1,40 @@
+{
+  "timestamp_utc": "2026-10-06T19:41:13.460411+00:00",
+  "head": "b0d8acc963606224f3c22d5c0a0070062846f5c8",
+  "source_harness": "checkout local; FatigueRuntime real; unittest; sem camera/MediaPipe; nenhuma consulta ou alteracao remota nesta implementacao",
+  "reproduction_test_unchanged": true,
+  "before_functional": {
+    "tests": 4,
+    "failures": 4,
+    "errors": 0
+  },
+  "after_functional": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0
+  },
+  "new_regressions": 23,
+  "full_suite": {
+    "tests": 175,
+    "failures": 0,
+    "errors": 0
+  },
+  "checks": {
+    "py_compile": "PASS",
+    "docker compose config --quiet": "PASS",
+    "bash -n sync/monitoramento-sync.sh sync/install-monitoramento-sync.sh sync/99-monitoramento-sync": "PASS",
+    "git diff --check": "PASS"
+  },
+  "sha256": {
+    "eye_closure.py": "8fa7971093b1d386384c7d0fe7ec43b669a54e69a0d8007acc26dab5f9912860",
+    "fatigue_fsm.py": "17caa2480cd2c72fe0309be44d920e958763f0fbcad2660811884b9364ea6bb1",
+    "runtime_models.py": "39c8c1c93d6216e0ba3e26cee799553eba36aaacfa0810e82bcf824dad297cce",
+    "runtime_observability.py": "b00de90faafc6632d05a6704bc060f7cc2ba398ee6a4b349287cb7bbb5377d82",
+    "tests/test_deterministic_runtime.py": "e36b8954bd7d0be89cbcf7bdd5fe35dff131634248c75b0894fae54de7139cac",
+    "README.md": "a2cf5ebee75056738a5c1b2020831e707f051db89cc7e888424b2e6df85d2a1d",
+    "TESTE REGRECAO.txt": "989862d9736b31bcbc07eba604467b8c3692a921f3fb1601c8d96b15223ac4ec",
+    "tests/test_binocular_recovery.py": "44053ed0a68fed918b5dbad2395953344a83039e0a7f272816fcf3c41bded38f",
+    "fatigue_runtime.py": "df27d286f2a3f26459451d7334c06fb6cc556f674587bef879003148cead14d0",
+    "perclos_rt.py": "56b939ac379ca63782fbbdef49e2a8b7efbb8e92c8db82651cf0e6a01ecf1831"
+  }
+}

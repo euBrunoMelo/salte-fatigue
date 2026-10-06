@@ -1,0 +1,49 @@
+{
+  "timestamp_utc": "2026-10-06T19:38:56.627941+00:00",
+  "source_harness": "checkout local; FatigueRuntime real; unittest; sem camera/MediaPipe; nenhuma consulta ou alteracao remota nesta implementacao",
+  "head": "b0d8acc963606224f3c22d5c0a0070062846f5c8",
+  "python": "Python 3.14.4",
+  "sha256": {
+    "eye_closure.py": "928077c1bf779752477c40dacc69c1e3d502bda5f37dee3e93aca26ee38a16fa",
+    "fatigue_fsm.py": "94cb1a3b8607e71f4cf7210a01ecccae7641d1e5888bbeae5e54594b335ff57f",
+    "runtime_models.py": "e2abe4c3c374600e5d0ef9c33bca6ce927909ba01307d1a6c8e49add62bbc386",
+    "runtime_observability.py": "814900177998ca6d57cca880b6829aaf0843b4732e4f462bb29da9e4ef4b85d5",
+    "fatigue_runtime.py": "df27d286f2a3f26459451d7334c06fb6cc556f674587bef879003148cead14d0",
+    "perclos_rt.py": "56b939ac379ca63782fbbdef49e2a8b7efbb8e92c8db82651cf0e6a01ecf1831",
+    "tests/test_binocular_recovery.py": "44053ed0a68fed918b5dbad2395953344a83039e0a7f272816fcf3c41bded38f"
+  },
+  "runs": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_binocular_recovery.py",
+        "-k",
+        "TestBinocularReproductions",
+        "-v"
+      ],
+      "returncode": 1,
+      "log": "before-reproductions.log"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_binocular_recovery.py",
+        "-v"
+      ],
+      "returncode": 1,
+      "log": "before-regressions.log"
+    }
+  ]
+}

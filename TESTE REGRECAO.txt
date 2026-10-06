@@ -21,6 +21,12 @@ O pacote produtivo deve conter apenas os modulos atuais e face_landmarker.task.
 - Um olho valido: DEGRADED; aberto fica UNKNOWN e fechamento no maximo WARNING.
 - Dois olhos validos: requisito para PERCLOS e CRITICAL.
 - Fechamento binocular: ambos os olhos validos com EAR <= limiar.
+- Trecho binocular atual independente da duracao geral; nao somar trechos.
+- Perder um olho reinicia o trecho binocular; recuperar nao promove retroativamente.
+- Minimo historico closure_valid_eye_count nao representa qualidade atual nem limita CRITICAL.
+- Evidencia critica: observacao READY e (binocular_prolonged ou PERCLOS disponivel >= limiar).
+- PERCLOS disponivel: estado da metrica READY e valor nao nulo; valor isolado nao e evidencia.
+- Evento de reabertura transporta o trecho encerrado; frame aberto seguinte tem zero/False.
 - Gap >0.5 s interrompe fechamento, promocao de piscada e recuperacao critica.
 - Pausas de 0.6 e 34 s nunca estabelecem sono continuo.
 - Piscadas de ate 400 ms sao excluidas; fechamento prolongado comeca em 1000 ms.
@@ -37,6 +43,8 @@ Nao e necessario gerar eye_calibration.json. Arquivos antigos sao ignorados e
 preservados. Conferir closure_method=absolute_ear, closed_ear_threshold=0.17 e
 max_sample_gap_seconds=0.5 em run-start.json; calibration_loaded=false e esperado.
 Conferir fatigue_label e perclos_ear nas avaliacoes; perclos_p80 deve ser null.
+Conferir closure_binocular_ms e closure_binocular_prolonged; o estado pode
+continuar critical por histerese mesmo com esses campos em zero/False.
 
 4. HIL/SHADOW NO CM5
 
@@ -52,6 +60,16 @@ Cenarios obrigatorios:
 - Fechamento >400 ms: WARNING/fadiga; borda de 400 ms ainda e piscada.
 - Piscadas curtas: sem CRITICAL.
 - Fechamento bilateral continuo >=1000 ms: CRITICAL/sono.
+- Recuperacao de dois olhos em 0.1 s: evidencia binocular e CRITICAL em 1.1 s.
+- Perda em 0.6 s e recuperacao em 0.7 s: nova evidencia somente em 1.7 s.
+- EARs 0.10/0.20 e 0.20/0.10: sem fechamento binocular, apesar da media 0.15.
+- Bordas binoculares 999/1000, 749/750 e 1499/1500 ms conforme limiar configurado.
+- Trechos de 600 ms separados por invalidez nao somam 1200 ms.
+- Reabertura apos gap >500 ms nao finaliza fechamento usando a lacuna.
+- Timestamps repetidos nao acumulam; regressivos/nao finitos continuam rejeitados.
+- Verificar duracao e booleano de evidencia, nao apenas estado mantido pela histerese.
+- PERCLOS critico com READY promove mesmo com minimo historico monocular.
+- PERCLOS numerico acima do limiar, mas indisponivel, nao gera evidencia critica.
 - Recuperacao critica: 500 ms continuos; gap reinicia a contagem.
 - Pausas >0.5 s: reiniciar episodio ocular, sem falso sono.
 - Apenas um olho valido e fechado: WARNING no maximo.
