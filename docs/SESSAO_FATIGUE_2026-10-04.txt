@@ -1,0 +1,298 @@
+SESSAO FATIGUE — TESTES E EVIDENCIAS DE 04/10/2026
+================================================
+
+Registro salvo no computador local. Horario do operador: America/Sao_Paulo,
+UTC-03. Os JSON e logs originais mantem seus timestamps UTC ou o fuso emitido
+pelo journal. As consultas sao sequenciais, nao uma fotografia simultanea.
+
+Proxima sessao: investigar as pausas provocadas por timeouts de escrita do NVMe.
+A causa fisica ou de driver desses timeouts ainda nao foi estabelecida.
+
+1. ESCOPO E CONFIGURACAO PRESERVADA
+
+Projeto local:
+/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601
+
+Projeto executado no Raspberry:
+/mnt/nvme/Monitoramento/FATIGUE
+
+Docker usa /mnt/nvme/docker. Logs do FATIGUE usam ./logs:/app/logs, confirmados
+em /dev/nvme0n1p1, montado em /mnt/nvme como ext4. Essa verificacao se refere
+aos dados Docker e aos logs; nao representa uma migracao do boot ou do SO.
+
+Alteracoes funcionais do dia foram limitadas ao FATIGUE. As configuracoes e
+processos de monitor-motorista, DrowsyDriving e gallery foram preservados.
+O container antigo salte-tev8 permaneceu fora do teste; o aviso de orphan nao
+resultou em sua remocao ou inicializacao.
+
+Acesso autorizado conforme AGENTS.md:
+ssh -F /tmp/codex-rpi-ssh/config rpi-sala 'COMANDO'
+
+Preservar SSH, VPN e authorized_keys. Sudo e operacoes destrutivas no Raspberry
+exigem autorizacao explicita. O arquivamento desta sessao fez consultas remotas
+somente de leitura e gravou as copias no computador local.
+
+2. CAMERA E OPERACAO SEM CALIBRACAO
+
+FATIGUE seleciona a ID fisica contendo 70000, independente de indices:
+platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500
+
+Nos testes de hoje ela foi aberta no indice 1. O outro sensor, associado ao
+monitor-motorista, foi identificado como:
+platform/axi/1000120000.pcie/1f00088000.i2c/i2c-10/10-001a imx500
+
+O FATIGUE inicia diretamente por run_host.py, sem wait_for_camera.py.
+Fonte ausente, ambigua ou ocupada produz erro; a politica Docker existente
+restart: unless-stopped continua configurada.
+
+Remocao de calibracao implementada conforme escolhas do usuario:
+- EAR absoluto <= 0.17 determina olho fechado.
+- Um unico limiar em FatigueRuntimeConfig alimenta fechamento e PERCLOS.
+- Dois olhos validos permitem classificacao READY sem eye_calibration.json.
+- Um olho valido e DEGRADED: aberto resulta UNKNOWN; fechamento, no maximo fadiga.
+- Sem rosto ou sem olhos validos: UNKNOWN e episodio ocular interrompido.
+- Piscada ate 400 ms e excluida; fechamento >400 ms produz evidencia de fadiga.
+- Fechamento binocular continuo >=1000 ms produz evidencia de sono.
+- PERCLOS conserva janela de 60 s, cobertura binocular minima de 80%,
+  exclusao de piscadas e integracao limitada nas lacunas.
+- PERCLOS >=15% produz fadiga; >=30% pode produzir sono com dois olhos validos.
+- Sono tem prioridade; recuperacao exige 500 ms continuos sem evidencia critica.
+- Gap >0.5 s interrompe episodio ocular, promocao retroativa de piscada e
+  contagem de recuperacao; tempo sem observacao nao estabelece sono continuo.
+
+Codigos internos preservados: safe/ativo, warning/fadiga, critical/sono,
+unknown/unknown. Logs acrescentam fatigue_label e perclos_ear; perclos_p80
+permanece null. run-start registra closure_method=absolute_ear e limiar 0.17.
+calibration_loaded=false e esperado neste modo.
+
+O runtime nao le o JSON de calibracao, inclusive quando ausente ou invalido.
+Ferramentas historicas de enrollment permanecem no codigo-fonte, mas foram
+retiradas da imagem Docker. Opcoes operacionais de calibracao, fallback, P80
+normalizado e pose relativa dependente de enrollment foram removidas. Pose
+bruta permanece nos logs; atencao operacional permanece unavailable.
+
+A FSM temporal EAR/PERCLOS foi mantida. Nao foram implementadas as tres faixas
+diretas de EAR do paper. Referencia permanece no PDF de docs/references/:
+Computer vision-based approach to detect fatigue driving and face mask for
+edge computing device - PMC.pdf, Heliyon 2022, DOI 10.1016/j.heliyon.2022.e11204,
+https://pmc.ncbi.nlm.nih.gov/articles/PMC9619001/
+
+Gravacao de incidentes continua desabilitada por --no-danger-record.
+
+3. TESTES LOCAIS E IMPLANTACAO
+
+Suite final: 152 testes aprovados, com saida completa preservada em
+evidencias/2026-10-04/implementacao_sem_calibracao/tests.log.
+
+Cobertura: limiar inclusivo, estados ativo/fadiga/sono, bordas de 400/1000 ms,
+recuperacao de 500 ms, limites PERCLOS de 15/30%, janela e cobertura, JSON
+ausente/invalido sem leitura, face ausente, EAR NaN/Inf/invalido, um olho,
+gaps de 0.5/0.6/34 s, timestamp regressivo, compatibilidade de logs e recorder,
+manifestos e contrato de producao sem supervisor/calibracao.
+
+Compilacao dos modulos e docker compose config passaram. Replay com MediaPipe
+real processou oito frames de um video preto: UNKNOWN esperado por ausencia
+de rosto, metodo absolute_ear e limiar 0.17 registrados. Esse replay valida
+inicializacao e pipeline; os tres estados foram exercitados nos testes puros
+e na sondagem do runtime no host Raspberry, nao no video preto.
+
+Uma etapa anterior de camera registrou 135 testes na conversa. Sua saida bruta
+temporaria nao foi localizada no arquivamento; a saida final dos 152 testes
+esta preservada. Essa distincao evita apresentar um arquivo inexistente como
+evidencia arquivada.
+
+Antes do rebuild manual, 19/19 arquivos de producao foram conferidos por hash
+entre PC e Raspberry. Foram publicados 17 arquivos de codigo, testes e docs.
+config/README.md ficou atualizado apenas no PC: a pasta remota era root:root,
+sem permissao de escrita para o usuario SSH. Isso nao afeta a execucao.
+
+Backup da etapa de camera no Raspberry:
+/mnt/nvme/Monitoramento/FATIGUE-backups/20261004T135352Z
+Imagem: salte-fatigue:backup-20261004t135352z
+
+Backup antes de remover a dependencia de calibracao:
+/mnt/nvme/Monitoramento/FATIGUE-backups/20261004T144724Z-absolute-ear
+Imagem: salte-fatigue:backup-20261004t144724z-absolute-ear
+Imagem anterior: sha256:656956b2ab96007e1aa210dd95be87b87ea2d5c4a175bc5b55a1d8461895b41d
+
+O usuario executou o build e a recriacao, somente do FATIGUE:
+docker compose config --quiet &&
+docker compose build salte-fatigue &&
+docker compose up -d --no-deps --force-recreate salte-fatigue
+
+Imagem nova observada:
+sha256:b50016c7656627b0faf586d4905d63fa10cfab8d87769eb9cfc1e22321e4eec5
+Container: acf19d2bebfc411e62be3c548643eabf2458b64b5c4ea31e05a3406286e4034b
+StartedAt: 2026-10-04T14:53:56.768109224Z
+Camera iniciou; runtime registrou absolute_ear, limiar 0.170 e unknown -> ativo.
+
+4. PRIMEIRO ENSAIO: CAMERA CORRETA, AINDA COM DEPENDENCIA DE CALIBRACAO
+
+Janela: 14:00:17 a 14:10:17 UTC (11:00:17 a 11:10:17 BRT).
+14 amostras, dez minutos.
+Run ID: 7bcdea7fc9f04b8eb7f00bb4d35fe562
+
+Camera 70000 aberta corretamente, indice 1, mais de 6330 frames e zero reinicios.
+Faces e dois olhos validos em 1291/1292 registros da varredura final.
+Todos os 1292 registros UNKNOWN: JSON de calibracao ausente e fallback nao usado.
+Dois segmentos publicados; indices de frames/avaliacoes correspondentes.
+
+Infraestrutura reprovada: 24 novos timeouts de escrita na janela, lacuna maxima
+entre registros de aproximadamente 34.016 s; processo principal em D em 10/14
+amostras. Temperatura final 84.5 C; get_throttled=0xe0008.
+Monitor-motorista e gallery mantiveram seus containers e configuracoes.
+
+Relatorio completo e amostras:
+evidencias/2026-10-04/teste_camera_antes_remocao_calibracao/
+
+5. SEGUNDO ENSAIO: SEM DEPENDENCIA DE CALIBRACAO
+
+21 amostras entre 14:56:00 e 15:06:01 UTC (11:56:00 a 12:06:01 BRT).
+Coletor concluido as 15:06:10 UTC, duracao 610.092 s, sem falhas de coleta.
+Run ID: f903178777b2489088e6f4b615ace5fe
+Inicio de run-start: 2026-10-04T14:54:10.916Z
+
+Na ultima amostra:
+- Frame index 4140: pelo menos 4141 frames capturados.
+- 829 pares de registros; 733 ativo e 96 UNKNOWN nos logs amostrados.
+- Os 96 UNKNOWN copiados tinham qualidade no_face, nao falta de calibracao.
+- Eventos completos registraram duas entradas em fadiga durante teste do usuario.
+- Nenhum evento sono foi observado nessa janela.
+- Dois segmentos finais: 384 e 289 pares; terceiro parcial ativo: 156 pares.
+- Contagens conferiam com manifestos; hashes finais permaneceram estaveis.
+- FATIGUE, monitor-motorista e gallery sem reinicios ou mudancas de configuracao.
+- Monitor-motorista continuava avancando frames e registrando Face: YES.
+- Gallery respondia HTTP 403 ao acesso localhost, coerente com sua restricao
+  de acesso ja identificada; nao equivale a indisponibilidade do processo.
+
+Eventos do fechamento deliberado:
+14:56:35.835 UTC — ativo -> fadiga, frame 1376.
+14:56:40.534 UTC — fadiga -> ativo, frame 1377.
+14:56:41.746 UTC — ativo -> fadiga, frame 1409.
+14:56:44.255 UTC — fadiga -> ativo, frame 1410.
+
+Essas transicoes foram seguidas por intervalos de cerca de 4.7 s e 2.5 s ate
+o proximo frame. A contagem de fechamento foi reiniciada apos a lacuna.
+Os logs de avaliacoes sao amostrados a cada cinco frames; eventos de mudanca
+de estado sao consultados separadamente para captar estados breves.
+
+NVMe: 59 timeouts desde o inicio do runtime na ultima leitura. O incremento
+entre primeira e ultima contagem foi 50 (9 -> 59); a primeira consulta ja
+incluia timeouts anteriores ao termino de sua propria coleta. Tratar esses
+valores como leituras sequenciais, nao como um contador instantaneo alinhado
+exatamente aos limites da janela.
+
+Lacuna maxima entre registros amostrados: 34.017 s. A thread principal do
+FATIGUE foi observada em D (disk sleep), folio_wait_bit_common, em cinco
+verificacoes adicionais consecutivas. Isso confirma espera de I/O no processo.
+
+PERCLOS indisponivel em todos os 21 checkpoints: cobertura de cerca de 3.1%
+a 37.0%, abaixo dos 80% necessarios. Temperatura CPU entre 74.35 e 84.8 C.
+get_throttled variou entre 0xe0000 e 0xe0008; bit 0x8 sinalizou limite termico
+ativo em oito amostras. Referencia para interpretar os bits:
+https://www.raspberrypi.com/documentation/computers/os.html#get_throttled
+
+O codigo publica eventos sincronicamente no loop e o logger faz flush/fsync
+para publicacao duravel. As pausas apos transicoes, somadas ao estado D e aos
+timeouts do kernel, sustentam a investigacao do caminho de persistencia.
+A causa no SSD/controlador/PCIe/alimentacao/firmware nao foi confirmada.
+
+Relatorio completo, 21 amostras e sondagem das threads:
+evidencias/2026-10-04/teste_sem_calibracao/
+
+6. CONFIRMACAO POSTERIOR E ARQUIVO AMPLIADO
+
+Consulta posterior: contador avancou de 22412 frames, as 15:45:26 UTC, para
+22976 frames, as 15:47:43 UTC. Estado ativo, dois olhos validos, mesmo container,
+zero reinicios. Dez segmentos finais e 000011.partial recebendo frames.jsonl
+e assessments.jsonl no NVMe. Timeouts recentes continuavam no kernel.
+
+Registro consolidado dessa consulta, reconstruido das saidas da conversa:
+evidencias/2026-10-04/confirmacao_coleta_12h47_brt.json
+
+Para preservar os resultados, os artefatos ja finalizados das duas execucoes
+foram copiados por SSH somente de leitura para o PC. Corte do arquivo:
+2026-10-04T16:01:40.785486Z (13:01:40 BRT).
+23 segmentos completos, 234 arquivos e 11675 pares de frames/avaliacoes.
+SHA-256, JSON, contagens, bytes dos manifestos e indices dos pares conferidos.
+Parciais ainda mutaveis foram excluidos dessa copia de artefatos finais.
+As amostras observacionais preservam os metadados dos parciais vistos no teste.
+
+Arquivo ampliado da execucao anterior: 11 segmentos, 6253 pares, todos UNKNOWN,
+ultimo frame index 31260. Arquivo ampliado da execucao nova: 12 segmentos,
+5422 pares, ultimo frame index 27105; 5067 safe, 352 unknown e 3 warning nos
+registros amostrados. Eventos da execucao nova registram 13 entradas em fadiga,
+80 em ativo e 69 em UNKNOWN. Nenhum critical/sono consta dos artefatos arquivados.
+
+IMPORTANTE: esses segmentos abrangem periodos posteriores ao ensaio de dez
+minutos. Neles existem 155 avaliacoes com PERCLOS disponivel e cobertura maxima
+de 100%; houve periodos de recuperacao da cobertura. Isso nao altera o resultado
+de PERCLOS indisponivel nos checkpoints da janela monitorada. A maior lacuna
+amostrada da execucao nova ampliada foi 38.510 s.
+
+Detalhes: resumo_execucoes_arquivadas.json e verificacao_logs_finalizados.json
+dentro de evidencias/2026-10-04/.
+
+7. CONTEUDO PRESERVADO E REPRODUCAO
+
+Pasta permanente: docs/evidencias/2026-10-04/
+- INDICE.json: mapa dos conjuntos de evidencia.
+- MANIFEST.sha256: integridade dos arquivos locais arquivados.
+- codigo_testado/: snapshot de 43 arquivos, modulos, modelo, testes e insumos sync.
+- codigo_testado_manifest.json: hashes do snapshot de codigo.
+- ambiente_testes_local.json: Python 3.14.4 e versoes dos 22 pacotes do ambiente local.
+- implementacao_sem_calibracao/: saida da suite, compose, compilacao/replay,
+  verificacao de hashes, backups e metadados de implantacao.
+- comparacao_pc_raspberry/: alinhamento inicial e fontes daquela etapa.
+- teste_camera_antes_remocao_calibracao/: ensaio anterior, 14 amostras e relatorio.
+- teste_sem_calibracao/: ensaio novo, 21 amostras, relatorio e threads.
+- raspberry_logs_finalizados.tar: copia dos artefatos finais das duas execucoes.
+- raspberry_logs_finalizados_manifest.json: arquivos de origem, hashes e corte.
+- proveniencia_copias.json: relacao com os arquivos temporarios e hashes de copia.
+
+Valores de Env nos docker inspect foram omitidos das copias arquivadas.
+As comparacoes e os hashes previamente registrados permanecem documentados.
+Os scripts coletores arquivados sao referencia historica; para reutilizacao,
+copiar para outra pasta de saida e preservar estes arquivos de evidencia.
+
+Reproduzir a suite do snapshot com o ambiente local existente:
+cd /home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/docs/evidencias/2026-10-04/codigo_testado
+PYTHONDONTWRITEBYTECODE=1 /home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601/.venv/bin/python -m unittest discover -s tests -v
+
+As dependencias nao foram empacotadas como ambiente executavel; suas versoes,
+Dockerfile e modelo foram preservados. Nao executar novos testes dentro das
+pastas com amostras antigas para evitar substituir evidencia historica.
+
+Durante o arquivamento foi acrescentada somente a exclusao docs/evidencias/
+ao .dockerignore local, para deixar o arquivo de evidencias fora do contexto
+de futuros builds. Essa linha nao foi enviada ao Raspberry e nao altera o
+container em execucao. O snapshot conserva o .dockerignore usado na validacao.
+
+8. PONTO DE RETOMADA: INVESTIGAR TIMEOUTS DE ESCRITA
+
+Resultado atual: camera e remocao de calibracao funcionando; estabilidade
+da infraestrutura ainda reprovada pelas pausas e pelos timeouts observados.
+Sono nao foi validado ao vivo. Preservar EAR 0.17, FSM/PERCLOS, camera 70000,
+gap de 0.5 s, armazenamento NVMe e --no-danger-record durante o diagnostico.
+
+Na proxima sessao, comecar por consultas de leitura:
+1. Confirmar conexao, imagem/container em uso, continuidade dos frames e logs,
+   montagens e configuracoes dos demais servicos.
+2. Reconfirmar modelo e firmware do NVMe, kernel, controlador/ponte PCIe,
+   velocidade/largura negociadas e parametros de energia/ASPM disponiveis.
+3. Correlacionar timestamps dos timeouts WRITE no journal com lacunas de frames,
+   transicoes, publicacoes de segmentos e estados/wchan das threads.
+4. Examinar indicadores acessiveis de saude/temperatura do SSD e I/O; distinguir
+   temperatura do SSD da temperatura CPU. A falta de flag de subtensao do SoC
+   nao demonstra, por si so, alimentacao adequada do NVMe.
+5. Examinar a latencia de persistencia e o acoplamento do loop de captura com
+   flush/fsync/publicacao, preservando o contrato de artefatos finais duraveis.
+6. Propor qualquer intervencao com base no diagnostico, preservando backups e
+   respeitando AGENTS.md; depois repetir um teste comparavel de dez minutos.
+
+Criterios de revalidacao: frames e timestamps avancando, ausencia de novos
+timeouts WRITE e bloqueios prolongados, segmentos integros, PERCLOS com cobertura
+suficiente, teste ocular observavel e continuidade do monitor-motorista.
+Mudancas nos demais servicos, sudo, reboot, reset de controlador, reparos de
+filesystem, troca de parametros de boot/PCIe ou atualizacoes nao foram feitas
+como parte do arquivamento e exigem avaliacao de escopo/autorizacao na retomada.

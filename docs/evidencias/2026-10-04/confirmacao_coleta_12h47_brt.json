@@ -1,0 +1,60 @@
+{
+  "provenance": "Consolidacao dos resultados SSH apresentados na conversa em 04/10/2026; nenhum acesso remoto adicional foi feito para reconstruir este registro.",
+  "check_date": "2026-10-04",
+  "first_health_observed": {
+    "ts_utc": "2026-10-04T15:45:26.080Z",
+    "frames_seen": 22412,
+    "label": "ativo"
+  },
+  "last_health_observed": {
+    "ts_utc": "2026-10-04T15:47:43.504Z",
+    "frames_seen": 22976,
+    "label": "ativo"
+  },
+  "file_snapshot_started_at_utc": "2026-10-04T15:47:30.971414Z",
+  "run_id": "f903178777b2489088e6f4b615ace5fe",
+  "latest_segment": "000011.partial",
+  "completed_segments": 10,
+  "last_frame_idx_in_files": 22975,
+  "files_modified_at_utc": "2026-10-04T15:47:15.429894Z",
+  "frames_jsonl_bytes": 27413,
+  "assessments_jsonl_bytes": 63162,
+  "face_detected": true,
+  "valid_eye_count": 2,
+  "observation_state": "ready",
+  "fatigue_state": "safe",
+  "fatigue_label": "ativo",
+  "perclos_coverage": 0.2809580823000033,
+  "perclos_ear": null,
+  "containers": {
+    "salte-fatigue": {
+      "running": true,
+      "started_at": "2026-10-04T14:53:56.768109224Z",
+      "restart_count": 0
+    },
+    "monitor-motorista": {
+      "running": true,
+      "started_at": "2026-10-04T12:57:57.085451786Z",
+      "restart_count": 0
+    },
+    "gallery": {
+      "running": true,
+      "started_at": "2026-10-04T12:57:57.08456736Z",
+      "restart_count": 0
+    }
+  },
+  "logs_mount": {
+    "device": "/dev/nvme0n1p1",
+    "target": "/mnt/nvme",
+    "filesystem": "ext4"
+  },
+  "recent_nvme_timeout_timestamps_brt": [
+    "2026-10-04T12:43:52-03:00",
+    "2026-10-04T12:45:04-03:00",
+    "2026-10-04T12:45:04-03:00",
+    "2026-10-04T12:46:03-03:00",
+    "2026-10-04T12:46:36-03:00"
+  ],
+  "transient_segment_open_observation": "Na consulta anterior, 000011.partial ja existia e frames.jsonl/assessments.jsonl ainda nao existiam. Na consulta seguinte ambos continham registros. Nao houve remocao ou recuperacao manual.",
+  "conclusion": "A coleta continuava e os arquivos avancavam; pausas de escrita no NVMe ainda presentes."
+}

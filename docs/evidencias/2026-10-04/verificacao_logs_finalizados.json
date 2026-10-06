@@ -1,0 +1,189 @@
+{
+  "segments": [
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000001",
+      "frame_count": 481,
+      "assessment_count": 481,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000002",
+      "frame_count": 786,
+      "assessment_count": 786,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000003",
+      "frame_count": 593,
+      "assessment_count": 593,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000004",
+      "frame_count": 602,
+      "assessment_count": 602,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000005",
+      "frame_count": 517,
+      "assessment_count": 517,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000006",
+      "frame_count": 471,
+      "assessment_count": 471,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000007",
+      "frame_count": 825,
+      "assessment_count": 825,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000008",
+      "frame_count": 401,
+      "assessment_count": 401,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000009",
+      "frame_count": 476,
+      "assessment_count": 476,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000010",
+      "frame_count": 903,
+      "assessment_count": 903,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "segment": "000011",
+      "frame_count": 198,
+      "assessment_count": 198,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000001",
+      "frame_count": 384,
+      "assessment_count": 384,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000002",
+      "frame_count": 289,
+      "assessment_count": 289,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000003",
+      "frame_count": 493,
+      "assessment_count": 493,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000004",
+      "frame_count": 235,
+      "assessment_count": 235,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000005",
+      "frame_count": 596,
+      "assessment_count": 596,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000006",
+      "frame_count": 665,
+      "assessment_count": 665,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000007",
+      "frame_count": 369,
+      "assessment_count": 369,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000008",
+      "frame_count": 303,
+      "assessment_count": 303,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000009",
+      "frame_count": 432,
+      "assessment_count": 432,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000010",
+      "frame_count": 743,
+      "assessment_count": 743,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000011",
+      "frame_count": 420,
+      "assessment_count": 420,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    },
+    {
+      "run_id": "f903178777b2489088e6f4b615ace5fe",
+      "segment": "000012",
+      "frame_count": 493,
+      "assessment_count": 493,
+      "manifest_counts_and_bytes_ok": true,
+      "paired_frame_indices_ok": true
+    }
+  ],
+  "all_checks_passed": true
+}

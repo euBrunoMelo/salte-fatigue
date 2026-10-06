@@ -1,0 +1,29 @@
+ M .dockerignore
+ M CLAUDE.md
+ M Dockerfile
+ M README.md
+ M calibrate_eyes.py
+ M camera_routing.py
+ M docker-compose.yml
+ M run_host.py
+ M tests/test_feature_extractor_runtime.py
+ M tests/test_feature_vector_camera.py
+ M tests/test_production_boundary.py
+ D tests/test_wait_for_camera.py
+ D wait_for_camera.py
+?? .ai-jail
+?? .claude/
+?? AGENTS.md
+?? RP-008180-DS-7-cm5-datasheet.pdf
+?? __pycache__/
+?? docs/AUDITORIA_RASPBERRY_2026-10-02.txt
+?? docs/CAM_DISP0_DRIVER_INVESTIGACAO_2026-10-02.md
+?? docs/CODEX_RPI_SSH_UBUNTU.md
+?? docs/PI_BENCH_AUDIT_PRELIMINARY.md
+?? docs/PI_NVME_DOCKER_2026-10-02.md
+?? docs/RELEASE_MANIFEST_2026-09-25.sha256
+?? ops/collect_pi_bench_evidence.py
+?? ops/launch_codex_rpi.sh
+?? ops/setup_codex_rpi_lan.sh
+?? ops/setup_codex_rpi_ssh.sh
+?? tests/__pycache__/

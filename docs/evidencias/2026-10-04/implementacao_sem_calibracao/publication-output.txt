@@ -1,0 +1,1 @@
+{"published_files": 17, "all_publication_hashes_match": true, "container_rebuilt": false, "container_restarted": false, "nonruntime_document_not_copied": {"path": "config/README.md", "reason": "directory root:root, no write permission for SSH user"}}

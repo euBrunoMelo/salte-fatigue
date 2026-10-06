@@ -1,0 +1,371 @@
+{
+  "final_run": {
+    "collected_utc": "2026-10-04T14:10:47.437172+00:00",
+    "run_dir": "/mnt/nvme/Monitoramento/FATIGUE/logs/runs/2026/10/04/7bcdea7fc9f04b8eb7f00bb4d35fe562",
+    "run_start": {
+      "schema_version": 1,
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "ts_utc": "2026-10-04T14:00:04.664Z",
+      "kind": "run_start",
+      "data": {
+        "fps": 30,
+        "camera_num": 1,
+        "camera_id": "platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500",
+        "camera_id_contains": "70000",
+        "video": null,
+        "calibration": "/app/config/eye_calibration.json",
+        "calibration_loaded": false,
+        "fallback_ear_threshold": null,
+        "p80_ratio": 0.8,
+        "perclos_window_sec": 60
+      }
+    },
+    "segments": [
+      {
+        "name": "000001",
+        "partial": false,
+        "frames.jsonl_count": 481,
+        "assessments.jsonl_count": 481,
+        "manifest": {
+          "schema_version": 1,
+          "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+          "sequence": 1,
+          "status": "completed",
+          "closed_at": "2026-10-04T14:05:16.198Z",
+          "bytes": 467904,
+          "frame_count": 481,
+          "assessment_count": 481,
+          "first_frame_idx": 0,
+          "last_frame_idx": 2400
+        }
+      },
+      {
+        "name": "000002",
+        "partial": false,
+        "frames.jsonl_count": 786,
+        "assessments.jsonl_count": 786,
+        "manifest": {
+          "schema_version": 1,
+          "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+          "sequence": 2,
+          "status": "completed",
+          "closed_at": "2026-10-04T14:10:16.566Z",
+          "bytes": 765435,
+          "frame_count": 786,
+          "assessment_count": 786,
+          "first_frame_idx": 2405,
+          "last_frame_idx": 6330
+        }
+      },
+      {
+        "name": "000003.partial",
+        "partial": true,
+        "frames.jsonl_count": 25,
+        "assessments.jsonl_count": 25
+      }
+    ],
+    "frame_records": 1292,
+    "assessment_records": 1292,
+    "last_frame_idx": 6455,
+    "faces_detected": 1291,
+    "both_eyes_valid": 1291,
+    "fatigue_states": {
+      "unknown": 1292
+    },
+    "same_frame_assessment_indices": true,
+    "duplicate_frame_indices": 0,
+    "frame_indices_strictly_increasing": true,
+    "frame_timestamps_strictly_increasing": true,
+    "max_gap_s": 34.01605329999984,
+    "invalid_json": [],
+    "temperature": {
+      "rc": 0,
+      "output": "temp=84.5'C",
+      "error": ""
+    },
+    "throttled": {
+      "rc": 0,
+      "output": "throttled=0xe0008",
+      "error": ""
+    },
+    "arm_clock": {
+      "rc": 0,
+      "output": "frequency(0)=2146032000",
+      "error": ""
+    }
+  },
+  "initial_health": {
+    "ts_utc": "2026-10-04T14:05:31Z",
+    "temperature_c": 84,
+    "throttled": "0xe0008",
+    "nvme_model": "KNUP NVME 256GB",
+    "nvme_firmware": "VC400618"
+  },
+  "gallery_probe": {
+    "http_status": 403,
+    "expected_reason": "A gallery restringe acesso a clientes da rede Wi-Fi AP; request.remote_addr e verificado antes de atender a rota.",
+    "configuration_changed": false
+  },
+  "pre_deploy_baseline": {
+    "monitor-motorista": {
+      "Id": "d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30",
+      "Image": "sha256:627b5612ac9d6f34acdb17e212f7ebec0d0e152dc4b4c93444a309b56a15b5f6",
+      "Status": "running",
+      "StartedAt": "2026-10-04T12:57:57.085451786Z",
+      "RestartCount": 0,
+      "Cmd": [
+        "python3",
+        "main.py"
+      ],
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/DrowsyDriving/logs",
+          "Destination": "/app/logs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/tmp/libcamera",
+          "Destination": "/tmp/libcamera",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    "salte-fatigue": {
+      "Id": "913eb6ad74071173a10dee187d8d1afd52a8df105a23370587acfb2eb30e82c9",
+      "Image": "sha256:7b580cc6bd10019362bb30eaf69917e875e91ae84bed2f56bb55a9e2da8dc160",
+      "Status": "running",
+      "StartedAt": "2026-10-04T12:57:57.083588027Z",
+      "RestartCount": 0,
+      "Cmd": [
+        "python3",
+        "wait_for_camera.py",
+        "--monitor-camera-num",
+        "0",
+        "--",
+        "python3",
+        "run_host.py",
+        "--monitor-camera-num",
+        "0",
+        "--no-danger-record",
+        "--logs-dir",
+        "/app/logs",
+        "--log-frame-every",
+        "5",
+        "--log-assessment-every",
+        "5",
+        "--danger-output-dir",
+        "/app/logs/incidents"
+      ],
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/config",
+          "Destination": "/app/config",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/logs",
+          "Destination": "/app/logs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    "gallery": {
+      "Id": "f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2",
+      "Image": "sha256:81096464a17d4bd3ec124c09ff3ad6f16ddf8c53295f2b6acd4e5e1f9da38901",
+      "Status": "running",
+      "StartedAt": "2026-10-04T12:57:57.08456736Z",
+      "RestartCount": 0,
+      "Cmd": [
+        "python3",
+        "gallery.py"
+      ],
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/DrowsyDriving/logs",
+          "Destination": "/data",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/etc/wifi_manager/networks.conf",
+          "Destination": "/etc/wifi_manager/networks.conf",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    "salte-tev8": {
+      "Id": "8aa865a8f7d05efcd01ccaf5f8cf3ae789a4d3775fef9c69f69be161f039b1b3",
+      "Image": "sha256:5b02ce2f4a0af46027067cd47e32ea441ae2055bf7d2c7af6a7d640e725f6c85",
+      "Status": "exited",
+      "StartedAt": "2026-09-25T13:57:41.391998074Z",
+      "RestartCount": 23,
+      "Cmd": [
+        "python3",
+        "run_host.py",
+        "--model-dir",
+        "/app",
+        "--camera-num",
+        "1",
+        "--mode",
+        "ear",
+        "--no-danger-record"
+      ],
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/DETECCAO_DANGER",
+          "Destination": "/app/DETECCAO_DANGER",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/logs",
+          "Destination": "/app/logs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/runs",
+          "Destination": "/app/runs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    }
+  },
+  "window_start": "2026-10-04T14:00:17+00:00",
+  "window_end": "2026-10-04T14:10:17+00:00",
+  "official_throttle_reference": "https://www.raspberrypi.com/documentation/computers/os.html#get_throttled",
+  "summary": {
+    "observed_window_seconds": 600.0,
+    "samples": 14,
+    "camera_id": "platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500",
+    "camera_index": 1,
+    "last_logged_frame_idx_at_window_end": 6330,
+    "fatigue_restarts": 0,
+    "other_containers_unchanged": {
+      "monitor-motorista": true,
+      "gallery": true,
+      "salte-tev8": true
+    },
+    "nvme_write_timeouts_during_window": 24,
+    "nvme_timeout_records_during_window": [
+      "[ 3884.025781] nvme nvme0: I/O tag 409 (3199) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+      "[ 3927.029908] nvme nvme0: I/O tag 412 (319c) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+      "[ 3976.185971] nvme nvme0: I/O tag 415 (519f) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:20480",
+      "[ 3976.185992] nvme nvme0: I/O tag 416 (51a0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+      "[ 3976.185998] nvme nvme0: I/O tag 417 (51a1) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+      "[ 3976.186004] nvme nvme0: I/O tag 418 (51a2) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+      "[ 3976.186008] nvme nvme0: I/O tag 419 (51a3) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+      "[ 3976.186013] nvme nvme0: I/O tag 420 (51a4) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+      "[ 3976.186018] nvme nvme0: I/O tag 421 (51a5) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+      "[ 3976.186023] nvme nvme0: I/O tag 423 (41a7) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:8192",
+      "[ 4023.282113] nvme nvme0: I/O tag 419 (61a3) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864",
+      "[ 4062.206156] nvme nvme0: I/O tag 421 (61a5) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:16384",
+      "[ 4115.450276] nvme nvme0: I/O tag 427 (61ab) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:28672",
+      "[ 4150.266282] nvme nvme0: I/O tag 432 (51b0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864",
+      "[ 4244.471006] nvme nvme0: I/O tag 439 (11b7) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:20480",
+      "[ 4307.960224] nvme nvme0: I/O tag 384 (3180) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+      "[ 4307.960251] nvme nvme0: I/O tag 385 (e181) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:8192",
+      "[ 4307.960260] nvme nvme0: I/O tag 386 (b182) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+      "[ 4307.960267] nvme nvme0: I/O tag 387 (9183) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+      "[ 4307.960274] nvme nvme0: I/O tag 388 (9184) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+      "[ 4307.960280] nvme nvme0: I/O tag 389 (9185) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+      "[ 4307.960287] nvme nvme0: I/O tag 390 (9186) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+      "[ 4307.960293] nvme nvme0: I/O tag 391 (8187) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:8192",
+      "[ 4346.876906] nvme nvme0: I/O tag 446 (01be) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:61440"
+    ],
+    "main_process_D_state_samples": 10,
+    "completed_segments_at_final_scan": 2,
+    "frame_records_at_final_scan": 1292,
+    "assessment_records_at_final_scan": 1292,
+    "face_detected_records": 1291,
+    "both_eyes_valid_records": 1291,
+    "max_frame_record_gap_s": 34.01605329999984,
+    "json_parse_errors": 0,
+    "frame_assessment_indices_match": true,
+    "temperature_final": "temp=84.5'C",
+    "throttled_final": "throttled=0xe0008",
+    "calibration_loaded": false,
+    "fallback_ear_threshold": null,
+    "fatigue_states": {
+      "unknown": 1292
+    },
+    "docker_root": "/mnt/nvme/docker",
+    "logs_device": "/dev/nvme0n1p1",
+    "camera_test": "passed",
+    "storage_publication_test": "passed_with_io_stalls",
+    "infrastructure_stability_test": "failed",
+    "raspberry_modified_during_monitoring": false
+  }
+}

@@ -1,0 +1,96 @@
+PROTOCOLO CANONICO - RUNTIME EAR/PERCLOS DETERMINISTICO
+======================================================
+
+1. VALIDACAO LOCAL OBRIGATORIA
+
+Executar na raiz deste diretorio:
+
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python -m py_compile run_host.py calibrate_eyes.py feature_extractor_rt.py observation_adapter.py runtime_models.py runtime_observability.py eye_quality_gate.py eye_calibration.py eye_closure.py perclos_rt.py fatigue_fsm.py attention_fsm.py fatigue_runtime.py atomic_persistence.py structured_logger.py danger_video_recorder.py
+docker compose config
+bash -n sync/monitoramento-sync.sh sync/install-monitoramento-sync.sh sync/99-monitoramento-sync
+
+O pacote produtivo deve conter apenas os modulos atuais e face_landmarker.task.
+
+2. INVARIANTES DE SEGURANCA
+
+- Sem face: ObservationState.UNAVAILABLE e FatigueState.UNKNOWN.
+- Sem calibracao valida: UNKNOWN e nao arma.
+- Fallback EAR 0.15: somente quando --fallback-ear-threshold 0.15 for passado explicitamente; fica UNKNOWN/ WARNING e nunca arma CRITICAL.
+- Fallback nunca alimenta PERCLOS.
+- Um olho valido: DEGRADED; aberto fica UNKNOWN e fechamento no maximo WARNING.
+- Dois olhos validos: requisito para PERCLOS e CRITICAL.
+- Fechamento: P80 normalizado pelas referencias aberta/fechada.
+- Piscadas de ate 400 ms sao excluidas; fechamento prolongado comeca em 1000 ms.
+- PERCLOS: janela temporal de 60 s, cobertura minima de 80%, deque limitado.
+- Pose usa somente a matriz facial do MediaPipe e nunca e evidencia direta de fadiga.
+- Atencao fica UNAVAILABLE sem os tres deltas validados em HIL.
+
+3. ENROLLMENT NA GEOMETRIA FINAL
+
+Nao reutilizar calibracao de outra camera, resolucao, aspect ratio ou montagem.
+
+python3 calibrate_eyes.py --output config/eye_calibration.json
+
+O operador deve cumprir as duas fases explicitamente instruidas: olhos abertos
+e olhos fechados. Conferir no JSON que open_*_ear > closed_*_ear e que o runtime
+registra calibration_loaded=true.
+
+4. HIL/SHADOW NO CM5
+
+Confirmar duas cameras por enumeracao e captura isolada. Identificar o indice
+da IMX500 destinada ao FATIGUE, entao rodar a imagem atual em foreground ou
+shadow com --no-danger-record e --logs-dir /app/logs.
+
+Cenarios obrigatorios:
+
+- Sem calibracao: UNKNOWN, nenhuma gravacao.
+- Face ausente: UNKNOWN, nunca SAFE.
+- Olhos abertos e duas medidas validas: SAFE apos disponibilidade.
+- Piscadas curtas: sem CRITICAL.
+- Fechamento bilateral >=1000 ms: CRITICAL.
+- Apenas um olho valido e fechado: WARNING no maximo.
+- Perda de face durante fechamento: acumulador interrompido.
+- Cobertura PERCLOS <80%: PERCLOS indisponivel.
+- Pose fora da zona: nao altera fadiga; atencao somente se zonas HIL configuradas.
+- Recorder desligado durante toda a primeira validacao.
+
+5. EVIDENCIAS A PRESERVAR
+
+- Saida completa da suite.
+- docker compose config.
+- Resultado do build --no-cache.
+- events/YYYY/MM/DD/*.json da sessao HIL.
+- runs/YYYY/MM/DD/<run_id>/segments/<seq>/{frames.jsonl,assessments.jsonl,manifest.json}.
+- Hash e caminho do eye_calibration.json usado.
+
+6. GATE DE PERSISTENCIA E SYNC
+
+- Nenhum arquivo ou diretorio *.partial pode aparecer na SALA.
+- Todo nome final deve permanecer imutavel entre ciclos de sync.
+- O timer generico deve usar OnCalendar a cada 5 minutos e Persistent=true.
+- O dispatcher e o timer devem chamar o mesmo monitoramento-sync.service.
+- Testar rede indisponivel, retorno, retry e comparacao por checksum.
+- Confirmar status.json sem usar pending_files como se fosse ACK remoto.
+- Confirmar contagem e hashes no receptor quando o acesso de auditoria voltar.
+- Nao habilitar o recorder antes do HIL de codec, permissao e consumo de disco.
+- No detector de pose, manter o rosto visivel por mais de 60 s: o primeiro AVI
+  final deve fechar, reabrir e continuar em outro segmento. O video parcial
+  nao pode ser selecionado pelo rsync. Verificar suspensao da gravacao abaixo
+  de 10 GiB livres sem interromper os eventos e snapshots.
+- Conferir no detector de pose que exposicao e ganho automaticos mantem a face
+  visivel sob a iluminacao real; nao fixar ganho analogico em 1.0.
+- A galeria nao pode montar a raiz /mnt/nvme/Monitoramento.
+
+7. GATE DE HARDWARE E ESTRESSE
+
+- Nenhum timeout de escrita NVMe novo antes ou durante o teste.
+- Duas cameras enumeradas e capturando simultaneamente em seus containers.
+- Nenhum reinicio inesperado, OOM ou throttling termico.
+- Teste acompanhado com operador, seguido de pelo menos 24 h de funcionamento.
+- Medir RAM, swap, CPU, temperatura, FPS, disco e crescimento de logs.
+- Coletar no PC com ops/collect_pi_health.py; nao registrar no NVMe sob teste.
+- Com somente uma camera enumerada, o indice zero pode corresponder a CAM/DISP0
+  ou CAM/DISP1. Conferir as IDs fisicas (`i2c@88000` para CAM/DISP0 e
+  `i2c@70000` para CAM/DISP1 na CM5IO oficial). FATIGUE deve aguardar
+  CAM/DISP1 se ela faltar; o detector de pose deve permanecer na CAM/DISP0.

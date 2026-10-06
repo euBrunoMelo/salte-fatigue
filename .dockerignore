@@ -3,14 +3,30 @@
 
 # Ambiente virtual do host (Docker instala deps próprias via pip)
 .venv/
+.git/
 .ai-jail
 .claude/
 tests/
 ops/
+.bak_*/
+
+# A imagem usa apenas os arquivos COPY do Dockerfile. Estes artefatos legados
+# permanecem no NVMe, mas nao devem ampliar o contexto do build.
+best_model.onnx
+best_model.onnx.data
+inference_config.json
+subject_calibrator_rt.py
+window_factory_rt.py
+salte_edge_runtime.py
+legacy_mlp_tests/
+config/
 
 # Cadernos e materiais de pesquisa nao entram na imagem.
 *.ipynb
 *.pdf
+
+# Evidencias e copias de codigo dos ensaios locais.
+docs/evidencias/
 
 # Cache Python (gerado em runtime)
 __pycache__/

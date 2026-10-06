@@ -1,0 +1,783 @@
+{
+  "temporary_evidence_copies": [
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/backup-output.txt",
+      "saved_path": "implementacao_sem_calibracao/backup-output.txt",
+      "source_sha256": "1b12209adb5b54a733c7cbe163f25a3a49b1c0517b0800543a699b994db0197c",
+      "saved_sha256": "1b12209adb5b54a733c7cbe163f25a3a49b1c0517b0800543a699b994db0197c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/CLAUDE.md",
+      "saved_path": "implementacao_sem_calibracao/before/CLAUDE.md",
+      "source_sha256": "6897a19831447ca4f2d5f50aca76c10cecee07d73f771ea7b50a258675c1c8c6",
+      "saved_sha256": "6897a19831447ca4f2d5f50aca76c10cecee07d73f771ea7b50a258675c1c8c6",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/Dockerfile",
+      "saved_path": "implementacao_sem_calibracao/before/Dockerfile",
+      "source_sha256": "1b364de3431dda435d42b740bf39ddf0155cdbcf234b9a55c91b4ba3771e0f4e",
+      "saved_sha256": "1b364de3431dda435d42b740bf39ddf0155cdbcf234b9a55c91b4ba3771e0f4e",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/README.md",
+      "saved_path": "implementacao_sem_calibracao/before/README.md",
+      "source_sha256": "351bd8a70089e190c1d7faab5f0940edf83e5cfa97a1bfa65c5bbfa201efce6e",
+      "saved_sha256": "351bd8a70089e190c1d7faab5f0940edf83e5cfa97a1bfa65c5bbfa201efce6e",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/TESTE REGRECAO.txt",
+      "saved_path": "implementacao_sem_calibracao/before/TESTE REGRECAO.txt",
+      "source_sha256": "1733373edccee0b83e1689b9cdc253bdbdffc363e5242111c6baa4a4d8404347",
+      "saved_sha256": "1733373edccee0b83e1689b9cdc253bdbdffc363e5242111c6baa4a4d8404347",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/config/README.md",
+      "saved_path": "implementacao_sem_calibracao/before/config/README.md",
+      "source_sha256": "abcfd81ff2394e797d8c761710962c05a0cc58a76dc8d1a2ee9ead81d70c2d7d",
+      "saved_sha256": "abcfd81ff2394e797d8c761710962c05a0cc58a76dc8d1a2ee9ead81d70c2d7d",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/docker-compose.yml",
+      "saved_path": "implementacao_sem_calibracao/before/docker-compose.yml",
+      "source_sha256": "0006ab64e5528bd318c0613488bff60a1db4e1414aed0b4fa924721393db4fa5",
+      "saved_sha256": "0006ab64e5528bd318c0613488bff60a1db4e1414aed0b4fa924721393db4fa5",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/eye_closure.py",
+      "saved_path": "implementacao_sem_calibracao/before/eye_closure.py",
+      "source_sha256": "b74040d40d4b882fb1dcad74ea5095979ba548d796139bae231f0b190da245f5",
+      "saved_sha256": "b74040d40d4b882fb1dcad74ea5095979ba548d796139bae231f0b190da245f5",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/fatigue_fsm.py",
+      "saved_path": "implementacao_sem_calibracao/before/fatigue_fsm.py",
+      "source_sha256": "6c5b33bf5aad02c5c4f7de77a1f1b1e709e59d04fd9f1314f5a00dc9a1d60d3a",
+      "saved_sha256": "6c5b33bf5aad02c5c4f7de77a1f1b1e709e59d04fd9f1314f5a00dc9a1d60d3a",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/fatigue_runtime.py",
+      "saved_path": "implementacao_sem_calibracao/before/fatigue_runtime.py",
+      "source_sha256": "7881b36c0a33e0da7032bfc7026e47cc766e82b99a78e31e863adbe24e983429",
+      "saved_sha256": "7881b36c0a33e0da7032bfc7026e47cc766e82b99a78e31e863adbe24e983429",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/perclos_rt.py",
+      "saved_path": "implementacao_sem_calibracao/before/perclos_rt.py",
+      "source_sha256": "d1c4f8bedf414049de048f30fe62e9fe4423b7034a894bc0fc0e0b4a504445bc",
+      "saved_sha256": "d1c4f8bedf414049de048f30fe62e9fe4423b7034a894bc0fc0e0b4a504445bc",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/run_host.py",
+      "saved_path": "implementacao_sem_calibracao/before/run_host.py",
+      "source_sha256": "a2db69745300ced74fcb738190afffe3e079f6c200be2b846c9fc183bfc128af",
+      "saved_sha256": "a2db69745300ced74fcb738190afffe3e079f6c200be2b846c9fc183bfc128af",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/runtime_models.py",
+      "saved_path": "implementacao_sem_calibracao/before/runtime_models.py",
+      "source_sha256": "617ee2cecb40654b51b85a6bb51d159c2f9bf1d5a115cdaf154d45e47fdbd16a",
+      "saved_sha256": "617ee2cecb40654b51b85a6bb51d159c2f9bf1d5a115cdaf154d45e47fdbd16a",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/runtime_observability.py",
+      "saved_path": "implementacao_sem_calibracao/before/runtime_observability.py",
+      "source_sha256": "bf35d245157e402fad131fcbda584d234905fe2fc0ec3fba00ae3db3d0b41d4b",
+      "saved_sha256": "bf35d245157e402fad131fcbda584d234905fe2fc0ec3fba00ae3db3d0b41d4b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/_bootstrap.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/_bootstrap.py",
+      "source_sha256": "77c3b276c090b4b681ba9ed84492abb291c72ddc0878a089329dd6797186e28a",
+      "saved_sha256": "77c3b276c090b4b681ba9ed84492abb291c72ddc0878a089329dd6797186e28a",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_danger_recorder_fsm.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_danger_recorder_fsm.py",
+      "source_sha256": "39105d8b433d3ba893907963cea641266324ef8e7bb0d3ca2271b7f618a7b25b",
+      "saved_sha256": "39105d8b433d3ba893907963cea641266324ef8e7bb0d3ca2271b7f618a7b25b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_deterministic_runtime.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_deterministic_runtime.py",
+      "source_sha256": "3c8e4a4239bff183be8e9f63bba9596c7afc17145c41fae8b9e87f568197ad82",
+      "saved_sha256": "3c8e4a4239bff183be8e9f63bba9596c7afc17145c41fae8b9e87f568197ad82",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_feature_extractor_runtime.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_feature_extractor_runtime.py",
+      "source_sha256": "6a35e950401ac04af5c7f3b43c02d55f57bc25e8a1225f28e7ed7bca0ec36360",
+      "saved_sha256": "6a35e950401ac04af5c7f3b43c02d55f57bc25e8a1225f28e7ed7bca0ec36360",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_feature_vector_camera.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_feature_vector_camera.py",
+      "source_sha256": "05e1bb350aea769bdcec0df8ea76eecb453e1bcd43198d8ff31728bc219d51db",
+      "saved_sha256": "05e1bb350aea769bdcec0df8ea76eecb453e1bcd43198d8ff31728bc219d51db",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_production_boundary.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_production_boundary.py",
+      "source_sha256": "b39e090bf1eb54372da44df43dc402e2f07cb209b68e24f31e979d130b91ad2e",
+      "saved_sha256": "b39e090bf1eb54372da44df43dc402e2f07cb209b68e24f31e979d130b91ad2e",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_structured_logger.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_structured_logger.py",
+      "source_sha256": "bddf927c0f83e645770706296b87257cc6b7754c01a409e8b48ed5633e50c01b",
+      "saved_sha256": "bddf927c0f83e645770706296b87257cc6b7754c01a409e8b48ed5633e50c01b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/before/tests/test_sync_contract.py",
+      "saved_path": "implementacao_sem_calibracao/before/tests/test_sync_contract.py",
+      "source_sha256": "d5acda9493d4b07c5042c29aaf65ca926061e4efd52bc5f424fcbbc9ac051a72",
+      "saved_sha256": "d5acda9493d4b07c5042c29aaf65ca926061e4efd52bc5f424fcbbc9ac051a72",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/black.avi",
+      "saved_path": "implementacao_sem_calibracao/black.avi",
+      "source_sha256": "003009d2f294ca987c72cf53c613e0a84f2a4fd87afaa92acabcf6d44fa018bf",
+      "saved_sha256": "003009d2f294ca987c72cf53c613e0a84f2a4fd87afaa92acabcf6d44fa018bf",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/compose-config.yml",
+      "saved_path": "implementacao_sem_calibracao/compose-config.yml",
+      "source_sha256": "7c8442e42d5c5975b9753888efcd9cf644e05d38bb68e7a7c775b368ef53597b",
+      "saved_sha256": "7c8442e42d5c5975b9753888efcd9cf644e05d38bb68e7a7c775b368ef53597b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/deployment-info.json",
+      "saved_path": "implementacao_sem_calibracao/deployment-info.json",
+      "source_sha256": "986139c2fdac394c77037784012abe25bfbc2da47fadabfd31e0db9f80756350",
+      "saved_sha256": "986139c2fdac394c77037784012abe25bfbc2da47fadabfd31e0db9f80756350",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/git-status-before.txt",
+      "saved_path": "implementacao_sem_calibracao/git-status-before.txt",
+      "source_sha256": "fd389a5e1761154ba8f7f8a23c6894a2ca366fc3b881dcf8bde6ecf1831735b4",
+      "saved_sha256": "fd389a5e1761154ba8f7f8a23c6894a2ca366fc3b881dcf8bde6ecf1831735b4",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/.dockerignore",
+      "saved_path": "implementacao_sem_calibracao/package/.dockerignore",
+      "source_sha256": "38d09a596ad43020786c2bdea8ba2d5b163c8d78addbf38a6df249b51ccb3547",
+      "saved_sha256": "38d09a596ad43020786c2bdea8ba2d5b163c8d78addbf38a6df249b51ccb3547",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/Dockerfile",
+      "saved_path": "implementacao_sem_calibracao/package/Dockerfile",
+      "source_sha256": "c685812ba790a0b7a96402cd805836810e9695004ca33fce67407567a53a3d5c",
+      "saved_sha256": "c685812ba790a0b7a96402cd805836810e9695004ca33fce67407567a53a3d5c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/atomic_persistence.py",
+      "saved_path": "implementacao_sem_calibracao/package/atomic_persistence.py",
+      "source_sha256": "ca303e016e57e309de105c21509ea3d95880bde097445bfd61b971f6590f9eec",
+      "saved_sha256": "ca303e016e57e309de105c21509ea3d95880bde097445bfd61b971f6590f9eec",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/attention_fsm.py",
+      "saved_path": "implementacao_sem_calibracao/package/attention_fsm.py",
+      "source_sha256": "2a47eeca5e0cc70b7ef6fa4efce0f625a73ced6145be779b02b65b8c1878c700",
+      "saved_sha256": "2a47eeca5e0cc70b7ef6fa4efce0f625a73ced6145be779b02b65b8c1878c700",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/camera_routing.py",
+      "saved_path": "implementacao_sem_calibracao/package/camera_routing.py",
+      "source_sha256": "20569489d8c7fcb3c0e345dcef6a87eaaa49fdf23aca86d284ca49584482d57b",
+      "saved_sha256": "20569489d8c7fcb3c0e345dcef6a87eaaa49fdf23aca86d284ca49584482d57b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/danger_video_recorder.py",
+      "saved_path": "implementacao_sem_calibracao/package/danger_video_recorder.py",
+      "source_sha256": "1298ffc3575c9e6c3fa36e00232a81f0c790836ae9dc4c8b3a90b18874d90bc2",
+      "saved_sha256": "1298ffc3575c9e6c3fa36e00232a81f0c790836ae9dc4c8b3a90b18874d90bc2",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/docker-compose.yml",
+      "saved_path": "implementacao_sem_calibracao/package/docker-compose.yml",
+      "source_sha256": "de288462ec4ea83dbd76d96029f849f833d92a50cd459bc27249a01c8132fcb3",
+      "saved_sha256": "de288462ec4ea83dbd76d96029f849f833d92a50cd459bc27249a01c8132fcb3",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/eye_closure.py",
+      "saved_path": "implementacao_sem_calibracao/package/eye_closure.py",
+      "source_sha256": "928077c1bf779752477c40dacc69c1e3d502bda5f37dee3e93aca26ee38a16fa",
+      "saved_sha256": "928077c1bf779752477c40dacc69c1e3d502bda5f37dee3e93aca26ee38a16fa",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/eye_quality_gate.py",
+      "saved_path": "implementacao_sem_calibracao/package/eye_quality_gate.py",
+      "source_sha256": "6cb5807de1af39b0c80dac105504a38cb0ffc431f06603ca937484355740635c",
+      "saved_sha256": "6cb5807de1af39b0c80dac105504a38cb0ffc431f06603ca937484355740635c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/face_landmarker.task",
+      "saved_path": "implementacao_sem_calibracao/package/face_landmarker.task",
+      "source_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "saved_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/fatigue_fsm.py",
+      "saved_path": "implementacao_sem_calibracao/package/fatigue_fsm.py",
+      "source_sha256": "94cb1a3b8607e71f4cf7210a01ecccae7641d1e5888bbeae5e54594b335ff57f",
+      "saved_sha256": "94cb1a3b8607e71f4cf7210a01ecccae7641d1e5888bbeae5e54594b335ff57f",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/fatigue_runtime.py",
+      "saved_path": "implementacao_sem_calibracao/package/fatigue_runtime.py",
+      "source_sha256": "df27d286f2a3f26459451d7334c06fb6cc556f674587bef879003148cead14d0",
+      "saved_sha256": "df27d286f2a3f26459451d7334c06fb6cc556f674587bef879003148cead14d0",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/feature_extractor_rt.py",
+      "saved_path": "implementacao_sem_calibracao/package/feature_extractor_rt.py",
+      "source_sha256": "64751e408c29772a1c3f91c285900048e57fa9491c78c39e62c7e97075579d65",
+      "saved_sha256": "64751e408c29772a1c3f91c285900048e57fa9491c78c39e62c7e97075579d65",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/observation_adapter.py",
+      "saved_path": "implementacao_sem_calibracao/package/observation_adapter.py",
+      "source_sha256": "3c33cccb4ecbd9e0f92479376fe6da4400cb7ac2e96e88b16870d2d4de87f2d8",
+      "saved_sha256": "3c33cccb4ecbd9e0f92479376fe6da4400cb7ac2e96e88b16870d2d4de87f2d8",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/perclos_rt.py",
+      "saved_path": "implementacao_sem_calibracao/package/perclos_rt.py",
+      "source_sha256": "56b939ac379ca63782fbbdef49e2a8b7efbb8e92c8db82651cf0e6a01ecf1831",
+      "saved_sha256": "56b939ac379ca63782fbbdef49e2a8b7efbb8e92c8db82651cf0e6a01ecf1831",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/run_host.py",
+      "saved_path": "implementacao_sem_calibracao/package/run_host.py",
+      "source_sha256": "2324f6480281388e4b61f5d8918b9b925fa9ba6887c87fe54b5bce0ef3df1ee7",
+      "saved_sha256": "2324f6480281388e4b61f5d8918b9b925fa9ba6887c87fe54b5bce0ef3df1ee7",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/runtime_models.py",
+      "saved_path": "implementacao_sem_calibracao/package/runtime_models.py",
+      "source_sha256": "e2abe4c3c374600e5d0ef9c33bca6ce927909ba01307d1a6c8e49add62bbc386",
+      "saved_sha256": "e2abe4c3c374600e5d0ef9c33bca6ce927909ba01307d1a6c8e49add62bbc386",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/runtime_observability.py",
+      "saved_path": "implementacao_sem_calibracao/package/runtime_observability.py",
+      "source_sha256": "814900177998ca6d57cca880b6829aaf0843b4732e4f462bb29da9e4ef4b85d5",
+      "saved_sha256": "814900177998ca6d57cca880b6829aaf0843b4732e4f462bb29da9e4ef4b85d5",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/package/structured_logger.py",
+      "saved_path": "implementacao_sem_calibracao/package/structured_logger.py",
+      "source_sha256": "0c43c88d0d1b8e466a58fece4687eb190150731107117679263334226a845ef2",
+      "saved_sha256": "0c43c88d0d1b8e466a58fece4687eb190150731107117679263334226a845ef2",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/production-manifest.json",
+      "saved_path": "implementacao_sem_calibracao/production-manifest.json",
+      "source_sha256": "f7a47fe66fad05d8edc2aaf22e57ae478b51e9defb22c7c6af72f3adc4674c9c",
+      "saved_sha256": "f7a47fe66fad05d8edc2aaf22e57ae478b51e9defb22c7c6af72f3adc4674c9c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/publication-manifest.json",
+      "saved_path": "implementacao_sem_calibracao/publication-manifest.json",
+      "source_sha256": "6e05e928afcfcb83c37f473512f575f94b93943d1b31ace53330674f82815155",
+      "saved_sha256": "6e05e928afcfcb83c37f473512f575f94b93943d1b31ace53330674f82815155",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/publication-output.txt",
+      "saved_path": "implementacao_sem_calibracao/publication-output.txt",
+      "source_sha256": "98ed93f491377757025b65048242c81cfd5cae03fe57035cb4eb3db3afbf6321",
+      "saved_sha256": "98ed93f491377757025b65048242c81cfd5cae03fe57035cb4eb3db3afbf6321",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/release-manifest.json",
+      "saved_path": "implementacao_sem_calibracao/release-manifest.json",
+      "source_sha256": "54c5672255228b417b11be26f2070c7de72b6199753ada942e382da70fd1a656",
+      "saved_sha256": "54c5672255228b417b11be26f2070c7de72b6199753ada942e382da70fd1a656",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/release.tar.gz",
+      "saved_path": "implementacao_sem_calibracao/release.tar.gz",
+      "source_sha256": "f9a9d7526d8cf8a63ef6d84a17dd29fa0dc6bdad14da03d6e995abb4d5bd617c",
+      "saved_sha256": "f9a9d7526d8cf8a63ef6d84a17dd29fa0dc6bdad14da03d6e995abb4d5bd617c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/remote-after.json",
+      "saved_path": "implementacao_sem_calibracao/remote-after.json",
+      "source_sha256": "d6d3dcd4de8a0cae54b15fb198c07d0b4b4aa5ef7a4492987a91b4d879e5f1cf",
+      "saved_sha256": "fb1b1c8aed6d0cd5f963398081371c52261659a93c8b3cbfcebd359f1aaeb552",
+      "mode": "environment_values_or_sensitive_keys_omitted"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/remote-baseline.json",
+      "saved_path": "implementacao_sem_calibracao/remote-baseline.json",
+      "source_sha256": "0b6cc001be0ff4894eb9b74e31026004490226c225a44f609a6b057d3b425565",
+      "saved_sha256": "fb74c677f01b2f6706b3ed375b54a1265c3b53b14b1d58f8b4dfbe815e5ea4e7",
+      "mode": "environment_values_or_sensitive_keys_omitted"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/run-end.json",
+      "saved_path": "implementacao_sem_calibracao/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/run-end.json",
+      "source_sha256": "b2d8b51664f1d955546bcee05c21dd7e3d5e59c7da093d9a9539b4c3d4b08eee",
+      "saved_sha256": "b2d8b51664f1d955546bcee05c21dd7e3d5e59c7da093d9a9539b4c3d4b08eee",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/run-start.json",
+      "saved_path": "implementacao_sem_calibracao/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/run-start.json",
+      "source_sha256": "f2304fbdf33502e53a8adddf683082772c9aa8f703a6334c97091651b272af80",
+      "saved_sha256": "f2304fbdf33502e53a8adddf683082772c9aa8f703a6334c97091651b272af80",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/segments/000001/assessments.jsonl",
+      "saved_path": "implementacao_sem_calibracao/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/segments/000001/assessments.jsonl",
+      "source_sha256": "467dd01d4d2d94d8572357df129559d68ec70adaa1913d60ce50d29191ea8239",
+      "saved_sha256": "467dd01d4d2d94d8572357df129559d68ec70adaa1913d60ce50d29191ea8239",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/segments/000001/frames.jsonl",
+      "saved_path": "implementacao_sem_calibracao/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/segments/000001/frames.jsonl",
+      "source_sha256": "83bf86defc8851bcb8b7a6ea36d5c69ccba66192584eda8441dd1f6cd2dcfc0c",
+      "saved_sha256": "83bf86defc8851bcb8b7a6ea36d5c69ccba66192584eda8441dd1f6cd2dcfc0c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/segments/000001/manifest.json",
+      "saved_path": "implementacao_sem_calibracao/replay-logs/runs/2026/10/04/7880df1e2604477bb74834fd93b81198/segments/000001/manifest.json",
+      "source_sha256": "fe0dbfbdddb5bda34ab6c9c4e84b19a0dc4012900955dec9599bca9b3b95a0b6",
+      "saved_sha256": "fe0dbfbdddb5bda34ab6c9c4e84b19a0dc4012900955dec9599bca9b3b95a0b6",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/replay-output.txt",
+      "saved_path": "implementacao_sem_calibracao/replay-output.txt",
+      "source_sha256": "88ea70698ba3a912d484e3fec3a7d66f935898bdf0f63907c1067e06f133e2b4",
+      "saved_sha256": "88ea70698ba3a912d484e3fec3a7d66f935898bdf0f63907c1067e06f133e2b4",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/tests.log",
+      "saved_path": "implementacao_sem_calibracao/tests.log",
+      "source_sha256": "bf1073c43e4515d528ec1899ad91c6556dceade0f8774cdcade3dd0aea6a38d7",
+      "saved_sha256": "bf1073c43e4515d528ec1899ad91c6556dceade0f8774cdcade3dd0aea6a38d7",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-no-calibration-fwhfavqo/verification.json",
+      "saved_path": "implementacao_sem_calibracao/verification.json",
+      "source_sha256": "d9510b5ff63e6d0d1609e839b1faf55c4b57bac56bf4dfc96b196be415892a95",
+      "saved_sha256": "d9510b5ff63e6d0d1609e839b1faf55c4b57bac56bf4dfc96b196be415892a95",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/completed.json",
+      "saved_path": "teste_sem_calibracao/completed.json",
+      "source_sha256": "e7e5a0ba4c46be9fbbcf8ebff228524749d391287bd6cad78a539e8edf945388",
+      "saved_sha256": "e7e5a0ba4c46be9fbbcf8ebff228524749d391287bd6cad78a539e8edf945388",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/monitor.py",
+      "saved_path": "teste_sem_calibracao/monitor.py",
+      "source_sha256": "84f8ba16dbea40d2754672ac50ee6974ed555fe80f4e018f598d398fb1281dff",
+      "saved_sha256": "84f8ba16dbea40d2754672ac50ee6974ed555fe80f4e018f598d398fb1281dff",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/report.json",
+      "saved_path": "teste_sem_calibracao/report.json",
+      "source_sha256": "0e9894adda5d4b3db14cb5f271892ab72ed94f91ede869685229536fc37a5df1",
+      "saved_sha256": "0e9894adda5d4b3db14cb5f271892ab72ed94f91ede869685229536fc37a5df1",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-001.json",
+      "saved_path": "teste_sem_calibracao/sample-001.json",
+      "source_sha256": "954aa7ff2413572892f79291c9a2807b46dcffb375600794843c754de324cfa8",
+      "saved_sha256": "954aa7ff2413572892f79291c9a2807b46dcffb375600794843c754de324cfa8",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-002.json",
+      "saved_path": "teste_sem_calibracao/sample-002.json",
+      "source_sha256": "a31413a03c1c00471914c0bc23b0bef0c8829e2fcb05b6ab02a1c40ac63d16a3",
+      "saved_sha256": "a31413a03c1c00471914c0bc23b0bef0c8829e2fcb05b6ab02a1c40ac63d16a3",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-003.json",
+      "saved_path": "teste_sem_calibracao/sample-003.json",
+      "source_sha256": "a4ae60a972418047cc2356455d8f75bc3b6b1ad78f9bf2ed66c8915492cd9329",
+      "saved_sha256": "a4ae60a972418047cc2356455d8f75bc3b6b1ad78f9bf2ed66c8915492cd9329",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-004.json",
+      "saved_path": "teste_sem_calibracao/sample-004.json",
+      "source_sha256": "a021e4b597b2894559d37ad333ef03af7d7ce012add682c08d880f1f325ab9fe",
+      "saved_sha256": "a021e4b597b2894559d37ad333ef03af7d7ce012add682c08d880f1f325ab9fe",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-005.json",
+      "saved_path": "teste_sem_calibracao/sample-005.json",
+      "source_sha256": "282c37f1079119a84c8ee669274e95a809163ef2802c85773e663bc9938b4737",
+      "saved_sha256": "282c37f1079119a84c8ee669274e95a809163ef2802c85773e663bc9938b4737",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-006.json",
+      "saved_path": "teste_sem_calibracao/sample-006.json",
+      "source_sha256": "5fff7354a5c0f76ba044f2f4b992b9ef2b324c1bbc2745a68b6718c236a5b74d",
+      "saved_sha256": "5fff7354a5c0f76ba044f2f4b992b9ef2b324c1bbc2745a68b6718c236a5b74d",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-007.json",
+      "saved_path": "teste_sem_calibracao/sample-007.json",
+      "source_sha256": "ada95e70f1f8001f99929ce31866bcfda3f0e9f859d7ca3b647b7952682600c2",
+      "saved_sha256": "ada95e70f1f8001f99929ce31866bcfda3f0e9f859d7ca3b647b7952682600c2",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-008.json",
+      "saved_path": "teste_sem_calibracao/sample-008.json",
+      "source_sha256": "9f48a0f86b241774b133a18b42bdf4677590ee0c91eff49fb8d5ff7417714e1b",
+      "saved_sha256": "9f48a0f86b241774b133a18b42bdf4677590ee0c91eff49fb8d5ff7417714e1b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-009.json",
+      "saved_path": "teste_sem_calibracao/sample-009.json",
+      "source_sha256": "af93f95557c9512b0dd40976959617c3d56d4de5e9b993428a0605fce886682d",
+      "saved_sha256": "af93f95557c9512b0dd40976959617c3d56d4de5e9b993428a0605fce886682d",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-010.json",
+      "saved_path": "teste_sem_calibracao/sample-010.json",
+      "source_sha256": "670a95d02e24e0fd91214d37b062f2f9d92163d6b11bd3e2b6a56583dea4fb37",
+      "saved_sha256": "670a95d02e24e0fd91214d37b062f2f9d92163d6b11bd3e2b6a56583dea4fb37",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-011.json",
+      "saved_path": "teste_sem_calibracao/sample-011.json",
+      "source_sha256": "7008c3af877a752cb727b2aa53819b318113b1b75b67d026fcd7c8047a05927b",
+      "saved_sha256": "7008c3af877a752cb727b2aa53819b318113b1b75b67d026fcd7c8047a05927b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-012.json",
+      "saved_path": "teste_sem_calibracao/sample-012.json",
+      "source_sha256": "454395dbe031e43a49c62ce82ad0917b5adad7079ba4a0517b0209a66dfb4e76",
+      "saved_sha256": "454395dbe031e43a49c62ce82ad0917b5adad7079ba4a0517b0209a66dfb4e76",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-013.json",
+      "saved_path": "teste_sem_calibracao/sample-013.json",
+      "source_sha256": "69669f1cbd36a6162ca36518f1986c5260993e3829d1c89a2210126e1a3718d9",
+      "saved_sha256": "69669f1cbd36a6162ca36518f1986c5260993e3829d1c89a2210126e1a3718d9",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-014.json",
+      "saved_path": "teste_sem_calibracao/sample-014.json",
+      "source_sha256": "aae8c9098fcf5df3c9aa681fcd99da0c9739f12c891ce73a45deb1b0c8be45d1",
+      "saved_sha256": "aae8c9098fcf5df3c9aa681fcd99da0c9739f12c891ce73a45deb1b0c8be45d1",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-015.json",
+      "saved_path": "teste_sem_calibracao/sample-015.json",
+      "source_sha256": "26f8a47c835dcdf2da4facec33c99b61cf88615c7edf728beab1ed0bd47ff2be",
+      "saved_sha256": "26f8a47c835dcdf2da4facec33c99b61cf88615c7edf728beab1ed0bd47ff2be",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-016.json",
+      "saved_path": "teste_sem_calibracao/sample-016.json",
+      "source_sha256": "8e0124de1548896ba8cabecadf2697ad5ac888d457f24b11877c421f083dbe58",
+      "saved_sha256": "8e0124de1548896ba8cabecadf2697ad5ac888d457f24b11877c421f083dbe58",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-017.json",
+      "saved_path": "teste_sem_calibracao/sample-017.json",
+      "source_sha256": "63e76a6d5fc1cbc76d8bd24b8bf827b59d4bd55a5939854e6ba8702afbc6e4e2",
+      "saved_sha256": "63e76a6d5fc1cbc76d8bd24b8bf827b59d4bd55a5939854e6ba8702afbc6e4e2",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-018.json",
+      "saved_path": "teste_sem_calibracao/sample-018.json",
+      "source_sha256": "b5fd3670ac07cfb799917993a7d9510ffdfce3911b7f9234c5a8ec01291de957",
+      "saved_sha256": "b5fd3670ac07cfb799917993a7d9510ffdfce3911b7f9234c5a8ec01291de957",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-019.json",
+      "saved_path": "teste_sem_calibracao/sample-019.json",
+      "source_sha256": "40f7281cde3caebee5db09ed256195b8c6cfa787ef8712c69d951d538a1f89bc",
+      "saved_sha256": "40f7281cde3caebee5db09ed256195b8c6cfa787ef8712c69d951d538a1f89bc",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-020.json",
+      "saved_path": "teste_sem_calibracao/sample-020.json",
+      "source_sha256": "d1bd86539e10b9f1c03b47cd3efd2ae5d5ed1f166bab45b2074b792ef96ef04d",
+      "saved_sha256": "d1bd86539e10b9f1c03b47cd3efd2ae5d5ed1f166bab45b2074b792ef96ef04d",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/sample-021.json",
+      "saved_path": "teste_sem_calibracao/sample-021.json",
+      "source_sha256": "28da4ff7a7c0e3611f0e4dac01065e81752f72b8e9ba456ca1d027b01f8c0076",
+      "saved_sha256": "28da4ff7a7c0e3611f0e4dac01065e81752f72b8e9ba456ca1d027b01f8c0076",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/started.json",
+      "saved_path": "teste_sem_calibracao/started.json",
+      "source_sha256": "516b536a021748f84d05dab428859ccb4a708343bc848ff92b1c9a0612045f2c",
+      "saved_sha256": "516b536a021748f84d05dab428859ccb4a708343bc848ff92b1c9a0612045f2c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-live-absolute-ear-20261004-n49lsve2/threads.json",
+      "saved_path": "teste_sem_calibracao/threads.json",
+      "source_sha256": "18885e4de5529fe651cbc5512868f2176c9a868ac2b591b21165ade95e2151e2",
+      "saved_sha256": "18885e4de5529fe651cbc5512868f2176c9a868ac2b591b21165ade95e2151e2",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/monitor-config.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/monitor-config.json",
+      "source_sha256": "1c2e01fc7f907e22964b219c28adb6d4c2ca250bf102f8fa163377e7fbedd57c",
+      "saved_sha256": "1c2e01fc7f907e22964b219c28adb6d4c2ca250bf102f8fa163377e7fbedd57c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/monitor.py",
+      "saved_path": "teste_camera_antes_remocao_calibracao/monitor.py",
+      "source_sha256": "1a28c2c9ea0b7a2c9fe4d0df0d4fc61fa52ba8841fd42e26b24fbb11529bcb2c",
+      "saved_sha256": "1a28c2c9ea0b7a2c9fe4d0df0d4fc61fa52ba8841fd42e26b24fbb11529bcb2c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/report.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/report.json",
+      "source_sha256": "748e0453e36910079392d4071943fd54089f6d254cc0dc2ceaa90b1835fac19c",
+      "saved_sha256": "748e0453e36910079392d4071943fd54089f6d254cc0dc2ceaa90b1835fac19c",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-001.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-001.json",
+      "source_sha256": "3bc7a3d4d39ad58bfff2ece35d3f6dfa4e49024ddd2f67dfa2a7297bafc1a5c9",
+      "saved_sha256": "3bc7a3d4d39ad58bfff2ece35d3f6dfa4e49024ddd2f67dfa2a7297bafc1a5c9",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-002.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-002.json",
+      "source_sha256": "306ff421c31fc3b6bb7f860eb4e3dd5ea64ab040724b742f40062a5a357b1d12",
+      "saved_sha256": "306ff421c31fc3b6bb7f860eb4e3dd5ea64ab040724b742f40062a5a357b1d12",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-003.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-003.json",
+      "source_sha256": "bb24bf354e7e52dd943f6e34a51f941b5b54f1d17527386fd44d8f41d3b1aa1b",
+      "saved_sha256": "bb24bf354e7e52dd943f6e34a51f941b5b54f1d17527386fd44d8f41d3b1aa1b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-004.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-004.json",
+      "source_sha256": "7e004479b40c9f14aca4e56064ded650a236cf36dff4defb022b0eef12b56e5d",
+      "saved_sha256": "7e004479b40c9f14aca4e56064ded650a236cf36dff4defb022b0eef12b56e5d",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-005.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-005.json",
+      "source_sha256": "3a2187daf3ec7674634cced00926e9ac0799cbc8ccff836ff477a3636c5bcffd",
+      "saved_sha256": "3a2187daf3ec7674634cced00926e9ac0799cbc8ccff836ff477a3636c5bcffd",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-006.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-006.json",
+      "source_sha256": "8c909a94e336f01744624f0b77585bea3a1033b101ff666f4276a93786d75ea4",
+      "saved_sha256": "8c909a94e336f01744624f0b77585bea3a1033b101ff666f4276a93786d75ea4",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-007.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-007.json",
+      "source_sha256": "2c5a2567cdfd02ca66e2c977f4ee5dbb2251b0bdb706aa30eb7037bf29284f0e",
+      "saved_sha256": "2c5a2567cdfd02ca66e2c977f4ee5dbb2251b0bdb706aa30eb7037bf29284f0e",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-008.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-008.json",
+      "source_sha256": "4da6ebd481ae068f9d2954367bcd68b3608af10e92d6ba707170a2583b4dc707",
+      "saved_sha256": "4da6ebd481ae068f9d2954367bcd68b3608af10e92d6ba707170a2583b4dc707",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-009.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-009.json",
+      "source_sha256": "56cccc7fb6f3cb6e2651b22a48fdba1e95b7bc869f516860821631b96f6c61be",
+      "saved_sha256": "56cccc7fb6f3cb6e2651b22a48fdba1e95b7bc869f516860821631b96f6c61be",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-010.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-010.json",
+      "source_sha256": "d81fd2eaf054a83e03af0b297db042f3f49fe0e013dfd23672c7273c4028a336",
+      "saved_sha256": "d81fd2eaf054a83e03af0b297db042f3f49fe0e013dfd23672c7273c4028a336",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-011.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-011.json",
+      "source_sha256": "e1c84de9fe2482bdbcc0dbbd5667de2a384d1f860457891cd852cd09ac158ca6",
+      "saved_sha256": "e1c84de9fe2482bdbcc0dbbd5667de2a384d1f860457891cd852cd09ac158ca6",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-012.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-012.json",
+      "source_sha256": "49594c8668da60eb8d69918a5f5b306659d43b1853cd41dfcdd0e6a3de74a7b5",
+      "saved_sha256": "49594c8668da60eb8d69918a5f5b306659d43b1853cd41dfcdd0e6a3de74a7b5",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-013.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-013.json",
+      "source_sha256": "8d53accfad471838bb985802e9002d8ba5cddd495b5304bbe27a78de174f292e",
+      "saved_sha256": "8d53accfad471838bb985802e9002d8ba5cddd495b5304bbe27a78de174f292e",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-monitor-20261004-vynkhrvs/sample-014.json",
+      "saved_path": "teste_camera_antes_remocao_calibracao/sample-014.json",
+      "source_sha256": "e2f90a863fae8b5d756bdc591135d7b72ebe62ea046b6bf81110b6e2c52ebb98",
+      "saved_sha256": "e2f90a863fae8b5d756bdc591135d7b72ebe62ea046b6bf81110b6e2c52ebb98",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/Dockerfile",
+      "saved_path": "comparacao_pc_raspberry/Dockerfile",
+      "source_sha256": "1b364de3431dda435d42b740bf39ddf0155cdbcf234b9a55c91b4ba3771e0f4e",
+      "saved_sha256": "1b364de3431dda435d42b740bf39ddf0155cdbcf234b9a55c91b4ba3771e0f4e",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/alignment.json",
+      "saved_path": "comparacao_pc_raspberry/alignment.json",
+      "source_sha256": "5b6a70668320f3a2d71d4ade8a26894ed5d114eaacea13470f0010df6104331f",
+      "saved_sha256": "5b6a70668320f3a2d71d4ade8a26894ed5d114eaacea13470f0010df6104331f",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/calibrate_eyes.py",
+      "saved_path": "comparacao_pc_raspberry/calibrate_eyes.py",
+      "source_sha256": "34c2a44072d5cf857e7de92908840e30d6122efa6f63b877ea357cc7147f4fa7",
+      "saved_sha256": "34c2a44072d5cf857e7de92908840e30d6122efa6f63b877ea357cc7147f4fa7",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/camera_routing.py",
+      "saved_path": "comparacao_pc_raspberry/camera_routing.py",
+      "source_sha256": "20569489d8c7fcb3c0e345dcef6a87eaaa49fdf23aca86d284ca49584482d57b",
+      "saved_sha256": "20569489d8c7fcb3c0e345dcef6a87eaaa49fdf23aca86d284ca49584482d57b",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/docker-compose.yml",
+      "saved_path": "comparacao_pc_raspberry/docker-compose.yml",
+      "source_sha256": "0006ab64e5528bd318c0613488bff60a1db4e1414aed0b4fa924721393db4fa5",
+      "saved_sha256": "0006ab64e5528bd318c0613488bff60a1db4e1414aed0b4fa924721393db4fa5",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/run_host.py",
+      "saved_path": "comparacao_pc_raspberry/run_host.py",
+      "source_sha256": "a2db69745300ced74fcb738190afffe3e079f6c200be2b846c9fc183bfc128af",
+      "saved_sha256": "a2db69745300ced74fcb738190afffe3e079f6c200be2b846c9fc183bfc128af",
+      "mode": "identical"
+    },
+    {
+      "temporary_source": "/tmp/fatigue-nvme-align-npcebl94/verification.json",
+      "saved_path": "comparacao_pc_raspberry/verification.json",
+      "source_sha256": "e1397a81754e018e25f3ca85d15ea1fa460e93749ae186007e5985c7c9bb02e7",
+      "saved_sha256": "e1397a81754e018e25f3ca85d15ea1fa460e93749ae186007e5985c7c9bb02e7",
+      "mode": "identical"
+    }
+  ],
+  "redacted_json_paths": [
+    "implementacao_sem_calibracao/remote-after.json[0].Config.Env",
+    "implementacao_sem_calibracao/remote-after.json[1].Config.Env",
+    "implementacao_sem_calibracao/remote-after.json[2].Config.Env",
+    "implementacao_sem_calibracao/remote-baseline.json.containers[0].Config.Env",
+    "implementacao_sem_calibracao/remote-baseline.json.containers[1].Config.Env",
+    "implementacao_sem_calibracao/remote-baseline.json.containers[2].Config.Env"
+  ],
+  "note": "Valores de Env nos docker inspect foram omitidos. Configuracoes e hashes de comparacao ja registrados nas evidencias permanecem preservados."
+}

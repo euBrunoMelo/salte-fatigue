@@ -1,0 +1,53 @@
+{
+  "matching_production_files": 21,
+  "wait_for_camera_absent": true,
+  "compose_valid": true,
+  "python_syntax_valid": true,
+  "command": [
+    "python3",
+    "run_host.py",
+    "--camera-id-contains",
+    "70000",
+    "--no-danger-record",
+    "--logs-dir",
+    "/app/logs",
+    "--log-frame-every",
+    "5",
+    "--log-assessment-every",
+    "5",
+    "--danger-output-dir",
+    "/app/logs/incidents"
+  ],
+  "docker_root": "/mnt/nvme/docker",
+  "logs_host_path": "/mnt/nvme/Monitoramento/FATIGUE/logs",
+  "logs_device": "/dev/nvme0n1p1",
+  "containers_unchanged": [
+    "monitor-motorista",
+    "salte-fatigue",
+    "gallery",
+    "salte-tev8"
+  ],
+  "calibration_unchanged": true,
+  "new_image_built": false,
+  "new_container_started": false,
+  "old_image_backup": "salte-fatigue:backup-20261004t135352z",
+  "remote_backup": "/mnt/nvme/Monitoramento/FATIGUE-backups/20261004T135352Z",
+  "pc_sources_unchanged": true,
+  "changed_files": [
+    "Dockerfile",
+    "docker-compose.yml",
+    "run_host.py",
+    "camera_routing.py",
+    "calibrate_eyes.py"
+  ],
+  "source_stage": "/tmp/fatigue-nvme-align-npcebl94",
+  "nvme_write_timeouts_observed": true,
+  "latest_timeout_kernel_seconds": 3443.696522,
+  "start_commands": [
+    "cd /mnt/nvme/Monitoramento/FATIGUE",
+    "docker compose config --quiet",
+    "docker compose build salte-fatigue",
+    "docker compose up -d --no-deps --force-recreate salte-fatigue"
+  ],
+  "monitor_after_user_notice_minutes": 10
+}

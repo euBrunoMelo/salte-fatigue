@@ -1,0 +1,347 @@
+{
+  "monitoring": {
+    "completed_at_utc": "2026-10-04T15:06:10.338076+00:00",
+    "sample_count": 21,
+    "elapsed_seconds": 610.092
+  },
+  "sample_count": 21,
+  "collection_errors": [],
+  "first_sample_utc": "2026-10-04T14:56:00.920626+00:00",
+  "last_sample_utc": "2026-10-04T15:06:01.995602+00:00",
+  "run_id": "f903178777b2489088e6f4b615ace5fe",
+  "run_path": "/mnt/nvme/Monitoramento/FATIGUE/logs/runs/2026/10/04/f903178777b2489088e6f4b615ace5fe",
+  "run_start": {
+    "schema_version": 1,
+    "run_id": "f903178777b2489088e6f4b615ace5fe",
+    "ts_utc": "2026-10-04T14:54:10.916Z",
+    "kind": "run_start",
+    "data": {
+      "fps": 30,
+      "camera_num": 1,
+      "camera_id": "platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500",
+      "camera_id_contains": "70000",
+      "video": null,
+      "calibration": null,
+      "calibration_loaded": false,
+      "fallback_ear_threshold": null,
+      "p80_ratio": null,
+      "closure_method": "absolute_ear",
+      "closed_ear_threshold": 0.17,
+      "max_sample_gap_seconds": 0.5,
+      "perclos_window_sec": 60.0
+    }
+  },
+  "image": "sha256:b50016c7656627b0faf586d4905d63fa10cfab8d87769eb9cfc1e22321e4eec5",
+  "last_logged_frame_idx": 4140,
+  "minimum_captured_frames": 4141,
+  "logged_frames": 829,
+  "logged_assessments": 829,
+  "assessment_labels": {
+    "ativo": 733,
+    "unknown": 96
+  },
+  "valid_eyes": {
+    "2": 733,
+    "0": 96
+  },
+  "face_detected_records": 733,
+  "state_transition_counts": {
+    "ativo": 8,
+    "fadiga": 2,
+    "unknown": 5
+  },
+  "state_transitions": [
+    {
+      "ts_utc": "2026-10-04T14:54:12.065Z",
+      "previous": "unknown",
+      "current": "safe",
+      "previous_label": "unknown",
+      "current_label": "ativo",
+      "frame_idx": 0
+    },
+    {
+      "ts_utc": "2026-10-04T14:56:35.835Z",
+      "previous": "safe",
+      "current": "warning",
+      "previous_label": "ativo",
+      "current_label": "fadiga",
+      "frame_idx": 1376
+    },
+    {
+      "ts_utc": "2026-10-04T14:56:40.534Z",
+      "previous": "warning",
+      "current": "safe",
+      "previous_label": "fadiga",
+      "current_label": "ativo",
+      "frame_idx": 1377
+    },
+    {
+      "ts_utc": "2026-10-04T14:56:41.746Z",
+      "previous": "safe",
+      "current": "warning",
+      "previous_label": "ativo",
+      "current_label": "fadiga",
+      "frame_idx": 1409
+    },
+    {
+      "ts_utc": "2026-10-04T14:56:44.255Z",
+      "previous": "warning",
+      "current": "safe",
+      "previous_label": "fadiga",
+      "current_label": "ativo",
+      "frame_idx": 1410
+    },
+    {
+      "ts_utc": "2026-10-04T14:57:50.378Z",
+      "previous": "safe",
+      "current": "unknown",
+      "previous_label": "ativo",
+      "current_label": "unknown",
+      "frame_idx": 1623
+    },
+    {
+      "ts_utc": "2026-10-04T14:58:32.782Z",
+      "previous": "unknown",
+      "current": "safe",
+      "previous_label": "unknown",
+      "current_label": "ativo",
+      "frame_idx": 1790
+    },
+    {
+      "ts_utc": "2026-10-04T14:59:16.182Z",
+      "previous": "safe",
+      "current": "unknown",
+      "previous_label": "ativo",
+      "current_label": "unknown",
+      "frame_idx": 1916
+    },
+    {
+      "ts_utc": "2026-10-04T14:59:16.271Z",
+      "previous": "unknown",
+      "current": "safe",
+      "previous_label": "unknown",
+      "current_label": "ativo",
+      "frame_idx": 1917
+    },
+    {
+      "ts_utc": "2026-10-04T15:01:35.526Z",
+      "previous": "safe",
+      "current": "unknown",
+      "previous_label": "ativo",
+      "current_label": "unknown",
+      "frame_idx": 2668
+    },
+    {
+      "ts_utc": "2026-10-04T15:01:37.959Z",
+      "previous": "unknown",
+      "current": "safe",
+      "previous_label": "unknown",
+      "current_label": "ativo",
+      "frame_idx": 2675
+    },
+    {
+      "ts_utc": "2026-10-04T15:03:37.479Z",
+      "previous": "safe",
+      "current": "unknown",
+      "previous_label": "ativo",
+      "current_label": "unknown",
+      "frame_idx": 3206
+    },
+    {
+      "ts_utc": "2026-10-04T15:04:16.394Z",
+      "previous": "unknown",
+      "current": "safe",
+      "previous_label": "unknown",
+      "current_label": "ativo",
+      "frame_idx": 3361
+    },
+    {
+      "ts_utc": "2026-10-04T15:04:55.399Z",
+      "previous": "safe",
+      "current": "unknown",
+      "previous_label": "ativo",
+      "current_label": "unknown",
+      "frame_idx": 3823
+    },
+    {
+      "ts_utc": "2026-10-04T15:05:55.571Z",
+      "previous": "unknown",
+      "current": "safe",
+      "previous_label": "unknown",
+      "current_label": "ativo",
+      "frame_idx": 3976
+    }
+  ],
+  "unknown_quality_in_copied_assessments": {
+    "no_face": 96
+  },
+  "last_assessment": {
+    "schema_version": 1,
+    "run_id": "f903178777b2489088e6f4b615ace5fe",
+    "record_type": "assessment",
+    "frame_idx": 4140,
+    "timestamp_s": 7763.655388473,
+    "quality": "both_eyes_valid",
+    "left_valid": true,
+    "right_valid": true,
+    "pose_usable": true,
+    "valid_eye_count": 2,
+    "fatigue_state": "safe",
+    "fatigue_label": "ativo",
+    "observation_state": "ready",
+    "closure_active": false,
+    "closure_ms": 0.0,
+    "closure_event": "none",
+    "closure_valid_eye_count": 2,
+    "using_fallback": false,
+    "perclos_p80": null,
+    "perclos_ear": null,
+    "perclos_coverage": 0.10597336536666262,
+    "perclos_valid_seconds": 6.358401921999757,
+    "perclos_window_seconds": 60.0,
+    "attention_state": "unavailable",
+    "attention_duration_ms": 0.0,
+    "attention_pitch_delta": null,
+    "attention_yaw_delta": null,
+    "attention_roll_delta": null
+  },
+  "perclos_coverage_range_at_sample_times": [
+    0.03088231401666235,
+    0.3702070173500033
+  ],
+  "perclos_nonnull_at_sample_times": 0,
+  "longest_sampled_gap": {
+    "from_frame": 3360,
+    "to_frame": 3365,
+    "seconds": 34.01737753599991
+  },
+  "nvme_write_timeouts_since_run": 59,
+  "nvme_write_timeouts_first_sample": 9,
+  "nvme_write_timeouts_during_observation_delta": 50,
+  "cpu_temp_c_range": [
+    74.35,
+    84.8
+  ],
+  "throttled_values": [
+    "throttled=0xe0000",
+    "throttled=0xe0008"
+  ],
+  "thermal_soft_limit_active_samples": 8,
+  "final_segments": [
+    {
+      "name": "000001",
+      "partial": false,
+      "frame_count": 384,
+      "assessment_count": 384,
+      "manifest": {
+        "schema_version": 1,
+        "run_id": "f903178777b2489088e6f4b615ace5fe",
+        "sequence": 1,
+        "status": "completed",
+        "closed_at": "2026-10-04T14:59:16.131Z",
+        "bytes": 396035,
+        "frame_count": 384,
+        "assessment_count": 384,
+        "first_frame_idx": 0,
+        "last_frame_idx": 1915
+      },
+      "manifest_counts_ok": true,
+      "sha256": {
+        "manifest.json": "1f6e2245d983c87d1fc9e0a39579574b4081e494b85995a6a7973dbce91075c9",
+        "assessments.jsonl": "b3c48b5271d610b4f77f4388b524d45e23fd3c08ccab226efcd996b4f4c1d54a",
+        "frames.jsonl": "3a10b21605ea71562f59e0bb55c588739a01c6c9b4b1465261871abc64160aec"
+      },
+      "immutable_hashes_unchanged": true,
+      "hash_check_samples": 14
+    },
+    {
+      "name": "000002",
+      "partial": false,
+      "frame_count": 289,
+      "assessment_count": 289,
+      "manifest": {
+        "schema_version": 1,
+        "run_id": "f903178777b2489088e6f4b615ace5fe",
+        "sequence": 2,
+        "status": "completed",
+        "closed_at": "2026-10-04T15:04:16.630Z",
+        "bytes": 298115,
+        "frame_count": 289,
+        "assessment_count": 289,
+        "first_frame_idx": 1920,
+        "last_frame_idx": 3360
+      },
+      "manifest_counts_ok": true,
+      "sha256": {
+        "manifest.json": "7512964637b88fbd1c28d5761c512b9ac0810989693c688c407fb507943f9fd6",
+        "assessments.jsonl": "f5346e37e5cd5935df3ce1de7166aaddf05459f2894f9c51fbee8d6dd619963f",
+        "frames.jsonl": "70d9f6ab45fcd3df9a7998d8b40185d8109aa92c7b35a8b050d8497ce666b80d"
+      },
+      "immutable_hashes_unchanged": true,
+      "hash_check_samples": 4
+    }
+  ],
+  "current_partial_segments": [
+    {
+      "name": "000003.partial",
+      "partial": true,
+      "frame_count": 156,
+      "assessment_count": 156,
+      "manifest": null
+    }
+  ],
+  "containers": {
+    "/salte-fatigue": {
+      "same_container_throughout": true,
+      "same_image_throughout": true,
+      "same_configuration_throughout": true,
+      "restart_counts": [
+        0
+      ],
+      "statuses": [
+        "running"
+      ],
+      "started_at": "2026-10-04T14:53:56.768109224Z",
+      "disk_wait_samples": 2
+    },
+    "/monitor-motorista": {
+      "same_container_throughout": true,
+      "same_image_throughout": true,
+      "same_configuration_throughout": true,
+      "restart_counts": [
+        0
+      ],
+      "statuses": [
+        "running"
+      ],
+      "started_at": "2026-10-04T12:57:57.085451786Z",
+      "disk_wait_samples": 0
+    },
+    "/gallery": {
+      "same_container_throughout": true,
+      "same_image_throughout": true,
+      "same_configuration_throughout": true,
+      "restart_counts": [
+        0
+      ],
+      "statuses": [
+        "running"
+      ],
+      "started_at": "2026-10-04T12:57:57.08456736Z",
+      "disk_wait_samples": 0
+    }
+  },
+  "logs_mount": {
+    "code": 0,
+    "stdout": "/dev/nvme0n1p1 /mnt/nvme ext4\n",
+    "stderr": ""
+  },
+  "nvme_free_gib": 203.44,
+  "gallery_http_status": "HTTP/1.1 403 FORBIDDEN",
+  "scope": "Read-only SSH; no container, source, storage, SSH or VPN changes. Observer artifacts saved on PC.",
+  "limitations": [
+    "Assessment logs are sampled every five frames; state transitions also checked in unsampled event files.",
+    "Sono was not observed in this test; I/O gaps and no_face observations interrupt continuous closure.",
+    "PERCLOS remained unavailable at all observation checkpoints; binocular temporal coverage was below 80%."
+  ]
+}

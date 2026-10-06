@@ -1,0 +1,82 @@
+{
+  "production_hashes": {
+    "attention_fsm.py": "2a47eeca5e0cc70b7ef6fa4efce0f625a73ced6145be779b02b65b8c1878c700",
+    "camera_routing.py": "20569489d8c7fcb3c0e345dcef6a87eaaa49fdf23aca86d284ca49584482d57b",
+    "atomic_persistence.py": "ca303e016e57e309de105c21509ea3d95880bde097445bfd61b971f6590f9eec",
+    "structured_logger.py": "0c43c88d0d1b8e466a58fece4687eb190150731107117679263334226a845ef2",
+    "Dockerfile": "c685812ba790a0b7a96402cd805836810e9695004ca33fce67407567a53a3d5c",
+    "tests/test_absolute_ear_runtime.py": "eede2ba9a5b64847c6f228a40108bbaca3b28d5a619bbabf119d66b06c86affa",
+    "tests/test_production_boundary.py": "bf100380d6a2bf15220d3bd344bef39aa4ef38ae70eeb46c12498cab44788f2f",
+    "perclos_rt.py": "56b939ac379ca63782fbbdef49e2a8b7efbb8e92c8db82651cf0e6a01ecf1831",
+    "runtime_models.py": "e2abe4c3c374600e5d0ef9c33bca6ce927909ba01307d1a6c8e49add62bbc386",
+    "feature_extractor_rt.py": "64751e408c29772a1c3f91c285900048e57fa9491c78c39e62c7e97075579d65",
+    "run_host.py": "2324f6480281388e4b61f5d8918b9b925fa9ba6887c87fe54b5bce0ef3df1ee7",
+    "face_landmarker.task": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+    "TESTE REGRECAO.txt": "7308833b6d53ae183fae1f8b5af2f6ea79cb79c5cb55f58eb8c2c7447c540d44",
+    "fatigue_runtime.py": "df27d286f2a3f26459451d7334c06fb6cc556f674587bef879003148cead14d0",
+    "docker-compose.yml": "de288462ec4ea83dbd76d96029f849f833d92a50cd459bc27249a01c8132fcb3",
+    "observation_adapter.py": "3c33cccb4ecbd9e0f92479376fe6da4400cb7ac2e96e88b16870d2d4de87f2d8",
+    "tests/test_feature_vector_camera.py": "cc89045d8247f1976bc05aefc8d205097cf423741808a375e6d3cc556019d307",
+    "tests/test_feature_extractor_runtime.py": "b983c999ae6cc2bce53be9647209dd21efc2fd403caacf78a1d3e59b97878a29",
+    "tests/test_deterministic_runtime.py": "2ea68df9d8912e9db853cb548c4defc587bcd3c2514fb65d765d494740fec812",
+    ".dockerignore": "38d09a596ad43020786c2bdea8ba2d5b163c8d78addbf38a6df249b51ccb3547",
+    "CLAUDE.md": "9b9612b41110e00265efc65fff3af58a02d34e6842f445a76e36cee7e16b0f3b",
+    "danger_video_recorder.py": "1298ffc3575c9e6c3fa36e00232a81f0c790836ae9dc4c8b3a90b18874d90bc2",
+    "fatigue_fsm.py": "94cb1a3b8607e71f4cf7210a01ecccae7641d1e5888bbeae5e54594b335ff57f",
+    "README.md": "937e0db83e25e3ebed52a0e1dca7aa946c74986e0865a40b5774ce10038fbf33",
+    "eye_closure.py": "928077c1bf779752477c40dacc69c1e3d502bda5f37dee3e93aca26ee38a16fa",
+    "runtime_observability.py": "814900177998ca6d57cca880b6829aaf0843b4732e4f462bb29da9e4ef4b85d5",
+    "eye_quality_gate.py": "6cb5807de1af39b0c80dac105504a38cb0ffc431f06603ca937484355740635c"
+  },
+  "production_count": 19,
+  "publication_count": 17,
+  "compile": "ok",
+  "compose": "ok",
+  "runtime_labels": [
+    "ativo",
+    "fadiga",
+    "sono"
+  ],
+  "gap_probes": {
+    "0.6": {
+      "label": "ativo",
+      "closure_ms": 0.0
+    },
+    "34": {
+      "label": "ativo",
+      "closure_ms": 0.0
+    }
+  },
+  "backup_image": "sha256:656956b2ab96007e1aa210dd95be87b87ea2d5c4a175bc5b55a1d8461895b41d",
+  "container_comparison": {
+    "/salte-fatigue": {
+      "same_container": true,
+      "same_image": true,
+      "same_started_at": true,
+      "same_restart_count": true,
+      "same_configuration": true,
+      "running": true
+    },
+    "/monitor-motorista": {
+      "same_container": true,
+      "same_image": true,
+      "same_started_at": true,
+      "same_restart_count": true,
+      "same_configuration": true,
+      "running": true
+    },
+    "/gallery": {
+      "same_container": true,
+      "same_image": true,
+      "same_started_at": true,
+      "same_restart_count": true,
+      "same_configuration": true,
+      "running": true
+    }
+  },
+  "logs_device": "/dev/nvme0n1p1",
+  "local_tests_passed": 152,
+  "nonruntime_document_not_copied": "config/README.md: remote directory root:root",
+  "backup_path": "/mnt/nvme/Monitoramento/FATIGUE-backups/20261004T144724Z-absolute-ear",
+  "manual_build_and_start_pending": true
+}

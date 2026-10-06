@@ -1,0 +1,56 @@
+{
+  "session_date": "2026-10-04",
+  "saved_at_utc": "2026-10-04T16:08:54.665144+00:00",
+  "summary": "RESUMO_SESSAO.txt",
+  "next_session": "Investigar pausas causadas por timeouts de escrita do NVMe; comecar por diagnostico de leitura, mantendo configuracao funcional do FATIGUE e demais servicos.",
+  "local_tests": {
+    "passed": 152,
+    "output": "implementacao_sem_calibracao/tests.log",
+    "source_snapshot": "codigo_testado/",
+    "source_hashes": "codigo_testado_manifest.json",
+    "environment": "ambiente_testes_local.json"
+  },
+  "evidence_sets": [
+    {
+      "name": "Comparacao PC/Raspberry e etapa de camera",
+      "path": "comparacao_pc_raspberry/"
+    },
+    {
+      "name": "Implementacao e validacao sem calibracao",
+      "path": "implementacao_sem_calibracao/",
+      "report": "implementacao_sem_calibracao/verification.json"
+    },
+    {
+      "name": "Ensaio antes de remover dependencia de calibracao",
+      "path": "teste_camera_antes_remocao_calibracao/",
+      "report": "teste_camera_antes_remocao_calibracao/report.json",
+      "samples": 14
+    },
+    {
+      "name": "Ensaio do runtime sem calibracao",
+      "path": "teste_sem_calibracao/",
+      "report": "teste_sem_calibracao/report.json",
+      "samples": 21
+    },
+    {
+      "name": "Confirmacao posterior da coleta",
+      "report": "confirmacao_coleta_12h47_brt.json",
+      "provenance": "Reconstituido das saidas SSH da conversa, sem consulta adicional para esse registro."
+    },
+    {
+      "name": "Artefatos finalizados ampliados das duas execucoes",
+      "archive": "raspberry_logs_finalizados.tar",
+      "manifest": "raspberry_logs_finalizados_manifest.json",
+      "validation": "verificacao_logs_finalizados.json",
+      "summary": "resumo_execucoes_arquivadas.json",
+      "segments": 23,
+      "paired_records": 11675,
+      "files": 234
+    }
+  ],
+  "copy_provenance": "proveniencia_copias.json",
+  "integrity_manifest": "MANIFEST.sha256",
+  "scope_note": "Copias salvas no PC. Acesso ao Raspberry somente para leitura de artefatos finais; nenhum processo ou configuracao remota foi alterado. .dockerignore local ganhou a exclusao docs/evidencias/.",
+  "privacy_note": "Valores de Env nos docker inspect foram omitidos das copias de JSON.",
+  "time_note": "Relatorios das janelas monitoradas e resumo dos segmentos ampliados tem cortes diferentes; consulte os timestamps de cada conjunto."
+}

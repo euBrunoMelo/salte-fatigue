@@ -1,0 +1,756 @@
+[
+  {
+    "Id": "1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422",
+    "Created": "2026-10-04T13:59:35.273656328Z",
+    "Path": "python3",
+    "Args": [
+      "run_host.py",
+      "--camera-id-contains",
+      "70000",
+      "--no-danger-record",
+      "--logs-dir",
+      "/app/logs",
+      "--log-frame-every",
+      "5",
+      "--log-assessment-every",
+      "5",
+      "--danger-output-dir",
+      "/app/logs/incidents"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 4744,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-04T13:59:48.123159951Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "Image": "sha256:656956b2ab96007e1aa210dd95be87b87ea2d5c4a175bc5b55a1d8461895b41d",
+    "ResolvConfPath": "/mnt/nvme/docker/containers/1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422/resolv.conf",
+    "HostnamePath": "/mnt/nvme/docker/containers/1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422/hostname",
+    "HostsPath": "/mnt/nvme/docker/containers/1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422/hosts",
+    "LogPath": "/mnt/nvme/docker/containers/1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422/1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422-json.log",
+    "Name": "/salte-fatigue",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": [
+        "/run/udev:/run/udev:ro",
+        "/mnt/nvme/Monitoramento/FATIGUE/logs:/app/logs:rw",
+        "/mnt/nvme/Monitoramento/FATIGUE/config:/app/config:rw",
+        "/dev:/dev:rw"
+      ],
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "5",
+          "max-size": "10m"
+        }
+      },
+      "NetworkMode": "fatigue_default",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": null,
+      "CgroupnsMode": "private",
+      "Dns": null,
+      "DnsOptions": null,
+      "DnsSearch": null,
+      "ExtraHosts": [],
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": false,
+      "SecurityOpt": [
+        "seccomp:unconfined"
+      ],
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 0,
+      "NanoCpus": 0,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": null,
+      "BlkioDeviceReadBps": null,
+      "BlkioDeviceWriteBps": null,
+      "BlkioDeviceReadIOps": null,
+      "BlkioDeviceWriteIOps": null,
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": null,
+      "DeviceCgroupRules": [
+        "c *:* rmw"
+      ],
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 0,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": null,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/run/udev",
+        "Destination": "/run/udev",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/mnt/nvme/Monitoramento/FATIGUE/logs",
+        "Destination": "/app/logs",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/mnt/nvme/Monitoramento/FATIGUE/config",
+        "Destination": "/app/config",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/dev",
+        "Destination": "/dev",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "1575798dbce6",
+      "Domainname": "",
+      "User": "salte",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "PYTHONUNBUFFERED=[valor omitido no arquivo]",
+        "PATH=[valor omitido no arquivo]",
+        "DEBIAN_FRONTEND=[valor omitido no arquivo]"
+      ],
+      "Cmd": [
+        "python3",
+        "run_host.py",
+        "--camera-id-contains",
+        "70000",
+        "--no-danger-record",
+        "--logs-dir",
+        "/app/logs",
+        "--log-frame-every",
+        "5",
+        "--log-assessment-every",
+        "5",
+        "--danger-output-dir",
+        "/app/logs/incidents"
+      ],
+      "Image": "salte-fatigue:latest",
+      "Volumes": null,
+      "WorkingDir": "/app",
+      "Entrypoint": null,
+      "Labels": {
+        "com.docker.compose.config-hash": "78e4ee6e522f7fc34c17d6b6ff940c9afdaaa4a4b46e6c0e4083a19844880158",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:656956b2ab96007e1aa210dd95be87b87ea2d5c4a175bc5b55a1d8461895b41d",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "fatigue",
+        "com.docker.compose.project.config_files": "/mnt/nvme/Monitoramento/FATIGUE/docker-compose.yml",
+        "com.docker.compose.project.working_dir": "/mnt/nvme/Monitoramento/FATIGUE",
+        "com.docker.compose.replace": "salte-fatigue",
+        "com.docker.compose.service": "salte-fatigue",
+        "com.docker.compose.version": "5.1.3",
+        "description": "SALTE EAR/PERCLOS deterministico (Pi 5, MediaPipe)",
+        "maintainer": "Bruno Melo"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "7ef558189c46885ba9cce412e135d88ae45e81e914164b3c608acb22cb164ab9",
+      "SandboxKey": "/var/run/docker/netns/7ef558189c46",
+      "Ports": {},
+      "Networks": {
+        "fatigue_default": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": [
+            "salte-fatigue",
+            "salte-fatigue"
+          ],
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "8f4efade5d566459fe84dc3a08072038abb29f490ea292c24ca57780dc9d6728",
+          "EndpointID": "6c43398aa1a19eb7b297a35925ab8bc299f6cb271728b34361f2ad3c2ceb7bae",
+          "Gateway": "172.19.0.1",
+          "IPAddress": "172.19.0.2",
+          "MacAddress": "42:7c:19:fc:11:9f",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": [
+            "salte-fatigue",
+            "1575798dbce6"
+          ]
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:b8881c5c62d55feaa2722ac10f49d2920ffa89008fa06404501962bd0586fef5",
+      "size": 5033,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  {
+    "Id": "d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30",
+    "Created": "2026-10-02T19:26:35.856142286Z",
+    "Path": "/app/docker-entrypoint.sh",
+    "Args": [
+      "python3",
+      "main.py"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 2166,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-04T12:57:57.085451786Z",
+      "FinishedAt": "2026-10-04T12:57:46.794832959Z"
+    },
+    "Image": "sha256:627b5612ac9d6f34acdb17e212f7ebec0d0e152dc4b4c93444a309b56a15b5f6",
+    "ResolvConfPath": "/mnt/nvme/docker/containers/d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30/resolv.conf",
+    "HostnamePath": "/mnt/nvme/docker/containers/d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30/hostname",
+    "HostsPath": "/mnt/nvme/docker/containers/d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30/hosts",
+    "LogPath": "/mnt/nvme/docker/containers/d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30/d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30-json.log",
+    "Name": "/monitor-motorista",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": [
+        "/run/udev:/run/udev:ro",
+        "/tmp/libcamera:/tmp/libcamera:rw",
+        "/mnt/nvme/Monitoramento/DrowsyDriving/logs:/app/logs:rw",
+        "/dev:/dev:rw"
+      ],
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {}
+      },
+      "NetworkMode": "drowsydriving_default",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": null,
+      "CgroupnsMode": "private",
+      "Dns": [],
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": [],
+      "GroupAdd": [
+        "44",
+        "993"
+      ],
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": true,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": false,
+      "SecurityOpt": [
+        "label=disable"
+      ],
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 0,
+      "NanoCpus": 0,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": null,
+      "BlkioDeviceReadBps": null,
+      "BlkioDeviceWriteBps": null,
+      "BlkioDeviceReadIOps": null,
+      "BlkioDeviceWriteIOps": null,
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": null,
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 0,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": null,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "MaskedPaths": null,
+      "ReadonlyPaths": null
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/mnt/nvme/Monitoramento/DrowsyDriving/logs",
+        "Destination": "/app/logs",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/dev",
+        "Destination": "/dev",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/run/udev",
+        "Destination": "/run/udev",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/tmp/libcamera",
+        "Destination": "/tmp/libcamera",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "d86c3d8c695c",
+      "Domainname": "",
+      "User": "",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "Tty": true,
+      "OpenStdin": true,
+      "StdinOnce": false,
+      "Env": [
+        "YOLO_CONFIG_DIR=[valor omitido no arquivo]",
+        "LIBCAMERA_LOG_LEVELS=[valor omitido no arquivo]",
+        "PYTHONUNBUFFERED=[valor omitido no arquivo]",
+        "OPENCV_VIDEOIO_PRIORITY_GSTREAMER=[valor omitido no arquivo]",
+        "LIBCAMERA_IPA_FORCE_ISOLATION=[valor omitido no arquivo]",
+        "PATH=[valor omitido no arquivo]",
+        "DEBIAN_FRONTEND=[valor omitido no arquivo]"
+      ],
+      "Cmd": [
+        "python3",
+        "main.py"
+      ],
+      "Image": "drowsydriving-monitor",
+      "Volumes": null,
+      "WorkingDir": "/app",
+      "Entrypoint": [
+        "/app/docker-entrypoint.sh"
+      ],
+      "Labels": {
+        "com.docker.compose.config-hash": "623bd79e5fdd8c2dbd297545ffdf420c179a10d081369e45a636f9a57baadcba",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:627b5612ac9d6f34acdb17e212f7ebec0d0e152dc4b4c93444a309b56a15b5f6",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "drowsydriving",
+        "com.docker.compose.project.config_files": "/mnt/nvme/Monitoramento/DrowsyDriving/docker-compose.yml",
+        "com.docker.compose.project.working_dir": "/mnt/nvme/Monitoramento/DrowsyDriving",
+        "com.docker.compose.replace": "monitor-motorista",
+        "com.docker.compose.service": "monitor",
+        "com.docker.compose.version": "5.1.3"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "9f0d85bf3347dc397f3bddd35b8f4845f7e9d129ddb43aa4be2d8e5b2d3ae815",
+      "SandboxKey": "/var/run/docker/netns/9f0d85bf3347",
+      "Ports": {},
+      "Networks": {
+        "drowsydriving_default": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": [
+            "monitor-motorista",
+            "monitor"
+          ],
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "a06e76f6124cb75162bc8384bc71e183a752f243daec8ea56ea4e103f35d0fce",
+          "EndpointID": "f61866a0d9fc1d94172651a7cbd9bf87426b8b64624ec03fb886a5251e595ce2",
+          "Gateway": "172.18.0.1",
+          "IPAddress": "172.18.0.2",
+          "MacAddress": "92:80:bf:b4:4f:38",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": [
+            "monitor-motorista",
+            "monitor",
+            "d86c3d8c695c"
+          ]
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:86e93e992428121742390b959ba9e0e36d49b344f7dbcc05f4cb10e5ede62aab",
+      "size": 2021,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  },
+  {
+    "Id": "f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2",
+    "Created": "2026-09-11T20:41:13.345627501Z",
+    "Path": "python3",
+    "Args": [
+      "gallery.py"
+    ],
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 2150,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-04T12:57:57.08456736Z",
+      "FinishedAt": "2026-10-04T12:57:46.794910514Z"
+    },
+    "Image": "sha256:81096464a17d4bd3ec124c09ff3ad6f16ddf8c53295f2b6acd4e5e1f9da38901",
+    "ResolvConfPath": "/mnt/nvme/docker/containers/f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2/resolv.conf",
+    "HostnamePath": "/mnt/nvme/docker/containers/f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2/hostname",
+    "HostsPath": "/mnt/nvme/docker/containers/f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2/hosts",
+    "LogPath": "/mnt/nvme/docker/containers/f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2/f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2-json.log",
+    "Name": "/gallery",
+    "RestartCount": 0,
+    "Driver": "overlayfs",
+    "Platform": "linux",
+    "MountLabel": "",
+    "ProcessLabel": "",
+    "AppArmorProfile": "",
+    "ExecIDs": null,
+    "HostConfig": {
+      "Binds": [
+        "/mnt/nvme/Monitoramento/DrowsyDriving/logs:/data:ro",
+        "/etc/wifi_manager/networks.conf:/etc/wifi_manager/networks.conf:rw"
+      ],
+      "ContainerIDFile": "",
+      "LogConfig": {
+        "Type": "json-file",
+        "Config": {
+          "max-file": "5",
+          "max-size": "10m"
+        }
+      },
+      "NetworkMode": "host",
+      "PortBindings": {},
+      "RestartPolicy": {
+        "Name": "always",
+        "MaximumRetryCount": 0
+      },
+      "AutoRemove": false,
+      "VolumeDriver": "",
+      "VolumesFrom": null,
+      "ConsoleSize": [
+        0,
+        0
+      ],
+      "CapAdd": null,
+      "CapDrop": null,
+      "CgroupnsMode": "private",
+      "Dns": [],
+      "DnsOptions": [],
+      "DnsSearch": [],
+      "ExtraHosts": [],
+      "GroupAdd": null,
+      "IpcMode": "private",
+      "Cgroup": "",
+      "Links": null,
+      "OomScoreAdj": 0,
+      "PidMode": "",
+      "Privileged": false,
+      "PublishAllPorts": false,
+      "ReadonlyRootfs": false,
+      "SecurityOpt": null,
+      "UTSMode": "",
+      "UsernsMode": "",
+      "ShmSize": 67108864,
+      "Runtime": "runc",
+      "Isolation": "",
+      "CpuShares": 0,
+      "Memory": 0,
+      "NanoCpus": 0,
+      "CgroupParent": "",
+      "BlkioWeight": 0,
+      "BlkioWeightDevice": null,
+      "BlkioDeviceReadBps": null,
+      "BlkioDeviceWriteBps": null,
+      "BlkioDeviceReadIOps": null,
+      "BlkioDeviceWriteIOps": null,
+      "CpuPeriod": 0,
+      "CpuQuota": 0,
+      "CpuRealtimePeriod": 0,
+      "CpuRealtimeRuntime": 0,
+      "CpusetCpus": "",
+      "CpusetMems": "",
+      "Devices": null,
+      "DeviceCgroupRules": null,
+      "DeviceRequests": null,
+      "MemoryReservation": 0,
+      "MemorySwap": 0,
+      "MemorySwappiness": null,
+      "OomKillDisable": null,
+      "PidsLimit": null,
+      "Ulimits": null,
+      "CpuCount": 0,
+      "CpuPercent": 0,
+      "IOMaximumIOps": 0,
+      "IOMaximumBandwidth": 0,
+      "MaskedPaths": [
+        "/proc/acpi",
+        "/proc/asound",
+        "/proc/interrupts",
+        "/proc/kcore",
+        "/proc/keys",
+        "/proc/latency_stats",
+        "/proc/sched_debug",
+        "/proc/scsi",
+        "/proc/timer_list",
+        "/proc/timer_stats",
+        "/sys/devices/virtual/powercap",
+        "/sys/firmware"
+      ],
+      "ReadonlyPaths": [
+        "/proc/bus",
+        "/proc/fs",
+        "/proc/irq",
+        "/proc/sys",
+        "/proc/sysrq-trigger"
+      ]
+    },
+    "Storage": {
+      "RootFS": {
+        "Snapshot": {
+          "Name": "overlayfs"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/mnt/nvme/Monitoramento/DrowsyDriving/logs",
+        "Destination": "/data",
+        "Mode": "ro",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/etc/wifi_manager/networks.conf",
+        "Destination": "/etc/wifi_manager/networks.conf",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      }
+    ],
+    "Config": {
+      "Hostname": "raspberrypi",
+      "Domainname": "",
+      "User": "",
+      "AttachStdin": false,
+      "AttachStdout": true,
+      "AttachStderr": true,
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [
+        "IMAGE_DIR=[valor omitido no arquivo]",
+        "PATH=[valor omitido no arquivo]",
+        "LANG=[valor omitido no arquivo]",
+        "GPG_KEY=[valor omitido no arquivo]",
+        "PYTHON_VERSION=[valor omitido no arquivo]",
+        "PYTHON_SHA256=[valor omitido no arquivo]"
+      ],
+      "Cmd": [
+        "python3",
+        "gallery.py"
+      ],
+      "Image": "wifi-ap-gallery",
+      "Volumes": null,
+      "WorkingDir": "/app",
+      "Entrypoint": null,
+      "Labels": {
+        "com.docker.compose.config-hash": "af66d2c68cba77c49a96a495b2a1c437d3b6081410aaeb48e9888dae4c310e0c",
+        "com.docker.compose.container-number": "1",
+        "com.docker.compose.depends_on": "",
+        "com.docker.compose.image": "sha256:81096464a17d4bd3ec124c09ff3ad6f16ddf8c53295f2b6acd4e5e1f9da38901",
+        "com.docker.compose.oneoff": "False",
+        "com.docker.compose.project": "wifi-ap",
+        "com.docker.compose.project.config_files": "/mnt/nvme/Wifi-AP/docker-compose.yml",
+        "com.docker.compose.project.working_dir": "/mnt/nvme/Wifi-AP",
+        "com.docker.compose.replace": "gallery",
+        "com.docker.compose.service": "gallery",
+        "com.docker.compose.version": "5.1.3"
+      }
+    },
+    "NetworkSettings": {
+      "SandboxID": "6b075fb6cc6fe790088baf664eedb185cd8eaa00d670d3063832fa5eeb6f4b57",
+      "SandboxKey": "/var/run/docker/netns/default",
+      "Ports": {},
+      "Networks": {
+        "host": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "DriverOpts": null,
+          "GwPriority": 0,
+          "NetworkID": "9e122a6ac14f9a20e965ba9273a4935415b029ba963ee39e74ea039483b77fe2",
+          "EndpointID": "13bee888f1b2dfa25c1a221879e255996b2b47dbb10c7d212d9aff69819e353f",
+          "Gateway": "",
+          "IPAddress": "",
+          "MacAddress": "",
+          "IPPrefixLen": 0,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "DNSNames": null
+        }
+      }
+    },
+    "ImageManifestDescriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:0e6d5bcbaf27a8d888c6cb7bd12ae3212aeccd5f7bcea95459eacb6e18b18f97",
+      "size": 1623,
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux"
+      }
+    }
+  }
+]

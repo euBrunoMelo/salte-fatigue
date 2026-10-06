@@ -1,0 +1,20 @@
+# ai-jail sandbox configuration
+# https://github.com/akitaonrails/ai-jail
+# Edit freely. Regenerate with: ai-jail --clean --init
+
+command = [
+    "ai-memory",
+    "run",
+    "opencode",
+    "-c",
+]
+rw_maps = ["~/.local/share/ai-memory"]
+ro_maps = [
+    "~/.config/ai-memory",
+    "~/.local/npm",
+]
+no_docker = true
+no_display = true
+network = true
+private_home = false
+agent_state = true

@@ -1,0 +1,105 @@
+{
+  "archive_collected_at_utc": "2026-10-04T16:01:40.785486+00:00",
+  "note": "Only immutable final segments available at archive time; active partial omitted. This covers periods beyond the timed monitoring windows.",
+  "runs": {
+    "7bcdea7fc9f04b8eb7f00bb4d35fe562": {
+      "segments": 11,
+      "frame_records": 6253,
+      "assessment_records": 6253,
+      "last_frame_idx": 31260,
+      "last_assessment": {
+        "schema_version": 1,
+        "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+        "record_type": "assessment",
+        "frame_idx": 31260,
+        "timestamp_s": 7027.974478032,
+        "quality": "both_eyes_valid",
+        "left_valid": true,
+        "right_valid": true,
+        "pose_usable": true,
+        "valid_eye_count": 2,
+        "fatigue_state": "unknown",
+        "observation_state": "unavailable",
+        "closure_active": false,
+        "closure_ms": 0.0,
+        "closure_event": "none",
+        "closure_valid_eye_count": 2,
+        "using_fallback": false,
+        "perclos_p80": null,
+        "perclos_coverage": 0.0,
+        "perclos_valid_seconds": 0.0,
+        "perclos_window_seconds": 60.0,
+        "attention_state": "unavailable",
+        "attention_duration_ms": 0.0,
+        "attention_pitch_delta": null,
+        "attention_yaw_delta": null,
+        "attention_roll_delta": null
+      },
+      "fatigue_states": {
+        "unknown": 6253
+      },
+      "quality": {
+        "both_eyes_valid": 5384,
+        "no_face": 865,
+        "one_eye_valid": 4
+      },
+      "max_sampled_gap_s": 34.13919936499951,
+      "state_transition_counts": {},
+      "perclos_ear_available_records": 0,
+      "max_perclos_coverage": 0.0
+    },
+    "f903178777b2489088e6f4b615ace5fe": {
+      "segments": 12,
+      "frame_records": 5422,
+      "assessment_records": 5422,
+      "last_frame_idx": 27105,
+      "last_assessment": {
+        "schema_version": 1,
+        "run_id": "f903178777b2489088e6f4b615ace5fe",
+        "record_type": "assessment",
+        "frame_idx": 27105,
+        "timestamp_s": 10761.327500653,
+        "quality": "both_eyes_valid",
+        "left_valid": true,
+        "right_valid": true,
+        "pose_usable": true,
+        "valid_eye_count": 2,
+        "fatigue_state": "safe",
+        "fatigue_label": "ativo",
+        "observation_state": "ready",
+        "closure_active": false,
+        "closure_ms": 0.0,
+        "closure_event": "none",
+        "closure_valid_eye_count": 2,
+        "using_fallback": false,
+        "perclos_p80": null,
+        "perclos_ear": null,
+        "perclos_coverage": 0.5424575430833405,
+        "perclos_valid_seconds": 32.54745258500043,
+        "perclos_window_seconds": 60.0,
+        "attention_state": "unavailable",
+        "attention_duration_ms": 0.0,
+        "attention_pitch_delta": null,
+        "attention_yaw_delta": null,
+        "attention_roll_delta": null
+      },
+      "fatigue_states": {
+        "safe": 5067,
+        "unknown": 352,
+        "warning": 3
+      },
+      "quality": {
+        "both_eyes_valid": 5070,
+        "no_face": 352
+      },
+      "max_sampled_gap_s": 38.51046375200167,
+      "state_transition_counts": {
+        "ativo": 80,
+        "fadiga": 13,
+        "unknown": 69
+      },
+      "perclos_ear_available_records": 155,
+      "max_perclos_coverage": 1.0
+    }
+  }
+}

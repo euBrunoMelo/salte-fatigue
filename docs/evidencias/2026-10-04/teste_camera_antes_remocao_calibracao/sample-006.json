@@ -1,0 +1,440 @@
+{
+  "ts_utc": "2026-10-04T14:05:47.926537+00:00",
+  "uptime_s": 4149.73,
+  "containers": {
+    "salte-fatigue": {
+      "id": "1575798dbce6b44e9e9523bd84764aee713a9982d821c0db8155007cd5109422",
+      "image": "sha256:656956b2ab96007e1aa210dd95be87b87ea2d5c4a175bc5b55a1d8461895b41d",
+      "status": "running",
+      "started_at": "2026-10-04T13:59:48.123159951Z",
+      "restart_count": 0,
+      "pid": 4744,
+      "command": [
+        "python3",
+        "run_host.py",
+        "--camera-id-contains",
+        "70000",
+        "--no-danger-record",
+        "--logs-dir",
+        "/app/logs",
+        "--log-frame-every",
+        "5",
+        "--log-assessment-every",
+        "5",
+        "--danger-output-dir",
+        "/app/logs/incidents"
+      ],
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/config",
+          "Destination": "/app/config",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/logs",
+          "Destination": "/app/logs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "proc": {
+        "state": "D",
+        "wchan": "jbd2_log_wait_commit"
+      }
+    },
+    "monitor-motorista": {
+      "id": "d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30",
+      "image": "sha256:627b5612ac9d6f34acdb17e212f7ebec0d0e152dc4b4c93444a309b56a15b5f6",
+      "status": "running",
+      "started_at": "2026-10-04T12:57:57.085451786Z",
+      "restart_count": 0,
+      "pid": 2166,
+      "command": [
+        "python3",
+        "main.py"
+      ],
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/DrowsyDriving/logs",
+          "Destination": "/app/logs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/tmp/libcamera",
+          "Destination": "/tmp/libcamera",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "proc": {
+        "state": "S",
+        "wchan": "0"
+      }
+    },
+    "gallery": {
+      "id": "f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2",
+      "image": "sha256:81096464a17d4bd3ec124c09ff3ad6f16ddf8c53295f2b6acd4e5e1f9da38901",
+      "status": "running",
+      "started_at": "2026-10-04T12:57:57.08456736Z",
+      "restart_count": 0,
+      "pid": 2150,
+      "command": [
+        "python3",
+        "gallery.py"
+      ],
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/DrowsyDriving/logs",
+          "Destination": "/data",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/etc/wifi_manager/networks.conf",
+          "Destination": "/etc/wifi_manager/networks.conf",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "proc": {
+        "state": "S",
+        "wchan": "0"
+      }
+    },
+    "salte-tev8": {
+      "id": "8aa865a8f7d05efcd01ccaf5f8cf3ae789a4d3775fef9c69f69be161f039b1b3",
+      "image": "sha256:5b02ce2f4a0af46027067cd47e32ea441ae2055bf7d2c7af6a7d640e725f6c85",
+      "status": "exited",
+      "started_at": "2026-09-25T13:57:41.391998074Z",
+      "restart_count": 23,
+      "pid": 0,
+      "command": [
+        "python3",
+        "run_host.py",
+        "--model-dir",
+        "/app",
+        "--camera-num",
+        "1",
+        "--mode",
+        "ear",
+        "--no-danger-record"
+      ],
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/runs",
+          "Destination": "/app/runs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/dev",
+          "Destination": "/dev",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/run/udev",
+          "Destination": "/run/udev",
+          "Mode": "ro",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/DETECCAO_DANGER",
+          "Destination": "/app/DETECCAO_DANGER",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/nvme/Monitoramento/FATIGUE/logs",
+          "Destination": "/app/logs",
+          "Mode": "rw",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "proc": {}
+    }
+  },
+  "fatigue_logs": {
+    "rc": 0,
+    "stdout": "",
+    "stderr": "2026-10-04T14:00:04.085060396Z 2026-10-04 14:00:04,084 SALTE.host WARNING: StructuredLogger encontrou partials antigos: (PosixPath('/app/logs/runs/2026/10/04/52fb1eea5b86430ea9a3a2c4cc4a99de/segments/000012.partial'), PosixPath('/app/logs/runs/2026/10/04/db653bf0fb73439fa61db2f3a78ad8ad/segments/000008.partial'))\n2026-10-04T14:00:04.096699164Z 2026-10-04 14:00:04,096 SALTE.host WARNING: Calibracao ocular ausente em /app/config/eye_calibration.json; detector nao arma sem fallback\n2026-10-04T14:00:04.099144065Z WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n2026-10-04T14:00:04.099176288Z W0000 00:00:1791122404.098349       1 face_landmarker_graph.cc:174] Sets FaceBlendshapesGraph acceleration to xnnpack by default.\n2026-10-04T14:00:04.106875047Z Error in cpuinfo: prctl(PR_SVE_GET_VL) failed\n2026-10-04T14:00:04.107077083Z INFO: Created TensorFlow Lite XNNPACK delegate for CPU.\n2026-10-04T14:00:04.110258150Z W0000 00:00:1791122404.109835      13 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.\n2026-10-04T14:00:04.137283140Z W0000 00:00:1791122404.136638      14 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.\n2026-10-04T14:00:04.547296502Z [1:03:26.352440020] [1] \u001b[1;32m INFO \u001b[1;37mCamera \u001b[1;34mcamera_manager.cpp:330 \u001b[0mlibcamera v0.5.2+99-bfd68f78\n2026-10-04T14:00:04.564434090Z [1:03:26.369582164] [19] \u001b[1;32m INFO \u001b[1;37mRPI \u001b[1;34mpisp.cpp:720 \u001b[0mlibpisp version v1.2.1 981977ff21f3 29-04-2025 (14:13:50)\n2026-10-04T14:00:04.565101144Z [1:03:26.370323236] [19] \u001b[1;31mERROR \u001b[1;37mV4L2 \u001b[1;34mv4l2_device.cpp:390 \u001b[0;32m'imx500 10-001a': \u001b[0mUnable to set controls: Device or resource busy\n2026-10-04T14:00:04.567266213Z [1:03:26.372496361] [19] \u001b[1;32m INFO \u001b[1;37mIPAProxy \u001b[1;34mipa_proxy.cpp:180 \u001b[0mUsing tuning file /usr/share/libcamera/ipa/rpi/pisp/imx500.json\n2026-10-04T14:00:04.575489027Z [1:03:26.380613341] [19] \u001b[1;32m INFO \u001b[1;37mCamera \u001b[1;34mcamera_manager.cpp:220 \u001b[0mAdding camera 'platform/axi/1000120000.pcie/1f00088000.i2c/i2c-10/10-001a imx500' for pipeline handler rpi/pisp\n2026-10-04T14:00:04.575528138Z [1:03:26.380644100] [19] \u001b[1;32m INFO \u001b[1;37mRPI \u001b[1;34mpisp.cpp:1179 \u001b[0mRegistered camera platform/axi/1000120000.pcie/1f00088000.i2c/i2c-10/10-001a imx500 to CFE device /dev/media2 and ISP device /dev/media0 using PiSP variant BCM2712_D0\n2026-10-04T14:00:04.575582082Z [1:03:26.380806452] [19] \u001b[1;32m INFO \u001b[1;37mRPI \u001b[1;34mpisp.cpp:720 \u001b[0mlibpisp version v1.2.1 981977ff21f3 29-04-2025 (14:13:50)\n2026-10-04T14:00:04.577574484Z [1:03:26.382714410] [19] \u001b[1;32m INFO \u001b[1;37mIPAProxy \u001b[1;34mipa_proxy.cpp:180 \u001b[0mUsing tuning file /usr/share/libcamera/ipa/rpi/pisp/imx500.json\n2026-10-04T14:00:04.586194241Z [1:03:26.391334482] [19] \u001b[1;32m INFO \u001b[1;37mCamera \u001b[1;34mcamera_manager.cpp:220 \u001b[0mAdding camera 'platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500' for pipeline handler rpi/pisp\n2026-10-04T14:00:04.586235130Z [1:03:26.391357463] [19] \u001b[1;32m INFO \u001b[1;37mRPI \u001b[1;34mpisp.cpp:1179 \u001b[0mRegistered camera platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500 to CFE device /dev/media3 and ISP device /dev/media1 using PiSP variant BCM2712_D0\n2026-10-04T14:00:04.586807647Z 2026-10-04 14:00:04,586 SALTE.host INFO: Camera FATIGUE platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500 no indice 1; seletor fisico=70000\n2026-10-04T14:00:04.588239533Z 2026-10-04 14:00:04,588 picamera2.picamera2 INFO: Initialization successful.\n2026-10-04T14:00:04.588580773Z 2026-10-04 14:00:04,588 picamera2.picamera2 INFO: Camera now open.\n2026-10-04T14:00:04.591694839Z 2026-10-04 14:00:04,591 picamera2.picamera2 INFO: Camera configuration has been adjusted!\n2026-10-04T14:00:04.591857006Z [1:03:26.397079061] [1] \u001b[1;32m INFO \u001b[1;37mCamera \u001b[1;34mcamera.cpp:1215 \u001b[0mconfiguring streams: (0) 640x480-RGB888/SMPTE170M/Rec709/None/Full (1) 2028x1520-RGGB_PISP_COMP1/RAW\n2026-10-04T14:00:04.592037338Z [1:03:26.397265319] [19] \u001b[1;32m INFO \u001b[1;37mRPI \u001b[1;34mpisp.cpp:1483 \u001b[0mSensor: platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500 - Selected sensor format: 2028x1520-SRGGB10_1X10/RAW - Selected CFE format: 2028x1520-PC1R/RAW\n2026-10-04T14:00:04.592803022Z 2026-10-04 14:00:04,592 picamera2.picamera2 INFO: Configuration successful!\n2026-10-04T14:00:04.663523907Z 2026-10-04 14:00:04,663 picamera2.picamera2 INFO: Camera started\n2026-10-04T14:00:09.861584163Z 2026-10-04 14:00:09,861 SALTE.host INFO: Runtime EAR/PERCLOS iniciado; calibracao=False fallback=None\n2026-10-04T14:00:09.901397252Z W0000 00:00:1791122409.899814      15 landmark_projection_calculator.cc:186] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.\n2026-10-04T14:00:14.686200828Z 2026-10-04 14:00:14,685 SALTE.host INFO: health: 118 frames, estado=unknown\n2026-10-04T14:00:24.693014217Z 2026-10-04 14:00:24,692 SALTE.host INFO: health: 186 frames, estado=unknown\n2026-10-04T14:00:34.708192032Z 2026-10-04 14:00:34,708 SALTE.host INFO: health: 463 frames, estado=unknown\n2026-10-04T14:00:44.740306100Z 2026-10-04 14:00:44,740 SALTE.host INFO: health: 704 frames, estado=unknown\n2026-10-04T14:01:24.770878261Z 2026-10-04 14:01:24,770 SALTE.host INFO: health: 866 frames, estado=unknown\n2026-10-04T14:01:34.778329838Z 2026-10-04 14:01:34,778 SALTE.host INFO: health: 1111 frames, estado=unknown\n2026-10-04T14:02:06.931171124Z 2026-10-04 14:02:06,930 SALTE.host INFO: health: 1121 frames, estado=unknown\n2026-10-04T14:02:16.966740264Z 2026-10-04 14:02:16,965 SALTE.host INFO: health: 1368 frames, estado=unknown\n2026-10-04T14:02:56.091117331Z 2026-10-04 14:02:56,090 SALTE.host INFO: health: 1496 frames, estado=unknown\n2026-10-04T14:03:06.105280907Z 2026-10-04 14:03:06,105 SALTE.host INFO: health: 1736 frames, estado=unknown\n2026-10-04T14:03:43.185919812Z 2026-10-04 14:03:43,182 SALTE.host INFO: health: 1876 frames, estado=unknown\n2026-10-04T14:04:22.108512566Z 2026-10-04 14:04:22,108 SALTE.host INFO: health: 1996 frames, estado=unknown\n2026-10-04T14:04:32.423682452Z 2026-10-04 14:04:32,423 SALTE.host INFO: health: 2126 frames, estado=unknown\n2026-10-04T14:04:42.424358089Z 2026-10-04 14:04:42,424 SALTE.host INFO: health: 2380 frames, estado=unknown\n2026-10-04T14:05:16.195889453Z 2026-10-04 14:05:16,194 SALTE.host INFO: health: 2401 frames, estado=unknown\n"
+  },
+  "monitor_logs": {
+    "rc": 0,
+    "stdout": "2026-10-04T14:05:29.087033457Z [025260] FPS: 9.3 | Face: YES | Score:  30.0 | State: RISCO | Alerts: none | Risk detail: {'one_hand_raised': {'active_secs': 0.0, 'recent_count': 11}, 'two_hands_raised': {'active_secs': 0.0, 'recent_count': 3}, 'no_seatbelt': {'active_secs': 0.0, 'recent_count': 2}, 'smoking': {'active_secs': 0.0, 'recent_count': 4}}\n2026-10-04T14:05:32.653919004Z [025290] FPS: 8.4 | Face: YES | Score:  32.5 | State: RISCO | Alerts: none | Risk detail: {'one_hand_raised': {'active_secs': 0.0, 'recent_count': 11}, 'two_hands_raised': {'active_secs': 0.0, 'recent_count': 3}, 'no_seatbelt': {'active_secs': 0.0, 'recent_count': 2}, 'smoking': {'active_secs': 0.0, 'recent_count': 3}}\n2026-10-04T14:05:36.076193494Z [025320] FPS: 8.8 | Face: YES | Score:  34.9 | State: RISCO | Alerts: none | Risk detail: {'one_hand_raised': {'active_secs': 0.0, 'recent_count': 11}, 'two_hands_raised': {'active_secs': 0.0, 'recent_count': 3}, 'no_seatbelt': {'active_secs': 0.0, 'recent_count': 2}, 'smoking': {'active_secs': 0.0, 'recent_count': 3}}\n2026-10-04T14:05:39.468533164Z [025350] FPS: 8.8 | Face: YES | Score:  37.3 | State: RISCO | Alerts: none | Risk detail: {'one_hand_raised': {'active_secs': 0.0, 'recent_count': 11}, 'two_hands_raised': {'active_secs': 0.0, 'recent_count': 3}, 'no_seatbelt': {'active_secs': 0.0, 'recent_count': 2}, 'smoking': {'active_secs': 0.0, 'recent_count': 3}}\n2026-10-04T14:05:42.883849561Z [025380] FPS: 8.8 | Face: YES | Score:  39.6 | State: RISCO | Alerts: none | Risk detail: {'one_hand_raised': {'active_secs': 0.0, 'recent_count': 11}, 'two_hands_raised': {'active_secs': 0.0, 'recent_count': 3}, 'no_seatbelt': {'active_secs': 0.0, 'recent_count': 2}, 'smoking': {'active_secs': 0.0, 'recent_count': 3}}\n2026-10-04T14:05:46.114241716Z [025410] FPS: 9.3 | Face: YES | Score:  41.9 | State: DESATENCAO | Alerts: none | Risk detail: {'one_hand_raised': {'active_secs': 0.0, 'recent_count': 11}, 'two_hands_raised': {'active_secs': 0.0, 'recent_count': 3}, 'no_seatbelt': {'active_secs': 0.0, 'recent_count': 2}, 'smoking': {'active_secs': 0.0, 'recent_count': 3}}\n",
+    "stderr": ""
+  },
+  "gallery_logs": {
+    "rc": 0,
+    "stdout": "",
+    "stderr": "2026-10-04T12:58:51.130209402Z 192.168.50.2 - - [04/Oct/2026 12:58:51] \"\u001b[36mGET /20260703_205747_NO_SEATBELT.jpg HTTP/1.1\u001b[0m\" 304 -\n2026-10-04T12:58:51.131976235Z 192.168.50.2 - - [04/Oct/2026 12:58:51] \"\u001b[36mGET /20260703_205753_NO_SEATBELT.jpg HTTP/1.1\u001b[0m\" 304 -\n2026-10-04T14:03:23.777422251Z 127.0.0.1 - - [04/Oct/2026 14:03:23] \"\u001b[31m\u001b[1mHEAD / HTTP/1.1\u001b[0m\" 403 -\n"
+  },
+  "run": {
+    "run_dir": "/mnt/nvme/Monitoramento/FATIGUE/logs/runs/2026/10/04/7bcdea7fc9f04b8eb7f00bb4d35fe562",
+    "run_start": {
+      "schema_version": 1,
+      "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+      "ts_utc": "2026-10-04T14:00:04.664Z",
+      "kind": "run_start",
+      "data": {
+        "fps": 30,
+        "camera_num": 1,
+        "camera_id": "platform/axi/1000120000.pcie/1f00070000.i2c/i2c-0/0-001a imx500",
+        "camera_id_contains": "70000",
+        "video": null,
+        "calibration": "/app/config/eye_calibration.json",
+        "calibration_loaded": false,
+        "fallback_ear_threshold": null,
+        "p80_ratio": 0.8,
+        "perclos_window_sec": 60.0
+      }
+    },
+    "segments": [
+      {
+        "name": "000001",
+        "partial": false,
+        "frames_bytes": 150727,
+        "assessments_bytes": 317177,
+        "manifest_exists": true,
+        "manifest": {
+          "schema_version": 1,
+          "run_id": "7bcdea7fc9f04b8eb7f00bb4d35fe562",
+          "sequence": 1,
+          "status": "completed",
+          "closed_at": "2026-10-04T14:05:16.198Z",
+          "bytes": 467904,
+          "frame_count": 481,
+          "assessment_count": 481,
+          "first_frame_idx": 0,
+          "last_frame_idx": 2400
+        }
+      },
+      {
+        "name": "000002.partial",
+        "partial": true,
+        "frames_bytes": 0,
+        "assessments_bytes": 0,
+        "manifest_exists": false
+      }
+    ],
+    "frames_tail": {
+      "bytes": 0,
+      "records": []
+    },
+    "assessments_tail": {
+      "bytes": 0,
+      "records": []
+    }
+  },
+  "nvme_write_timeouts": [
+    "[  125.952686] nvme nvme0: I/O tag 146 (4092) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+    "[  125.952724] nvme nvme0: I/O tag 147 (4093) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+    "[  125.952732] nvme nvme0: I/O tag 148 (8094) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:12288",
+    "[  125.952741] nvme nvme0: I/O tag 149 (2095) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+    "[  125.952749] nvme nvme0: I/O tag 150 (4096) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:12288",
+    "[  125.952756] nvme nvme0: I/O tag 151 (1097) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:69632",
+    "[  125.952763] nvme nvme0: I/O tag 152 (0098) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+    "[  125.952770] nvme nvme0: I/O tag 153 (0099) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:4096",
+    "[  173.052573] nvme nvme0: I/O tag 202 (00ca) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:16384",
+    "[  267.234043] nvme nvme0: I/O tag 207 (30cf) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:65536",
+    "[  306.143812] nvme nvme0: I/O tag 208 (40d0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:20480",
+    "[  369.638279] nvme nvme0: I/O tag 390 (5186) opcode 0x1 (I/O Cmd) QID 1 timeout, aborting req_op:WRITE(1) size:69632",
+    "[  422.889396] nvme nvme0: I/O tag 400 (1190) opcode 0x1 (I/O Cmd) QID 1 timeout, aborting req_op:WRITE(1) size:28672",
+    "[  461.802894] nvme nvme0: I/O tag 402 (3192) opcode 0x1 (I/O Cmd) QID 1 timeout, aborting req_op:WRITE(1) size:32768",
+    "[  500.715598] nvme nvme0: I/O tag 403 (4193) opcode 0x1 (I/O Cmd) QID 1 timeout, aborting req_op:WRITE(1) size:12288",
+    "[  539.627969] nvme nvme0: I/O tag 405 (5195) opcode 0x1 (I/O Cmd) QID 1 timeout, aborting req_op:WRITE(1) size:24576",
+    "[  578.532135] nvme nvme0: I/O tag 407 (7197) opcode 0x1 (I/O Cmd) QID 1 timeout, aborting req_op:WRITE(1) size:36864",
+    "[  648.163954] nvme nvme0: I/O tag 210 (80d2) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:32768",
+    "[  723.946872] nvme nvme0: I/O tag 221 (50dd) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:53248",
+    "[  795.626095] nvme nvme0: I/O tag 225 (80e1) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+    "[  834.529781] nvme nvme0: I/O tag 227 (70e3) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+    "[  871.401523] nvme nvme0: I/O tag 229 (60e5) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:28672",
+    "[ 1008.616793] nvme nvme0: I/O tag 238 (20ee) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 1047.528577] nvme nvme0: I/O tag 244 (20f4) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:57344",
+    "[ 1117.164301] nvme nvme0: I/O tag 196 (40c4) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:28672",
+    "[ 1160.168345] nvme nvme0: I/O tag 199 (d0c7) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:12288",
+    "[ 1160.168369] nvme nvme0: I/O tag 200 (b0c8) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 1160.168377] nvme nvme0: I/O tag 201 (b0c9) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:65536",
+    "[ 1160.168384] nvme nvme0: I/O tag 202 (90ca) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 1160.168391] nvme nvme0: I/O tag 203 (90cb) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 1160.168397] nvme nvme0: I/O tag 204 (80cc) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1160.168404] nvme nvme0: I/O tag 205 (70cd) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1160.168409] nvme nvme0: I/O tag 206 (90ce) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1199.072972] nvme nvme0: I/O tag 201 (c0c9) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 1248.225612] nvme nvme0: I/O tag 205 (90cd) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 1287.146023] nvme nvme0: I/O tag 207 (e0cf) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:12288",
+    "[ 1287.146046] nvme nvme0: I/O tag 208 (40d0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:32768",
+    "[ 1326.054385] nvme nvme0: I/O tag 209 (00d1) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 1391.590965] nvme nvme0: I/O tag 462 (61ce) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:57344",
+    "[ 1430.499088] nvme nvme0: I/O tag 219 (20db) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 1479.663269] nvme nvme0: I/O tag 467 (c1d3) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 1479.663295] nvme nvme0: I/O tag 468 (b1d4) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 1479.663303] nvme nvme0: I/O tag 469 (a1d5) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1479.663311] nvme nvme0: I/O tag 470 (a1d6) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1479.663318] nvme nvme0: I/O tag 471 (91d7) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1479.663325] nvme nvme0: I/O tag 472 (91d8) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1479.663331] nvme nvme0: I/O tag 473 (91d9) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1479.663337] nvme nvme0: I/O tag 474 (91da) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571419] nvme nvme0: I/O tag 468 (c1d4) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:8192",
+    "[ 1518.571441] nvme nvme0: I/O tag 469 (b1d5) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571448] nvme nvme0: I/O tag 470 (b1d6) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571453] nvme nvme0: I/O tag 471 (a1d7) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571458] nvme nvme0: I/O tag 472 (a1d8) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571464] nvme nvme0: I/O tag 473 (a1d9) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571469] nvme nvme0: I/O tag 474 (a1da) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1518.571474] nvme nvme0: I/O tag 475 (a1db) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 1584.107666] nvme nvme0: I/O tag 474 (d1da) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:12288",
+    "[ 1623.019645] nvme nvme0: I/O tag 476 (e1dc) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:24576",
+    "[ 1704.939626] nvme nvme0: I/O tag 489 (21e9) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 1747.943756] nvme nvme0: I/O tag 492 (11ec) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:24576",
+    "[ 1786.859783] nvme nvme0: I/O tag 494 (11ee) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 1850.343726] nvme nvme0: I/O tag 499 (31f3) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:24576",
+    "[ 1942.515653] nvme nvme0: I/O tag 515 (2203) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 2001.895629] nvme nvme0: I/O tag 524 (220c) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 2051.047584] nvme nvme0: I/O tag 526 (620e) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 2051.047612] nvme nvme0: I/O tag 527 (620f) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 2051.047621] nvme nvme0: I/O tag 528 (6210) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 2051.047629] nvme nvme0: I/O tag 529 (5211) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 2051.047636] nvme nvme0: I/O tag 530 (4212) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 2087.919566] nvme nvme0: I/O tag 527 (820f) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 2126.823499] nvme nvme0: I/O tag 529 (7211) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:28672",
+    "[ 2126.823538] nvme nvme0: I/O tag 224 (40e0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:8192",
+    "[ 2126.823545] nvme nvme0: I/O tag 225 (20e1) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 2169.831452] nvme nvme0: I/O tag 533 (4215) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:61440",
+    "[ 2241.517156] nvme nvme0: I/O tag 537 (7219) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 2313.198595] nvme nvme0: I/O tag 545 (5221) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:53248",
+    "[ 2313.198619] nvme nvme0: I/O tag 546 (5222) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 2352.103336] nvme nvme0: I/O tag 547 (6223) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:32768",
+    "[ 2391.016021] nvme nvme0: I/O tag 549 (6225) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 2444.272907] nvme nvme0: I/O tag 554 (522a) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 2481.129498] nvme nvme0: I/O tag 513 (5201) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 2524.142078] nvme nvme0: I/O tag 517 (7205) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 2591.726955] nvme nvme0: I/O tag 523 (820b) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:32768",
+    "[ 2649.067608] nvme nvme0: I/O tag 517 (b205) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 2687.984038] nvme nvme0: I/O tag 518 (d206) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 2737.136495] nvme nvme0: I/O tag 522 (c20a) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 2776.052828] nvme nvme0: I/O tag 524 (020c) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:28672",
+    "[ 2776.052848] nvme nvme0: I/O tag 525 (120d) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:65536",
+    "[ 2814.965187] nvme nvme0: I/O tag 526 (220e) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 2954.226217] nvme nvme0: I/O tag 540 (221c) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:57344",
+    "[ 3007.478482] nvme nvme0: I/O tag 546 (2222) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 3048.442778] nvme nvme0: I/O tag 549 (2225) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:12288",
+    "[ 3048.442800] nvme nvme0: I/O tag 550 (3226) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 3048.442806] nvme nvme0: I/O tag 552 (1228) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 3048.442811] nvme nvme0: I/O tag 553 (a229) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 3048.442817] nvme nvme0: I/O tag 554 (d22a) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:4096",
+    "[ 3048.442822] nvme nvme0: I/O tag 557 (922d) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3048.442826] nvme nvme0: I/O tag 558 (622e) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3048.442830] nvme nvme0: I/O tag 559 (822f) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3128.303275] nvme nvme0: I/O tag 557 (e22d) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:32768",
+    "[ 3128.303343] nvme nvme0: I/O tag 148 (1094) opcode 0x1 (I/O Cmd) QID 3 timeout, aborting req_op:WRITE(1) size:12288",
+    "[ 3183.603534] nvme nvme0: I/O tag 562 (a232) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 3249.143814] nvme nvme0: I/O tag 520 (1208) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 3288.051977] nvme nvme0: I/O tag 521 (d209) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 3326.960172] nvme nvme0: I/O tag 523 (420b) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 3365.880251] nvme nvme0: I/O tag 525 (d20d) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:53248",
+    "[ 3404.792396] nvme nvme0: I/O tag 527 (a20f) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 3443.696522] nvme nvme0: I/O tag 529 (a211) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 3548.144857] nvme nvme0: I/O tag 556 (822c) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:45056",
+    "[ 3587.056978] nvme nvme0: I/O tag 558 (b22e) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:32768",
+    "[ 3644.409171] nvme nvme0: I/O tag 563 (a233) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 3705.849336] nvme nvme0: I/O tag 567 (7237) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 3744.765468] nvme nvme0: I/O tag 569 (6239) opcode 0x1 (I/O Cmd) QID 2 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 3884.025781] nvme nvme0: I/O tag 409 (3199) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 3927.029908] nvme nvme0: I/O tag 412 (319c) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:40960",
+    "[ 3976.185971] nvme nvme0: I/O tag 415 (519f) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:20480",
+    "[ 3976.185992] nvme nvme0: I/O tag 416 (51a0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3976.185998] nvme nvme0: I/O tag 417 (51a1) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3976.186004] nvme nvme0: I/O tag 418 (51a2) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3976.186008] nvme nvme0: I/O tag 419 (51a3) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3976.186013] nvme nvme0: I/O tag 420 (51a4) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3976.186018] nvme nvme0: I/O tag 421 (51a5) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:131072",
+    "[ 3976.186023] nvme nvme0: I/O tag 423 (41a7) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:8192",
+    "[ 4023.282113] nvme nvme0: I/O tag 419 (61a3) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 4062.206156] nvme nvme0: I/O tag 421 (61a5) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 4115.450276] nvme nvme0: I/O tag 427 (61ab) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:28672",
+    "[ 4150.266282] nvme nvme0: I/O tag 432 (51b0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864"
+  ],
+  "latest_kernel_warnings": [
+    "[ 4023.282113] nvme nvme0: I/O tag 419 (61a3) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 4023.312026] nvme nvme0: Abort status: 0x0",
+    "[ 4062.206156] nvme nvme0: I/O tag 421 (61a5) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:16384",
+    "[ 4062.236084] nvme nvme0: Abort status: 0x0",
+    "[ 4115.450276] nvme nvme0: I/O tag 427 (61ab) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:28672",
+    "[ 4115.480198] nvme nvme0: Abort status: 0x0",
+    "[ 4150.266282] nvme nvme0: I/O tag 432 (51b0) opcode 0x1 (I/O Cmd) QID 4 timeout, aborting req_op:WRITE(1) size:36864",
+    "[ 4150.266424] nvme nvme0: Abort status: 0x0"
+  ],
+  "python_processes": {
+    "rc": 0,
+    "stdout": "   2150 Ss   -                              python3\n   2243 RLl+ -                              python3\n   4744 SLsl futex_wait_queue               python3\n   5469 Ss   do_sys_poll                    python3\n",
+    "stderr": ""
+  },
+  "docker_root": {
+    "rc": 0,
+    "stdout": "/mnt/nvme/docker\n",
+    "stderr": ""
+  },
+  "logs_device": {
+    "rc": 0,
+    "stdout": "/dev/nvme0n1p1\n",
+    "stderr": ""
+  },
+  "nvme_available_bytes": 218628300800
+}

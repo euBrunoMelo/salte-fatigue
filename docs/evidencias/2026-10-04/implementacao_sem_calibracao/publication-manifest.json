@@ -1,0 +1,19 @@
+{
+  "run_host.py": "2324f6480281388e4b61f5d8918b9b925fa9ba6887c87fe54b5bce0ef3df1ee7",
+  "runtime_models.py": "e2abe4c3c374600e5d0ef9c33bca6ce927909ba01307d1a6c8e49add62bbc386",
+  "runtime_observability.py": "814900177998ca6d57cca880b6829aaf0843b4732e4f462bb29da9e4ef4b85d5",
+  "eye_closure.py": "928077c1bf779752477c40dacc69c1e3d502bda5f37dee3e93aca26ee38a16fa",
+  "perclos_rt.py": "56b939ac379ca63782fbbdef49e2a8b7efbb8e92c8db82651cf0e6a01ecf1831",
+  "fatigue_fsm.py": "94cb1a3b8607e71f4cf7210a01ecccae7641d1e5888bbeae5e54594b335ff57f",
+  "fatigue_runtime.py": "df27d286f2a3f26459451d7334c06fb6cc556f674587bef879003148cead14d0",
+  "Dockerfile": "c685812ba790a0b7a96402cd805836810e9695004ca33fce67407567a53a3d5c",
+  "docker-compose.yml": "de288462ec4ea83dbd76d96029f849f833d92a50cd459bc27249a01c8132fcb3",
+  "README.md": "937e0db83e25e3ebed52a0e1dca7aa946c74986e0865a40b5774ce10038fbf33",
+  "CLAUDE.md": "9b9612b41110e00265efc65fff3af58a02d34e6842f445a76e36cee7e16b0f3b",
+  "TESTE REGRECAO.txt": "7308833b6d53ae183fae1f8b5af2f6ea79cb79c5cb55f58eb8c2c7447c540d44",
+  "tests/test_deterministic_runtime.py": "2ea68df9d8912e9db853cb548c4defc587bcd3c2514fb65d765d494740fec812",
+  "tests/test_feature_extractor_runtime.py": "b983c999ae6cc2bce53be9647209dd21efc2fd403caacf78a1d3e59b97878a29",
+  "tests/test_feature_vector_camera.py": "cc89045d8247f1976bc05aefc8d205097cf423741808a375e6d3cc556019d307",
+  "tests/test_production_boundary.py": "bf100380d6a2bf15220d3bd344bef39aa4ef38ae70eeb46c12498cab44788f2f",
+  "tests/test_absolute_ear_runtime.py": "eede2ba9a5b64847c6f228a40108bbaca3b28d5a619bbabf119d66b06c86affa"
+}

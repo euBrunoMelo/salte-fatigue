@@ -1,0 +1,10 @@
+/var/log/wifi_manager.log {
+    daily
+    maxsize 10M
+    rotate 7
+    missingok
+    notifempty
+    compress
+    delaycompress
+    copytruncate
+}

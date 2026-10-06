@@ -1,0 +1,7 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1791125163.821732   12265 face_landmarker_graph.cc:174] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1791125163.849771   12271 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1791125163.865025   12271 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+2026-10-04 11:46:03,868 SALTE.host INFO: Video aberto: /tmp/fatigue-no-calibration-fwhfavqo/black.avi, 10.00 fps, 8 frames
+2026-10-04 11:46:03,868 SALTE.host INFO: Runtime EAR/PERCLOS iniciado; metodo=absolute_ear limiar=0.170

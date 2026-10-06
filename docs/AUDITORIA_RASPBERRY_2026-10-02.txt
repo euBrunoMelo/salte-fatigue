@@ -1,0 +1,1029 @@
+AUDITORIA TÉCNICA OBSERVACIONAL — RASPBERRY DA SALA
+Observações realizadas em 02/10/2026
+Registro consolidado no computador local em 04/10/2026
+
+Este arquivo reúne o reconhecimento inicial, o plano aprovado e o relatório
+da investigação observacional apresentados na conversa de 02/10/2026.
+Não representa uma nova coleta nem uma confirmação do estado em 04/10/2026.
+Os caminhos de evidência, salvo indicação contrária, pertencem ao Raspberry.
+
+SUMÁRIO
+1. Objetivo, restrições, método e proveniência
+2. Reconhecimento inicial
+3. Plano fundamentado aprovado
+4. Resumo técnico da investigação
+5. Mapa dos componentes e fluxos
+6. Relação entre execução, configuração, código e artefatos
+7. Achados com evidências
+8. Proveniência, contradições e limitações
+9. Matriz de cobertura
+10. Recomendações não executadas
+
+
+1. OBJETIVO, RESTRIÇÕES, MÉTODO E PROVENIÊNCIA
+
+Objetivo: compreender e documentar o funcionamento real do Raspberry,
+relacionando sistema, serviços, processos, configurações, fontes,
+dependências, artefatos, armazenamento, persistência e comunicação.
+
+A investigação não pressupôs que o código encontrado no disco era o código
+em execução. As correspondências demonstráveis foram verificadas, e as
+lacunas foram mantidas explícitas.
+
+Restrições aplicadas:
+- Somente consultas; sem implementação, correção, refatoração ou otimização.
+- Sem alteração de código, configuração, permissões, serviços, rede,
+  bancos de dados ou estado de dispositivos.
+- Sem instalação, atualização, compilação, migração, reinício ou teste
+  mediante inicialização de aplicações.
+- Sem execução dos scripts encontrados no projeto.
+- Sem sudo, docker exec, testes de câmera ou requisições às aplicações.
+- Sem criação de arquivos de auditoria no Raspberry.
+- Sem contornar bloqueios ou ampliar privilégios.
+- Consultas limitadas em duração e volume; aprofundamento direcionado.
+- Sem leitura recursiva irrestrita de /proc, /sys, /dev ou do sistema inteiro.
+- Configurações, ambientes e logs consultados com seleção de campos e
+  filtragem; sem reprodução de credenciais, conteúdo de imagens ou vídeos.
+
+Períodos de coleta, em America/Sao_Paulo, UTC−03:
+- Reconhecimento: 02/10/2026, 20:00:22 a 20:01:12.
+- Investigação aprovada: 02/10/2026, 20:06:57 a 20:15:03.
+
+São consultas sucessivas, não uma fotografia simultânea. Registros de logs
+de outros horários estão identificados separadamente. Timestamps Docker
+em UTC foram convertidos para o horário local quando apresentados como tal.
+
+Ambiente de origem: máquina local ai-sandbox, usuário bruno, diretório
+/home/bruno/Documents/TRABALHO/SALTE_DROWSINESS/FATIGUE_20260601.
+Ambiente observado: host remoto raspberrypi, acessado por SSH como
+raspberrypi5. Os containers são ambientes distintos dentro desse host.
+
+Mecanismo de acesso utilizado:
+ssh -F /tmp/codex-rpi-ssh/config rpi-sala 'COMANDO'
+
+As evidências deste registro vieram de consultas realizadas na sessão de
+02/10/2026, por SSH, com utilitários disponíveis e consultas Python usando
+a biblioteca padrão. Não dependem de relatos históricos de outras sessões.
+Este TXT é uma consolidação do conteúdo da conversa, não um arquivo de
+saída bruta de todas as ferramentas.
+
+Padrão de evidência:
+- FATO OBSERVADO: resultado de consulta ou conteúdo de arquivo examinado.
+- INFERÊNCIA: interpretação sustentada pelas evidências, sem comprovação
+  direta de todos os passos.
+- NÃO VERIFICADO: informação que não foi comprovada no escopo e acesso usados.
+
+Ausência de mensagem em uma amostra não foi tratada como prova de saúde.
+Existência de arquivo, serviço configurado ou container ativo não foi
+tratada como comprovação automática de funcionamento da aplicação.
+
+Nota de filtragem: uma linha de autoria do Dockerfile apareceu na saída
+intermediária da conversa. A filtragem foi corrigida nas consultas
+seguintes; o dado pessoal não é reproduzido neste registro.
+
+
+2. RECONHECIMENTO INICIAL
+
+2.1. Identidade, sistema e recursos
+
+FATOS OBSERVADOS:
+- hostname: raspberrypi.
+- id: usuário raspberrypi5, UID 1000.
+- /proc/device-tree/model: Raspberry Pi Compute Module 5 Rev 1.0.
+- /etc/os-release: Debian GNU/Linux 13 (trixie), versão completa 13.4.
+- uname -srmo: Linux 6.12.75+rpt-rpi-2712 aarch64 GNU/Linux.
+- systemd-detect-virt: none.
+- /proc/self/cgroup: sessão sob user.slice.
+- timedatectl show: Timezone=America/Sao_Paulo, NTPSynchronized=yes.
+- getconf _NPROCESSORS_ONLN: 4.
+- free -h: aproximadamente 4 GiB de RAM e 2 GiB de swap.
+- uptime às 20:00:22: 7 dias e aproximadamente 3 horas de funcionamento;
+  cargas 7,21, 6,49 e 6,33.
+
+O resultado de systemd-detect-virt e o cgroup sustentam a identificação da
+sessão como pertencente ao host. O desvio do relógio não foi medido.
+
+2.2. Armazenamento e diretórios candidatos
+
+FATOS OBSERVADOS, por df -hT, findmnt e listagens limitadas:
+- /dev/mmcblk0p2 em /: ext4, 29 GiB, 42% ocupado.
+- /dev/mmcblk0p1 em /boot/firmware: vfat.
+- /dev/nvme0n1p1 em /mnt/nvme: ext4, 234 GiB, 9% ocupado.
+- Docker 29.4.3: raiz /mnt/nvme/docker, driver overlayfs.
+- Diretórios candidatos em /mnt/nvme/Monitoramento:
+  FATIGUE, DrowsyDriving, .staging e .rollback.
+- Projeto adicional em /mnt/nvme/Wifi-AP.
+- Outros diretórios relevantes: /mnt/nvme/containerd e /srv/media.
+
+A existência desses diretórios não comprova uso atual. Integridade e
+desempenho do armazenamento não foram avaliados nessa primeira etapa.
+
+2.3. Serviços e agendamento
+
+FATOS OBSERVADOS:
+- docker.service e containerd.service: habilitados, ativos e em execução.
+- wifi-manager.service e netclient.service: habilitados, ativos e em execução;
+  unidades em /etc/systemd/system/.
+- cron.service: em execução.
+- Nove timers systemd foram listados inicialmente.
+- NetworkManager-wait-online.service: habilitado, failed, MainPID=0.
+- Serviços de SSH, NetworkManager, descoberta, impressão, Bluetooth e
+  ambiente gráfico também estavam em execução.
+
+Os nove timers listados foram:
+dpkg-db-backup, logrotate, apt-daily-upgrade, apt-daily, man-db,
+systemd-tmpfiles-clean, rpi-zram-writeback, e2scrub_all e fstrim.
+
+Limite: a listagem inicial de timers carregados não inventariava todo
+arquivo de timer instalado. A revisão posterior encontrou um timer
+próprio desabilitado, descrito na seção 7.9.
+
+2.4. Containers às 20:00:37
+
+Nome                 Imagem declarada          Estado observado
+monitor-motorista    drowsydriving-monitor      Up aproximadamente 4 horas
+salte-fatigue        salte-fatigue:latest       Up aproximadamente 4 horas
+gallery              wifi-ap-gallery           Up aproximadamente 7 dias
+sweet_shaw           salte-fatigue:latest       Created
+salte-tev8           salte-tev8:latest          Exited (1), cerca de 7 dias antes
+
+Evidência: docker ps -a, com formato limitado a ID, nome, imagem, estado
+e portas.
+
+Metadados selecionados, consultados às 20:00:56–57:
+
+monitor-motorista:
+- Compose indicado por rótulo:
+  /mnt/nvme/Monitoramento/DrowsyDriving/docker-compose.yml.
+- Diretório interno /app; rede drowsydriving_default.
+- Montagens: logs do projeto em /app/logs; /dev; /run/udev somente leitura;
+  /tmp/libcamera.
+
+salte-fatigue:
+- Compose indicado por rótulo:
+  /mnt/nvme/Monitoramento/FATIGUE/docker-compose.yml.
+- Diretório interno /app; rede fatigue_default.
+- Montagens: logs em /app/logs; config em /app/config; /dev;
+  /run/udev somente leitura.
+
+gallery:
+- Compose indicado por rótulo: /mnt/nvme/Wifi-AP/docker-compose.yml.
+- Rede do host.
+- Logs de DrowsyDriving em /data, somente leitura.
+- /etc/wifi_manager/networks.conf com escrita permitida no container.
+
+INFERÊNCIA INICIAL: a montagem de logs em gallery sugeria um fluxo entre
+produção e apresentação de registros.
+
+NÃO VERIFICADO NESSA ETAPA: conteúdo atual de Compose versus configuração
+usada na criação, correspondência fonte–imagem, código carregado e
+funcionamento efetivo das aplicações.
+
+2.5. Processos e portas
+
+FATOS OBSERVADOS:
+- ps -eo pid,ppid,comm,pcpu,pmem --sort=-pcpu mostrou o Python PID 226197
+  com %CPU=391.
+- Foram observadas portas TCP 22, 8080, 111, 51821 e portas locais,
+  além de sockets UDP.
+
+O %CPU de ps não é uma medição instantânea. A identidade completa do
+processo e a atribuição das portas ainda eram desconhecidas no reconhecimento.
+A falha de wait-online não demonstrava indisponibilidade da rede atual,
+pois o SSH respondeu.
+
+2.6. Cobertura da primeira entrega
+
+- Identidade, ambiente e horário: inspecionados no escopo inicial.
+- Recursos, montagens, serviços, processos, agendamentos e containers:
+  parcialmente inspecionados.
+- Portas: parcialmente inspecionadas, sem correlação de responsáveis.
+- Código, configuração efetivamente carregada, dependências, logs e
+  persistência: não verificados nessa etapa.
+- Correspondência fonte–imagem–execução: não verificada nessa etapa.
+
+
+3. PLANO FUNDAMENTADO APROVADO
+
+Etapa 1 — Inicialização e execução
+Verificar serviços configurados, habilitados e ativos, processos próprios,
+timers, cron e serviços do usuário. Fontes: propriedades systemd, unidades
+e sobrescritas, agendamentos e consultas direcionadas de processos.
+Critério: associar cada componente relevante à inicialização ou registrar
+a lacuna.
+
+Etapa 2 — Containers e implantação
+Verificar processo principal, imagem por ID, reinício, redes, dispositivos,
+montagens e divergências com Compose. Fontes: metadados selecionados Docker
+e arquivos de implantação. Critério: separar configuração registrada na
+criação, arquivos atuais e execução observada.
+
+Etapa 3 — Código e configurações
+Verificar entradas, responsabilidades, chamadas, condições, erros e
+configuração carregada. Fontes: leituras limitadas dos projetos e arquivos
+dos processos acessíveis. Critério: explicar os fluxos com referências e
+distinguir comportamento previsto de execução comprovada.
+
+Etapa 4 — Artefatos e dependências
+Verificar binários, bibliotecas, modelos, versões, tamanhos e origem.
+Fontes: manifestos, Git, metadados de pacotes e imagens, executáveis,
+bibliotecas mapeadas e hashes direcionados. Critério: demonstrar a relação
+código–artefato–processo onde possível e declarar uso não comprovado.
+
+Etapa 5 — Persistência e comunicação
+Verificar logs, configurações, eventual banco, volumes, sockets, portas e
+conexões. Fontes: montagens, arquivos abertos, ss, código e logs delimitados.
+Critério: mapear produtores, consumidores, armazenamento e interfaces,
+diferenciando exposição de uso efetivo.
+
+Etapa 6 — Contradições e consolidação
+Revisar falhas, estados e versões divergentes, limitações de acesso e
+hipóteses contrárias. Critério: entregar mapa, correlações, achados e
+cobertura sem declarar saúde pela ausência de erros.
+
+Riscos e limites previstos:
+- Consultas consomem CPU e I/O, leituras podem atualizar atime e acessos
+  SSH podem gerar registros do sistema.
+- Configurações, argumentos e logs podem conter informações sensíveis;
+  usar seleção e filtragem antes de produzir saída.
+- Não usar docker exec, importação de módulos do projeto, testes de câmera
+  ou requisições à aplicação para provar funcionamento.
+- Registrar ferramenta ausente, acesso negado ou necessidade de privilégio;
+  não contornar bloqueios.
+
+O usuário aprovou a investigação mantendo todas as restrições de somente
+leitura e determinou resumos por etapa e revisão das conclusões antes da
+entrega final. Nenhuma autorização para modificar a máquina foi concedida.
+
+
+4. RESUMO TÉCNICO DA INVESTIGAÇÃO
+
+A auditoria confirmou um monitor processando frames, um segundo pipeline
+aguardando câmera e uma galeria em execução. Também confirmou timeouts de
+escrita no NVMe durante a observação, divergência entre o script Wi-Fi
+instalado e o repositório e sincronização automática desabilitada.
+
+Resumo por etapa:
+- Etapa 1: processos das aplicações associados aos containers por cgroups;
+  Python de maior CPU identificado como monitor-motorista; serviços próprios
+  correlacionados com systemd. Agendamento de outros usuários permaneceu
+  não verificado.
+- Etapa 2: comandos e montagens principais compatíveis com os Compose
+  consultados; primeiros hashes iguais; FATIGUE identificado como supervisor
+  de câmera. Sistema de arquivos do processo gallery inacessível.
+- Etapa 3: dois fluxos distintos reconstruídos; calibração ausente no
+  caminho esperado; script Wi-Fi instalado diferente do repositório.
+- Etapa 4: 18 arquivos Python de FATIGUE e 23 de DrowsyDriving iguais entre
+  host e arquivos dos containers; versões de dependências diferenciadas;
+  ONNX Runtime, OpenCV e libcamera mapeados no monitor.
+- Etapa 5: avanço de frames no monitor, espera de FATIGUE e falha de probe
+  da ponte da outra câmera; Wi-Fi conectado em modo cliente; persistência
+  e sockets examinados por amostras.
+- Etapa 6: timeouts atuais de NVMe confirmados; timer próprio instalado,
+  porém inativo e desabilitado; status de sincronização anterior ao boot;
+  contradições entre comentários e execução mantidas explícitas.
+
+A correspondência verificada é entre arquivos do projeto e arquivos
+visíveis no sistema de arquivos dos containers. Não equivale a leitura
+do conteúdo dos módulos Python já carregados em memória.
+
+
+5. MAPA DOS COMPONENTES E FLUXOS
+
+Legenda:
+  --> relação observada.
+  ..> comportamento reconstruído do código, sem comprovação completa de execução.
+
+systemd do host
+  --> Docker + containerd
+        --> monitor-motorista: runuser --> Python main.py
+        --> salte-fatigue: Python wait_for_camera.py
+        --> gallery: Python gallery.py
+  --> Wi-Fi Manager instalado --> NetworkManager --> Wi-Fi cliente observado
+  --> Netclient; interface WireGuard netmaker observada
+
+Dispositivos de câmera do host
+  --> descritores abertos pelo monitor
+  --> descritores abertos pelo supervisor FATIGUE
+
+monitor-motorista
+  --> saída de diagnóstico --> logs Docker no NVMe
+  ..> alertas/presença de rosto --> CSV, imagens e vídeos no NVMe
+                                   --> montagem /data da galeria
+
+wait_for_camera.py
+  ..> exige uma única outra câmera --> run_host.py
+       ..> MediaPipe --> EAR --> qualidade ocular --> fechamento
+       ..> PERCLOS --> estados de fadiga/atenção
+       ..> persistência FATIGUE no NVMe
+
+gallery.py do projeto
+  ..> servir arquivos de /data e páginas HTTP
+  ..> rotas de cadastro --> /etc/wifi_manager/networks.conf
+                              ..> leitura pelo Wi-Fi Manager
+
+monitoramento-sync.timer: instalado, desabilitado e inativo
+  ..> se ativado, serviço oneshot --> script rsync --> destino externo
+
+A montagem dos logs na galeria foi comprovada. O consumo efetivo desses
+arquivos por requisições HTTP não foi comprovado na janela observada.
+
+
+6. RELAÇÃO ENTRE EXECUÇÃO, CONFIGURAÇÃO, CÓDIGO E ARTEFATOS
+
+Docker
+- Execução: PID 1711, /usr/bin/dockerd.
+- Inicialização: docker.service, habilitado e ativo.
+- Unidade: /usr/lib/systemd/system/docker.service.
+- Configuração selecionada: /etc/docker/daemon.json, data-root=/mnt/nvme/docker.
+- Linha de comando: dockerd -H fd:// --containerd=/run/containerd/containerd.sock.
+
+containerd
+- Execução: PID 1096, /usr/bin/containerd.
+- Inicialização: containerd.service, habilitado e ativo.
+- Unidade: /usr/lib/systemd/system/containerd.service.
+- /etc/containerd/config.toml: version=3, root=/mnt/nvme/containerd,
+  state=/run/containerd.
+
+monitor-motorista
+- Container: d86c3d8c695c4c465f80b32afd6eeb37458b81b0e6ab9bb8d409e113a218af30.
+- Imagem: sha256:627b5612ac9d6f34acdb17e212f7ebec0d0e152dc4b4c93444a309b56a15b5f6.
+- Início registrado: 02/10/2026, 16:29:31 local.
+- Processo principal: PID 226157, runuser; aplicação Python PID 226197,
+  python3 main.py, UID efetivo 1000.
+- Diretório /app; restart unless-stopped; privileged=true.
+- Entrypoint registrado: /app/docker-entrypoint.sh.
+- Código candidato: /mnt/nvme/Monitoramento/DrowsyDriving.
+- 23 arquivos Python comparados coincidiram por SHA-256 com os arquivos
+  acessíveis através de /proc/226197/root/app.
+
+salte-fatigue
+- Container: 913eb6ad74071173a10dee187d8d1afd52a8df105a23370587acfb2eb30e82c9.
+- Imagem: sha256:7b580cc6bd10019362bb30eaf69917e875e91ae84bed2f56bb55a9e2da8dc160.
+- Início registrado: 02/10/2026, 16:25:56 local.
+- Processo: PID 225433, Python 3.11, wait_for_camera.py, UID efetivo 1000.
+- Diretório /app; restart unless-stopped; privileged=false;
+  seccomp:unconfined.
+- Comando registrado prevê iniciar run_host.py após a espera, com câmera
+  do monitor reservada no índice 0, --no-danger-record e amostragem de
+  frames/assessments a cada cinco.
+- Código candidato: /mnt/nvme/Monitoramento/FATIGUE.
+- 18 arquivos Python comparados coincidiram por SHA-256 com os arquivos
+  acessíveis através de /proc/225433/root/app.
+
+gallery
+- Container: f70a15bc5112a895866e2198128b030beefe03e8148716b5cb34b45ddc24f5f2.
+- Imagem: sha256:81096464a17d4bd3ec124c09ff3ad6f16ddf8c53295f2b6acd4e5e1f9da38901.
+- Início registrado: 25/09/2026, 16:48:43 local.
+- Processo: Python PID 2133, python3 gallery.py.
+- Restart always; rede do host; IMAGE_DIR=/data na configuração Docker.
+- Código candidato: /mnt/nvme/Wifi-AP/gallery.py.
+- Igualdade com o código dentro do container não comprovada: links de
+  exe, cwd e root do processo retornaram PermissionError.
+
+Wi-Fi Manager
+- Processo: PID 1090, /bin/bash /usr/local/bin/wifi_manager.sh.
+- Unidade: /etc/systemd/system/wifi-manager.service, linhas 3–9:
+  dependência de NetworkManager, ExecStart apontando para o script instalado,
+  Restart=always.
+- Serviço habilitado e ativo.
+- Script instalado diferente de /mnt/nvme/Wifi-AP/wifi_manager.sh.
+
+Netclient
+- Processo: PID 83433, /sbin/netclient daemon.
+- Unidade: /etc/systemd/system/netclient.service; usuário root,
+  ExecStart=/sbin/netclient e Restart=on-failure.
+- Serviço habilitado e ativo.
+- Binário /sbin/netclient: 25.755.810 bytes.
+- dpkg-query -S não encontrou proprietário para esse caminho.
+- Origem, versão e fonte correspondente não comprovadas.
+
+Sincronização
+- /etc/systemd/system/monitoramento-sync.service: Type=oneshot,
+  usuário raspberrypi5, ExecStart=/usr/local/sbin/monitoramento-sync.sh.
+- Serviço inativo; timer instalado, desabilitado e inativo.
+- Transferência atual não comprovada.
+
+Outros containers registrados
+- sweet_shaw: Created, PID 0, mesma imagem de FATIGUE; entrada sha256sum
+  registrada, mas não executada nesta auditoria.
+- salte-tev8: Exited (1), PID 0; imagem
+  sha256:5b02ce2f4a0af46027067cd47e32ea441ae2055bf7d2c7af6a7d640e725f6c85;
+  término registrado em 25/09/2026, 10:57:43 local; RestartCount=23 no
+  metadado consultado. Não foi reiniciado nem testado.
+
+Limites de correlação
+- Metadados Docker, cgroups e comandos correlacionam processos e containers.
+- Hashes iguais demonstram arquivos iguais no momento da leitura, não
+  conteúdo de módulos carregados em memória nem commit de construção.
+- Comandos, montagens e políticas principais correspondem aos Compose
+  atuais consultados, mas isso não comprova autor, comando de implantação
+  ou imutabilidade dos arquivos desde a criação.
+
+
+7. ACHADOS COM EVIDÊNCIAS
+
+7.1. NVMe apresentou timeouts durante a auditoria
+
+FATO OBSERVADO: na janela consultada de 19:58 até a coleta às 20:13:31,
+o kernel registrou, entre outros:
+
+02/10/2026 20:10:13.574826
+  nvme0 ... timeout, aborting req_op:WRITE(1) size:32768
+02/10/2026 20:11:55.978313
+  nvme0 ... timeout, aborting req_op:WRITE(1) size:36864
+02/10/2026 20:12:41.038334
+  nvme0 ... timeout, aborting req_op:WRITE(1) size:24576
+
+Evidência: journalctl -k -b, com --since, --until, expressão de busca
+e limite de 30 registros. O limite impede interpretar a amostra como
+contagem completa de ocorrências.
+
+Também há timeouts de leitura/escrita e reset no boot de 25/09, na janela
+16:45–17:00. Exemplo: 16:57:59.808724, timeout de comando administrativo
+seguido de reset controller.
+
+O NVMe abriga projetos, logs de aplicações, armazenamento Docker e raiz
+containerd. Portanto os registros atuais são relevantes para a arquitetura
+observada.
+
+NÃO VERIFICADO: causa física, integridade dos dados, recuperação de cada
+operação e processo responsável pelas escritas. Não houve atribuição dos
+eventos à auditoria ou a uma aplicação específica.
+
+7.2. DrowsyDriving estava avançando no processamento de frames
+
+FATO OBSERVADO: amostra de logs do monitor:
+- 20:09:36 local: contador 134820, FPS reportado 10,1.
+- 20:11:58 local: contador 136530, FPS reportado 10,2.
+- 58 mensagens de progresso; FPS reportado entre 8,9 e 10,4.
+
+Evidência: docker logs --timestamps, janela 20:07–20:12 local,
+últimas 60 linhas. Detalhes sobre pessoas, alertas e avaliações foram
+filtrados. Não houve correspondência de erros na expressão examinada
+nessa amostra; isso não comprova saúde integral.
+
+FATO OBSERVADO: /proc/226197/maps contém bibliotecas de ONNX Runtime,
+OpenCV, NumPy e libcamera. O processo é python3 main.py.
+
+INFERÊNCIA: o fluxo reconstruído de main.py é consistente com processamento
+contínuo. Não comprova precisão das detecções nem execução de todos os
+detectores em cada frame.
+
+Fluxo previsto pelo código:
+- Picamera2 com câmera padrão 0.
+- Pose em cada frame; objetos a cada três frames; cinto/fumo a cada quinze,
+  com condicionamento à presença de rosto.
+- Risco temporal agregado e classificação.
+- Imagens/CSV condicionados a alertas novos e cooldown.
+- Vídeo condicionado à presença de rosto, com debounce.
+
+Evidências:
+/mnt/nvme/Monitoramento/DrowsyDriving/main.py:
+  linhas 194–205: índice e inicialização da câmera;
+  linhas 252–264: cadências e configuração de gravação;
+  linhas 288–335: detectores, comportamentos e classificação;
+  linhas 360–440: vídeo, imagens, CSV e diagnóstico.
+utils/risk.py, linhas 65–98: parâmetros e agregação temporal do risco.
+utils/classifier.py, linhas 1–16: estados determinados pelo score.
+
+O wrapper YOLOOnnx configura CPUExecutionProvider e quatro threads
+intra-op, conforme detectors/yolo_onnx.py, linhas 158–166. Isso ajuda a
+contextualizar o uso de CPU, mas não prova que essa configuração explique
+sozinha a carga observada.
+
+7.3. FATIGUE estava no supervisor, sem pipeline ocular observado
+
+FATO OBSERVADO: o comando do PID 225433 permaneceu python3
+wait_for_camera.py. A lista completa de processos filtrada ao final não
+mostrou run_host.py.
+
+Log de inicialização em 02/10/2026, 16:25:57 local:
+  SALTE.camera_wait WARNING: Aguardando camera alem do indice 0 do monitor
+
+O timestamp Docker original é 2026-10-02T19:25:57.407092122Z. O horário
+ingênuo emitido pela aplicação dentro do container não deve ser confundido
+com o fuso do host.
+
+O supervisor enumera câmeras e só lança o filho quando existe exatamente
+uma câmera além da reservada. Falta ou ambiguidade mantém a espera.
+Falhas de enumeração são registradas; o loop volta a consultar após espera.
+Se o filho terminar, há nova verificação; sinais solicitam parada do filho.
+
+Evidências:
+/mnt/nvme/Monitoramento/FATIGUE/wait_for_camera.py, linhas 44–70;
+camera_routing.py, linhas 21–31;
+docker logs delimitado à inicialização;
+ps -eo pid,ppid,comm,etimes,pcpu,cgroup às 20:15:03.
+
+FATO OBSERVADO: o supervisor também possui bibliotecas e descritores de
+dispositivos de câmera abertos. Espera não significa ausência de interação
+com a infraestrutura de câmera.
+
+7.4. Duas câmeras configuradas; driver vinculado para um sensor consultado
+
+FATOS OBSERVADOS:
+- /boot/firmware/config.txt, linha 18: camera_auto_detect=1.
+- O mesmo arquivo, linha 53, seção all: camera_auto_detect=0.
+- Linhas 56–57: dtoverlay=imx500,cam0 e dtoverlay=imx500,cam1.
+- Journal do boot, 25/09 às 16:46:56: ponte 10-0040 registra
+  Could not get device info e probe failed with error -121.
+- /sys/bus/i2c/devices/0-001a/driver: vinculado ao driver imx500.
+- /sys/bus/i2c/devices/10-001a/driver: link não encontrado.
+- /sys/bus/i2c/devices/10-0040/driver: link não encontrado.
+- /sys/class/video4linux inclui v4l-subdev2 com nome imx500 0-001a.
+
+INFERÊNCIA: o conjunto é consistente com a espera de FATIGUE.
+
+NÃO VERIFICADO: causa física, estado elétrico, firmware da ponte que
+falhou, inexistência física da outra câmera ou correspondência integral
+do arquivo de configuração atual com o conteúdo utilizado no boot.
+Nenhum reprobe, ioctl, reset ou teste de captura foi executado.
+
+7.5. Calibração esperada de FATIGUE não encontrada
+
+FATO OBSERVADO: /app/config/eye_calibration.json não existe no sistema
+de arquivos observado do container; o caminho correspondente no host
+também não existe. O diretório config do host estava vazio na listagem.
+
+O código prevê:
+MediaPipe FaceLandmarker --> EAR e pose --> qualidade ocular --> fechamento
+--> PERCLOS --> máquinas de estados de fadiga e atenção.
+
+Sem calibração e sem limiar alternativo, a observação fica indisponível e
+a FSM permanece/resetta para UNKNOWN. A configuração de comando observada
+não fornece --fallback-ear-threshold.
+
+Evidências em /mnt/nvme/Monitoramento/FATIGUE:
+- run_host.py, linhas 216–225: defaults do detector.
+- run_host.py, linhas 276–285: tratamento de calibração ausente/inválida.
+- run_host.py, linhas 323–344: montagem do runtime, extrator e câmera.
+- fatigue_runtime.py, linhas 55–74: cadeia e disponibilidade.
+- fatigue_fsm.py, linhas 48–60: tratamento de estados não disponíveis.
+- feature_extractor_rt.py, linhas 176–204: FaceLandmarker VIDEO.
+
+INFERÊNCIA: mesmo superada a espera pela câmera, a configuração observada
+contém outra condição que impediria o funcionamento calibrado. Esse cenário
+não foi executado para testá-lo.
+
+7.6. Dependências do host e dos containers são diferentes
+
+FATOS OBSERVADOS:
+
+Dependência           Host                 FATIGUE              DrowsyDriving
+Debian                13                   12                   12
+Python                3.13 (pacote)        3.11                 3.11
+Picamera2             0.3.34               0.3.31               0.3.31
+libcamera (pacotes)   0.7.0                0.5.2                0.5.2
+NumPy                não aprofundado      1.24.2               1.24.2
+ONNX Runtime         não aprofundado      uso não comprovado   1.30.0, mapeado
+MediaPipe            não aprofundado      0.10.18 instalado    uso não comprovado
+OpenCV               não aprofundado      headless 4.14.0.94   Debian 4.6.0, mapeado
+
+MediaPipe não apareceu nos mapeamentos consultados do processo de espera
+de FATIGUE. Isso não equivale a exame integral de todos os objetos Python
+carregados ou prova de ausência em todos os processos.
+
+Evidências:
+- dpkg-query no host.
+- /proc/225433/root/etc/os-release e /proc/226197/root/etc/os-release.
+- Bases /var/lib/dpkg/status dos dois containers, acessadas pelos roots
+  dos processos, com seleção de pacotes.
+- Metadados dist-info/egg-info dos diretórios Python examinados.
+- /proc/225433/maps, /proc/226197/maps e /proc/226218/maps.
+
+A diferença de versões por si só não comprova incompatibilidade.
+Pacote declarado, instalado e biblioteca mapeada são evidências distintas.
+
+7.7. Artefatos no host que não integram o FATIGUE observado
+
+FATO OBSERVADO: existem no projeto do host, mas não foram encontrados
+nos caminhos correspondentes em /app:
+- best_model.onnx: 3.417 bytes.
+- best_model.onnx.data: 45.312 bytes.
+- inference_config.json: 3.451 bytes.
+- subject_calibrator_rt.py, window_factory_rt.py e salte_edge_runtime.py.
+
+O Dockerfile FATIGUE atual copia o pipeline determinístico e
+face_landmarker.task, de 3.758.596 bytes. O modelo de landmarks foi
+encontrado no host e no container com esse tamanho; não foi afirmada
+igualdade binária do modelo apenas a partir do tamanho.
+
+Modelos DrowsyDriving no container:
+- /app/yolov8n.onnx: 12.725.024 bytes.
+- /app/yolov8n-pose.onnx: 13.312.941 bytes.
+- /app/detectors/seatbelt.onnx: 12.139.947 bytes.
+- /app/detectors/smoking_detection.onnx: 12.139.935 bytes.
+
+Os dois modelos YOLO gerais não existem nos caminhos correspondentes
+do projeto do host. O Dockerfile prevê exportação no estágio builder e
+cópia para runtime.
+
+INFERÊNCIA: essa construção prevista explica sua presença apenas no
+container. Logs de construção e origem dos pesos não foram comprovados.
+
+Evidências:
+- Consultas direcionadas os.stat e open nos caminhos do host e dos roots
+  dos processos; FileNotFoundError onde indicado.
+- Dockerfile FATIGUE, linhas 97–117.
+- Dockerfile DrowsyDriving, linhas 30–32 e 76–79.
+- export_models.py, linhas 9–12.
+
+Tamanhos reportados pelo Docker para imagens:
+- FATIGUE: 369.604.306 bytes.
+- DrowsyDriving: 483.799.862 bytes.
+- Galeria: 54.906.155 bytes.
+- salte-tev8: 384.048.737 bytes.
+
+Esses valores não equivalem ao espaço físico exclusivo ocupado, pois
+camadas podem ser compartilhadas.
+
+7.8. Script Wi-Fi instalado diverge do repositório
+
+FATO OBSERVADO: SHA-256:
+Instalado:
+89a6754a25e7dbf168a58f2749c996873497f3dbb19bce8bc6e8d347acb0e904
+Repositório:
+e7d73dc3d8081653fa5fb3959f602f201d65d56d7eebcacd21997298b1eae505
+
+No instalado, _run_update() contém apenas ':'; no repositório, a função
+chama /usr/local/bin/update_models.sh em background.
+
+Evidências:
+/usr/local/bin/wifi_manager.sh, linhas 272–275;
+/mnt/nvme/Wifi-AP/wifi_manager.sh, linhas 272–275;
+consulta hashlib.sha256 sobre o conteúdo dos arquivos.
+
+O script instalado é uma máquina de estados AP, WIFI_SCAN e WIFI_CLIENT.
+Ele usa NetworkManager, hostapd e dnsmasq; prevê mudanças de endereço e
+regras de encaminhamento ao entrar/sair do modo AP. Nada disso foi executado
+pelo auditor.
+
+O repositório Wi-Fi está no commit:
+1456c92c4762e153627d9a1d8b988db9688d9ecf
+com alterações locais em docker-compose.yml, gallery.py e wifi_manager.sh.
+
+FATIGUE e DrowsyDriving não foram reconhecidos pelo Git como repositórios
+nos caminhos consultados. Resultado: fatal: not a git repository; busca
+parou na fronteira de montagem /mnt. Não foi ampliada essa busca.
+
+Evidência: git --no-optional-locks -C CAMINHO rev-parse e status,
+sem atualização opcional do índice.
+
+Limite: unidade e cmdline apontam para o script instalado, mas o conteúdo
+interno já carregado pelo Bash não foi inspecionado.
+
+7.9. Timer de sincronização instalado, mas desabilitado e inativo
+
+FATO OBSERVADO: monitoramento-sync.timer declara execução a cada cinco
+minutos, Persistent=true; estado disabled, inactive, dead.
+
+Unidade:
+/etc/systemd/system/monitoramento-sync.timer, linhas 5–8.
+Serviço:
+/etc/systemd/system/monitoramento-sync.service, linhas 5–16:
+montagem requerida, usuário raspberrypi5, StateDirectory e script instalado.
+
+O script instalado, versão declarada 1.1.3, prevê:
+- Arquivos finais sob logs de /mnt/nvme/Monitoramento.
+- Exclusão de temporários, parciais, quarantine e CSV mutável de DrowsyDriving.
+- rsync com ignore-existing, delay-updates e filtro instalado.
+- Lock, tentativas limitadas e status persistido.
+
+Evidências:
+/usr/local/sbin/monitoramento-sync.sh, linhas 5–19, 106–145 e 148–198;
+/etc/monitoramento-sync/rsync_filter.conf, linhas 1–14.
+
+Status persistido, campos selecionados de
+/var/lib/monitoramento-sync/status.json:
+- version: 1.1.3.
+- last_attempt: 2026-09-25T14:40:00Z.
+- last_success: 2026-09-25T14:40:04Z.
+- duration: 4.
+- eligible_files: 278.
+- files_transferred: 0.
+- bytes_transferred: 0.
+- attempts: 1.
+- rsync_exit_code: 0.
+
+O sucesso indicado é às 11:40:04 local de 25/09, anterior ao boot atual.
+Não comprova entrega atual nem histórico completo. A amostra do journal
+para o identificador monitoramento-sync, do boot atual até a coleta final,
+não retornou registros, sem transformar isso em prova de nunca ter rodado.
+
+Os exemplos antigos salte-sync.cron e 99-salte-sync existem no projeto,
+mas /etc/cron.d/salte-sync e
+/etc/NetworkManager/dispatcher.d/99-salte-sync não foram encontrados.
+Outros mecanismos possíveis não foram descartados.
+
+Scripts update_models.sh e sync_backup.sh também estão instalados.
+O primeiro prevê git fetch/pull e docker compose build/up; o segundo prevê
+rsync/SSH. Sua presença não demonstra execução atual. Não foram executados.
+
+7.10. Persistência possui canais distintos
+
+FATOS OBSERVADOS:
+- Dados de aplicações: bind mounts de logs no NVMe.
+- Diagnóstico padrão: logs Docker json-file também no NVMe.
+- DrowsyDriving/logs: no nível superior, 239 JPG, 18 AVI e um CSV,
+  total de 48.339.373 bytes; maior mtime da amostra em 25/09/2026.
+- FATIGUE/logs: três JSONL no nível superior, total de 129.381 bytes,
+  com mtimes de junho; há subdiretórios, incluindo runs, não inventariados
+  integralmente nessa consulta.
+- Monitor mantém abertos onnxruntime.db, onnxruntime.db-wal e
+  onnxruntime.db-shm no cache interno do usuário do container.
+
+A existência de dados antigos não prova produção atual desses artefatos.
+O avanço de frames foi comprovado pelo diagnóstico, mas não houve leitura
+de imagens ou vídeos nem execução de testes de gravação.
+
+Persistência prevista no FATIGUE:
+- run-start/run-end JSON.
+- Eventos em diretórios por data.
+- Segmentos JSONL de frames e assessments.
+- Rotação padrão por 300 segundos ou 64 MiB.
+- Escrita com flush/fsync e publicação de arquivos/diretórios finais.
+- Captura de incidentes prevista no código, porém desabilitada no comando
+  observado por --no-danger-record.
+
+Evidências:
+structured_logger.py, linhas 28–30, 201–217, 239–254, 291–329 e 345–375;
+atomic_persistence.py, linhas 101–137;
+run_host.py, linhas 353–358;
+metadados os.scandir/os.stat e descritores /proc/226197/fd.
+
+FATIGUE e gallery: rotação Docker registrada com max-size=10m e max-file=5.
+DrowsyDriving: LogConfig json-file com opções vazias. Não foi encontrada
+opção global de rotação no arquivo Docker consultado; não foi atribuído
+um limite efetivo sem evidência.
+
+NÃO VERIFICADO: conteúdo e finalidade do banco ONNX Runtime, atividade em
+todos os subdiretórios, durabilidade após falha, integridade de vídeos,
+recuperação de bancos ou alcance de armazenamento externo.
+
+7.11. Rede conectada e serviço de espera falho coexistem
+
+FATOS OBSERVADOS:
+- NetworkManager: wlan0 connected, interface WireGuard netmaker,
+  bridges Docker e eth0 unavailable.
+- Rota padrão por wlan0.
+- SSH respondeu durante as consultas.
+- hostapd.service, dnsmasq.service e wifi-ap.service: inativos e desabilitados.
+- NetworkManager-wait-online.service: habilitado, failed,
+  Result=exit-code.
+
+Logs de 25/09:
+- 16:47:59: wait-online encerra com status 1/FAILURE.
+- 17:02:59: Wi-Fi Manager registra transição para WIFI_SCAN.
+- 17:03:24: transição para WIFI_CLIENT e modo cliente ativo.
+
+Evidências: systemctl show; nmcli -t -f DEVICE,TYPE,STATE device status;
+ip -j route; journalctl das unidades em janela delimitada.
+
+Conclusão: a falha histórica de wait-online não demonstra indisponibilidade
+da rede atual. Não foi testada a operação em AP durante a auditoria.
+
+Sockets observados por ss -lntup:
+- TCP em endereços gerais: 22, 8080, 111, 51821.
+- TCP locais: 631 e 35767 na amostra.
+- UDP: incluindo 53, 111, 5353 e outras portas.
+
+Conexões consultadas por ss -ntup, com pares remotos omitidos na saída:
+quatro conexões TCP para porta remota 443, outra conexão TCP e uma UDP.
+Não foi atribuída finalidade ou processo sem evidência.
+
+As consultas ss não forneceram processos responsáveis pelos sockets.
+INFERÊNCIA: 8080 corresponde à galeria, sustentada por configuração,
+processo e logs históricos de inicialização. Não houve requisição HTTP.
+
+Os logs de início da galeria em 25/09 às 16:48:43 local registram:
+- Base folder: /data.
+- Serving Flask app 'gallery'.
+- Debug mode: off.
+- Running on all addresses (0.0.0.0).
+- Aviso do próprio Flask de uso do servidor de desenvolvimento.
+
+Na janela recente consultada não houve requisições retornadas pela amostra
+de logs. Isso não prova ausência histórica de acesso.
+
+Código gallery.py do projeto:
+- Linhas 7–11: raiz e arquivo de redes.
+- Linhas 16–24: restrição por prefixo de endereço para rotas de redes.
+- Linhas 42–51, 123–142: escrita do cadastro de redes.
+- Linhas 172–231: navegação e envio de arquivos.
+- Linhas 241–243: Flask em 0.0.0.0:8080.
+
+Esse comportamento é reconstruído do arquivo do projeto; sua igualdade
+com o arquivo executado dentro do container não foi comprovada.
+
+7.12. Comentários e metadados não bastam para provar comportamento
+
+FATOS OBSERVADOS:
+- LIBCAMERA_IPA_FORCE_ISOLATION=0 consta no Compose, na configuração Docker
+  e no ambiente efetivo permitido do Python do monitor.
+- Apesar disso, existe raspberrypi_ipa_proxy, PID 226218, associado ao
+  monitor por parent PID e cgroup.
+- O texto de ajuda da câmera em main.py menciona padrão 1, mas o parser
+  define default=0.
+
+Evidências:
+DrowsyDriving/docker-compose.yml, linhas 20–22;
+main.py, linhas 194–195;
+metadados docker inspect e campos permitidos de /proc/226197/environ;
+ps e /proc/226218/cmdline.
+
+As contradições foram mantidas explícitas. Não se presumiu que comentários
+descreviam o comportamento efetivo, nem foi inferida a razão da diferença
+entre a variável IPA e o processo separado.
+
+
+8. PROVENIÊNCIA, CONTRADIÇÕES E LIMITAÇÕES
+
+8.1. Fonte e imagem
+
+As imagens examinadas não possuem os rótulos OCI de revision, source,
+version e outros campos de proveniência selecionados. Digests identificam
+artefatos, mas não demonstram commit, construtor ou origem dos modelos.
+
+Exemplos de hashes completos coincidentes entre host e arquivo do container:
+
+FATIGUE/wait_for_camera.py:
+fcb549792b54ff0f97439e5522836b5855181017afd7499466c170f017755191
+FATIGUE/run_host.py:
+c2d10f1d42a6504b9f4dbe67910674092a4cc53bbc900adb4e69436dc09c4b30
+FATIGUE/camera_routing.py:
+399bddcf6ae3d208e20d59f2e9a0ed685f90e011924413698df745207f17083c
+DrowsyDriving/main.py:
+ecc69542ef20dbebe5964e79f6b4d55bcbc82702849611093e5aa940fe811fc3
+DrowsyDriving/docker-entrypoint.sh:
+84b7f672d04a501b8a3a16ac63ccd20d5c06f389b3de3f9b8e3689d456bdc7ed
+
+Método: hashlib.sha256 sobre os arquivos lidos no host e em
+/proc/225433/root/app ou /proc/226197/root/app. Comparações limitadas aos
+arquivos selecionados, pequenos, sem leitura indiscriminada de modelos.
+Os hashes dos dois pontos de entrada foram reconferidos ao final.
+
+O entrypoint de DrowsyDriving prevê criação de diretórios, chown e troca
+para o usuário salte; essas ações pertencem ao código de inicialização
+existente. O auditor não o executou.
+
+8.2. Módulos do kernel
+
+FATOS OBSERVADOS:
+- v4l2loopback carregado: versão 0.15.3.
+- Arquivo instalado:
+  /lib/modules/6.12.75+rpt-rpi-2712/updates/dkms/v4l2loopback.ko.xz.
+- srcversion carregado e do arquivo: 21668BAF4C6D00BDD2D5A4C.
+- Diretório /usr/src/v4l2loopback-0.15.3 encontrado.
+- /sys/class/video4linux/video10 tem nome VirtualCam.
+- spi_rp2040_gpio_bridge carregado e arquivo instalado têm srcversion
+  715A3164EE83BB4183C4207.
+- Arquivo:
+  /lib/modules/6.12.75+rpt-rpi-2712/kernel/drivers/spi/spi-rp2040-gpio-bridge.ko.xz.
+
+Evidências: campos selecionados de /sys/module e modinfo -F.
+
+Igualdade de srcversion sustenta correspondência de versão de fonte;
+não é comparação integral do binário carregado. Histórico de compilação,
+fonte integral correspondente e uso funcional da câmera virtual não foram
+comprovados.
+
+8.3. Limites de acesso e de abrangência
+
+- Links e arquivos internos de processos root, inclusive gallery,
+  retornaram PermissionError. Não foram usados meios alternativos para
+  contornar esse bloqueio.
+- Crontabs de outros usuários não foram examinados. A consulta do crontab
+  do usuário atual retornou código 1 e nenhuma entrada na saída coletada;
+  isso não foi ampliado para afirmar ausência global de agendamento.
+- A base de journal disponível lista apenas o boot iniciado em
+  25/09/2026 às 16:46:56.
+- Foram examinados /etc/crontab, diretórios cron relevantes e e2scrub_all;
+  não foi executado nenhum agendamento.
+- Serviço habilitado não foi equiparado a ativo; ativo não foi equiparado
+  a funcionalmente comprovado.
+- Não foram lidas chaves, credenciais, dados pessoais, conteúdo de imagens,
+  vídeos ou banco ONNX Runtime, nem consultados destinos externos de backup.
+- Diretórios .staging e .rollback foram identificados, sem exame integral
+  do conteúdo ou reconstrução de todos os históricos de implantação.
+- Carga de CPU e espaço ocupado são amostras; não houve benchmark.
+- A leitura de arquivos e o SSH têm efeitos incidentais possíveis, como
+  atime e logs de acesso. Nenhuma operação intencional de modificação foi
+  executada.
+
+8.4. Contradições mantidas após a revisão
+
+- Timer não listado inicialmente: havia timer instalado, mas desabilitado.
+- NVMe: erros também atuais, não apenas históricos de boot.
+- Rede: wait-online falho coexistia com Wi-Fi e SSH funcionais.
+- FATIGUE: container running coexistia com espera e ausência de pipeline
+  ocular nas listas observadas.
+- Fonte: o script Wi-Fi do repositório não era igual ao instalado.
+- IPA: variável de configuração não eliminou processo separado observado.
+- Ajuda CLI: índice descrito no texto diferia do default do parser.
+- Sincronização: status de sucesso anterior ao boot não provava execução
+  ou entrega durante o boot atual.
+- Arquivos de modelos e configuração no host não eram prova de inclusão
+  nem uso no container.
+
+
+9. MATRIZ DE COBERTURA
+
+Área: Identidade, SO, kernel e horário
+Cobertura: INSPECIONADO.
+Resultado: host remoto e containers diferenciados.
+
+Área: Recursos e armazenamento
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: capacidade, montagens e erros; integridade física não testada.
+
+Área: Serviços de sistema e usuário
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: inventário e componentes relevantes correlacionados.
+
+Área: Processos das aplicações
+Cobertura: INSPECIONADO.
+Resultado: comandos, PIDs, cgroups e usuários nos momentos consultados.
+
+Área: Agendamento
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: timers, cron de sistema e usuário atual; outros usuários não verificados.
+
+Área: Containers
+Cobertura: INSPECIONADO.
+Resultado: imagens, comandos, estados, redes, montagens e políticas de reinício.
+
+Área: Configuração efetiva
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: metadados Docker e ambiente permitido dos dois pipelines;
+outras configurações não comprovadas em memória.
+
+Área: Código próprio
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: entradas e fluxos centrais; sem revisão integral de todos os utilitários.
+
+Área: Fonte versus arquivos do container
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: 18 + 23 arquivos Python iguais; galeria inacessível.
+
+Área: Fonte versus código carregado em memória
+Cobertura: NÃO PÔDE SER VERIFICADO.
+Resultado: sem introspecção invasiva do interpretador.
+
+Área: Dependências
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: declarações, metadados instalados e bibliotecas mapeadas.
+
+Área: Artefatos e proveniência
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: IDs, versões e tamanhos; origem exata de builds/modelos não comprovada.
+
+Área: Câmeras e drivers
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: configuração, sysfs, descritores e logs; sem teste de dispositivo.
+
+Área: Persistência
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: montagens, código e metadados; integridade e recuperação não testadas.
+
+Área: Bancos/cache
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: arquivos ONNX Runtime abertos; conteúdo não examinado.
+
+Área: Portas e conexões
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: sockets observados; atribuição completa a processos indisponível.
+
+Área: Sincronização externa
+Cobertura: PARCIALMENTE INSPECIONADO.
+Resultado: código, timer e status histórico; entrega remota não verificada.
+
+Área: Funcionamento do monitor
+Cobertura: PARCIALMENTE COMPROVADO.
+Resultado: avanço de frames; precisão e saúde integral não verificadas.
+
+Área: Funcionamento ocular FATIGUE
+Cobertura: NÃO PÔDE SER VERIFICADO.
+Resultado: supervisor em espera; pipeline não observado.
+
+Área: Funcionamento HTTP da galeria
+Cobertura: NÃO PÔDE SER VERIFICADO.
+Resultado: processo e inicialização registrados; sem teste HTTP.
+
+Área: Implementação, correção e otimização
+Cobertura: NÃO SE APLICA.
+Resultado: fora do escopo; nenhuma aplicada.
+
+
+10. RECOMENDAÇÕES NÃO EXECUTADAS
+
+Para eventual investigação adicional, os pontos prioritários são esclarecer
+os timeouts atuais do NVMe, a falha da ponte da segunda câmera e a
+proveniência das imagens.
+
+Fechar lacunas da galeria e de processos root exigiria autorização
+específica para acesso adicional. Nenhuma escalada foi realizada.
+
+Nenhuma recomendação foi executada. Este documento registra observações
+e análises de 02/10/2026; não constitui intervenção ou validação do estado
+posterior da máquina.

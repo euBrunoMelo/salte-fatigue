@@ -1,0 +1,6 @@
+{
+  "backup": "/mnt/nvme/Monitoramento/FATIGUE-backups/20261004T144724Z-absolute-ear",
+  "backup_image": "salte-fatigue:backup-20261004t144724z-absolute-ear",
+  "previous_image": "sha256:656956b2ab96007e1aa210dd95be87b87ea2d5c4a175bc5b55a1d8461895b41d",
+  "release_files": 18
+}
