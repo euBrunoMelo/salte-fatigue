@@ -57,6 +57,15 @@ a zero/`false`. Invalidez ou gap impedem finalização através da interrupção
 Pose bruta continua nos logs; opções dependentes de pose neutra foram retiradas.
 A FSM temporal EAR/PERCLOS foi mantida, sem adotar três faixas diretas de EAR.
 
+Logs e incidentes usam processos escritores independentes. A avaliação entrega
+registros e frames somente a buffers em RAM; saturação rejeita novos dados e
+registra perdas, mantendo o estado ocular e os alertas atuais no HUD e no socket
+local `@salte-fatigue-status`. Aceitação na fila não confirma persistência.
+O padrão reserva 32 MiB para registros/controle e 128 MiB para imagens, incluindo
+pré-roll e frames em trânsito. `--no-danger-record` não cria processo, pool ou
+pré-buffer de vídeo. Consulte [o contrato de persistência](docs/PERSISTENCE_ISOLATION.md)
+para limites, saúde, cobertura e validação local.
+
 Para atualizar o FATIGUE no Raspberry, verificar antes os erros do NVMe e guardar
 os arquivos e a imagem anteriores. Timeouts de armazenamento ou bloqueios de
 escrita impedem o build e a implantação remotos.

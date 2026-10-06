@@ -442,7 +442,7 @@ class TestRunHostLogging(unittest.TestCase):
         )
         self.assertIsNone(application.active_critical_event_id)
 
-    def test_recorder_does_not_receive_unpersisted_event_id(self) -> None:
+    def test_recorder_receives_logical_reference_when_event_admission_fails(self) -> None:
         logger = FailingCorrelatingLogger()
         recorder = CapturingRecorder()
         application = RuntimeApplication.__new__(RuntimeApplication)
@@ -461,8 +461,8 @@ class TestRunHostLogging(unittest.TestCase):
 
         application._publish(np.zeros((48, 64, 3), dtype=np.uint8), features, critical)
 
-        self.assertEqual(recorder.event_ids, [None])
-        self.assertIsNone(application.active_critical_event_id)
+        self.assertEqual(recorder.event_ids, ["logical-1"])
+        self.assertEqual(application.active_critical_event_id, "logical-1")
 
 
 if __name__ == "__main__":

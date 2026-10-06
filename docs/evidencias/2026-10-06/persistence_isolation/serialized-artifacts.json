@@ -1,0 +1,1049 @@
+{
+  "metadata": [
+    {
+      "schema_version": 2,
+      "incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "artifact_id": "4ebdc9d99f37480f8812cada5a19fe9c-part0-0",
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "status": "completed",
+      "event_ids": [],
+      "logical_event_ids": [
+        "70fbe206461f4370b2ccecfa22e2c802"
+      ],
+      "event_reference_status": "logical_unconfirmed",
+      "started_at": "2026-10-06T21:05:42.507104+00:00",
+      "finished_at": "2026-10-06T21:06:24.140741+00:00",
+      "source_started_s": 104.0,
+      "source_finished_s": 145.63333333333333,
+      "requested_window": {
+        "start_s": 101.0,
+        "trigger_s": 104.0,
+        "end_s": 145.63333333333333
+      },
+      "actual_first_source_s": 101.0,
+      "actual_last_source_s": 145.63333333333333,
+      "admitted_frames": 194,
+      "consumed_frames": 194,
+      "verified_encoded_frames": 194,
+      "admission": "accepted",
+      "consumption": "encoding_submitted",
+      "file_finalized": true,
+      "durable_confirmation": "worker_ack",
+      "coverage_complete": false,
+      "coverage_reasons": [
+        "full",
+        "source_gap"
+      ],
+      "dropped_frames": {
+        "full": 1146
+      },
+      "gap_count": 1,
+      "max_gap_s": 38.233333333333334,
+      "gap_tolerance_s": 0.5,
+      "boundary_tolerance_s": 0.03333333333333333,
+      "codec": "mp4v",
+      "video_file": "video.mp4",
+      "sha256": {
+        "video.mp4": "afaa403fa7c2a01cece9622561b173cf8d5be612400725e861b49380135af945",
+        "timestamps.jsonl": "233055034168890cabce4105005731b1dac1724ae3be54bdfe97a9ddaf60de5e"
+      }
+    }
+  ],
+  "manifests": [
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 182,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:25.451Z",
+      "bytes": 4128,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1405,
+      "last_frame_idx": 1408,
+      "transport_sequences": [
+        182,
+        183,
+        184,
+        185
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "8bdf78f49dc17e1a9f146aeda01d43826a791aea8191d520055b22cf7a4f65c5",
+        "assessments.jsonl": "58ae5b612f36bd98be96add7e90e183641f3f9333dc521c4a96b04e7753cdd71"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 178,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:25.307Z",
+      "bytes": 4100,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1401,
+      "last_frame_idx": 1404,
+      "transport_sequences": [
+        178,
+        179,
+        180,
+        181
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "68cf99d7271f7291e1829fce66a4306e688f706424f3b94f513e48aff5457513",
+        "assessments.jsonl": "45f1eba2c9097c0291ee0ca07f5de2935ee5b6887c4c562fdc98a0363e8d30ae"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 174,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:25.184Z",
+      "bytes": 4128,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1397,
+      "last_frame_idx": 1400,
+      "transport_sequences": [
+        174,
+        175,
+        176,
+        177
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "5363b6de424c5a9e666a9e6cd527c9716ad39bd90eb08cbd340b05bb9e30f3cc",
+        "assessments.jsonl": "01e1d6e6afec98a7a0bbe8e6e0f8b1a7e6ab20eaee513123a48f65daefee3e70"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 170,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:25.041Z",
+      "bytes": 4099,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1393,
+      "last_frame_idx": 1396,
+      "transport_sequences": [
+        170,
+        171,
+        172,
+        173
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "7c3ac4683c696739764424fa8ff7316c6412af9681cf11ec8a7e34f456b05338",
+        "assessments.jsonl": "55e70ce4c92871220631c63f98d028f10e78326604adbe3f9f2b8edbeae2fb3b"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 166,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.908Z",
+      "bytes": 4102,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1389,
+      "last_frame_idx": 1392,
+      "transport_sequences": [
+        166,
+        167,
+        168,
+        169
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "6af1dd9c3f6ab1d6958ff890aee175f3a4bd50d8e0d44d2199883435263a570e",
+        "assessments.jsonl": "daee89779733ee16944fe84ae23e1ea58564b04cbe3b9bdb00cf3a4bfa80dd71"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 162,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.774Z",
+      "bytes": 4126,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1385,
+      "last_frame_idx": 1388,
+      "transport_sequences": [
+        162,
+        163,
+        164,
+        165
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "2617f929bc9455155363efc608b109be7d4c9c17c500961de4c633249849a4a9",
+        "assessments.jsonl": "c088d22aaf58d661815b3207879316ec2fa497adb62bba3d72494df553189ef2"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 158,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.651Z",
+      "bytes": 4128,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1381,
+      "last_frame_idx": 1384,
+      "transport_sequences": [
+        158,
+        159,
+        160,
+        161
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "bc6a4df9cc1a472f0de6905971f5bbed8622796ae8eae10f3ec5d9a8fb0f043b",
+        "assessments.jsonl": "fe48e7d287ca3f5430599f36e2952f4a3b9a4163c20e4053df624ce0143ae7cb"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 154,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.507Z",
+      "bytes": 4088,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1377,
+      "last_frame_idx": 1380,
+      "transport_sequences": [
+        154,
+        155,
+        156,
+        157
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "78b1795b4cfc2066a3feabc2a901bc9f1e97fc9f589a03cbe8df885cf6e05d41",
+        "assessments.jsonl": "e9ee8a70d1c89a4b31d9ec41fb41ed1f50c827250dfe8b2e14981002cf6aeea4"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 150,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.384Z",
+      "bytes": 4127,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1373,
+      "last_frame_idx": 1376,
+      "transport_sequences": [
+        150,
+        151,
+        152,
+        153
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "18b3a3938e92ea66a1fdf7c009120762447cdd4d7379e6fc6a43a2eb3adfb291",
+        "assessments.jsonl": "98935f74598f8752e7a105e846bfcb5614bcac112a2396e0f7aa817a358382ea"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 146,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.251Z",
+      "bytes": 4126,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1369,
+      "last_frame_idx": 1372,
+      "transport_sequences": [
+        146,
+        147,
+        148,
+        149
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "4c89fb07abdde993a8a4b11fea2bf886438e144a79862c2c5acaef4f3f95ee01",
+        "assessments.jsonl": "893522ddde363c0c24d21e292f468bef808cdcce77ca2acfa7b31bc8a3d6159d"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 141,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:24.108Z",
+      "bytes": 4091,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1365,
+      "last_frame_idx": 1368,
+      "transport_sequences": [
+        141,
+        143,
+        144,
+        145
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "d5c6309fd6c1b3da9eb1fc1791639a13a6f569aaf822409c98887ec31d2d7aaf",
+        "assessments.jsonl": "655f80135677066f61941dd498a802af02e74d20e84c221f59195949737989c6"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 137,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.974Z",
+      "bytes": 4140,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1361,
+      "last_frame_idx": 1364,
+      "transport_sequences": [
+        137,
+        138,
+        139,
+        140
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "63fa26d3dd2f4cbe6cfee8a9619e0557d75310509b7de89892c714e19c7cd7cc",
+        "assessments.jsonl": "8e0b0e5b0085fc262f60aeae6ccb470a132f6944158fa2d203e7a96f66d9c884"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 133,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.841Z",
+      "bytes": 4138,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1357,
+      "last_frame_idx": 1360,
+      "transport_sequences": [
+        133,
+        134,
+        135,
+        136
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "3bf267c153139b29ff4391e4d0a35696f40871fbbd6199edad8e40b9b1a2d20d",
+        "assessments.jsonl": "f2841dcd42936eaa5ad9124acac5ea3be4b2fe0ef09047676244d42607d59ef5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 129,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.718Z",
+      "bytes": 4114,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1353,
+      "last_frame_idx": 1356,
+      "transport_sequences": [
+        129,
+        130,
+        131,
+        132
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "2f2b2b0755d6dca30d65e4699e817a13023fa243256cb93da6518e83add30bed",
+        "assessments.jsonl": "c70ae629f950862dbaf2f4d0aafa5c69e3716f0e8d575616ed8dfce6ff18ea3f"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 125,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.575Z",
+      "bytes": 4170,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1349,
+      "last_frame_idx": 1352,
+      "transport_sequences": [
+        125,
+        126,
+        127,
+        128
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "611ad1fae27075627a184009585cd6ad3a4c639d095479ca4f4840849ed72c0c",
+        "assessments.jsonl": "87a21a88e6a2129be6f72b3044012a31bba27ec13e970c59407459b23778db25"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 121,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.441Z",
+      "bytes": 4298,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1345,
+      "last_frame_idx": 1348,
+      "transport_sequences": [
+        121,
+        122,
+        123,
+        124
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "6f5ef94c18cb9cfaf44f7a10e4ed14f1e323b936b8a71a609769bbc3d3d9f54d",
+        "assessments.jsonl": "08eab6f2888819e879798b89b6298b16e1fcb7ed98971fb5c0c0bc96cf9d331a"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 117,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.308Z",
+      "bytes": 4272,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1341,
+      "last_frame_idx": 1344,
+      "transport_sequences": [
+        117,
+        118,
+        119,
+        120
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "beb26ccc47919c3b03cbe8ef441690e5a0ee64232537fa9f0d44cfee2ce89b81",
+        "assessments.jsonl": "b7d6d31ffe8b4b35dddf2d940519d6f6df173e9189493934195c637e0c8a748e"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 113,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.175Z",
+      "bytes": 4298,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1337,
+      "last_frame_idx": 1340,
+      "transport_sequences": [
+        113,
+        114,
+        115,
+        116
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "da7d3fd39bef17c09579322079a88d43f10326c43be813e8a38b9b430198b97e",
+        "assessments.jsonl": "804f57180aadf75ca2268f9f1e7dabef946765d9a68a4c3b6601820de3dfaff0"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 109,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:23.041Z",
+      "bytes": 4263,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1333,
+      "last_frame_idx": 1336,
+      "transport_sequences": [
+        109,
+        110,
+        111,
+        112
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "24f11a15df45d76ae6ed21398a7621073cdbeb0034ca92f345c45b606237975e",
+        "assessments.jsonl": "00ddcea503210bfdbf87c9b02c5c3ae515a8bd83d2d58ecfba0ba1b43e11cdec"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 105,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.918Z",
+      "bytes": 4271,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1329,
+      "last_frame_idx": 1332,
+      "transport_sequences": [
+        105,
+        106,
+        107,
+        108
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "7e1c8ae04326c10540ece049c397dc19ad02dd3639ed66b312ea4e4e3b1cb464",
+        "assessments.jsonl": "3ca10aac34f7892ee8fea4f02fb0f5d8949254b6aac9e57aabbb556ee645a6d3"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 101,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.774Z",
+      "bytes": 4296,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1325,
+      "last_frame_idx": 1328,
+      "transport_sequences": [
+        101,
+        102,
+        103,
+        104
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "5fec504cc4ff996ae601eb9f6fef6724e643ada0def99d3b07a4cd38ef19183e",
+        "assessments.jsonl": "8b519e7c8ba7fda52d79b4d6db256d8185d153c6433528470b9689f6c1fd5e10"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 97,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.651Z",
+      "bytes": 4298,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1321,
+      "last_frame_idx": 1324,
+      "transport_sequences": [
+        97,
+        98,
+        99,
+        100
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "06a7b73fc2f78d5076bf3ee79291a5e7548c90f003d7a4a9c6a14a69741b73c7",
+        "assessments.jsonl": "aa71e7b5b5c024b71f2cf4a5f46230ce293f2aec94cd520fe4099687966592f5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 93,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.507Z",
+      "bytes": 4238,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1317,
+      "last_frame_idx": 1320,
+      "transport_sequences": [
+        93,
+        94,
+        95,
+        96
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "f8d71684aa070cd1f7bb3465a63dc2b33847f9a0d564effb4da7aff159403561",
+        "assessments.jsonl": "18789c0421020bd2a51e4811d7bad07e716f575f9a8c345786575996362689df"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 89,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.374Z",
+      "bytes": 4297,
+      "frame_count": 4,
+      "assessment_count": 4,
+      "first_frame_idx": 1313,
+      "last_frame_idx": 1316,
+      "transport_sequences": [
+        89,
+        90,
+        91,
+        92
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "27e0a4ce834c3aefc39ca5da3348b6b55b1c668f43c9cfb66844a22b16439e86",
+        "assessments.jsonl": "e80a6bb2558e2c80fa5ae4c57d73d2c9e0168b91e8021c61e1fe817a124a55b5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 83,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.241Z",
+      "bytes": 6433,
+      "frame_count": 6,
+      "assessment_count": 6,
+      "first_frame_idx": 1307,
+      "last_frame_idx": 1312,
+      "transport_sequences": [
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "4fc5dd12be5ff8d77f0a5e79568c21ff2168c82368e49f0bfd67b19dacd84f1a",
+        "assessments.jsonl": "2b2472eb405dc0f2a85bd939ddabb046477b94ff708e9b7a6458d313c17112b2"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 55,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.128Z",
+      "bytes": 14936,
+      "frame_count": 14,
+      "assessment_count": 14,
+      "first_frame_idx": 53,
+      "last_frame_idx": 1306,
+      "transport_sequences": [
+        55,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "599245372111b53dc88e23a367238da9b47f331eb7057542802eafaf7635967e",
+        "assessments.jsonl": "0c6537ce83e5d69efeab3aefbf5e43cc63d8d1f3495fdf49ad0588116c671d39"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 41,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:22.008Z",
+      "bytes": 14350,
+      "frame_count": 14,
+      "assessment_count": 14,
+      "first_frame_idx": 39,
+      "last_frame_idx": 52,
+      "transport_sequences": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "b7272cf34a5b50e5d1e2a317b23077cb73bd53675c54b85e3ee58d43238bf251",
+        "assessments.jsonl": "9f202bffbe7263c18d05c8ff00b66d3b6b15200d34c0393cdc536697e706d035"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 27,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:21.895Z",
+      "bytes": 14386,
+      "frame_count": 14,
+      "assessment_count": 14,
+      "first_frame_idx": 25,
+      "last_frame_idx": 38,
+      "transport_sequences": [
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "61c5040d86e78c03e65276148af97aba215a3698955382f4817d8e6e4c65e731",
+        "assessments.jsonl": "cae6d9719b0080838cad5a13cf21389bea8873a8da96f95be9702e268c018bc7"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 14,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:21.774Z",
+      "bytes": 13333,
+      "frame_count": 13,
+      "assessment_count": 13,
+      "first_frame_idx": 12,
+      "last_frame_idx": 24,
+      "transport_sequences": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "f2e87a0868338c1b3ba2a13c2e482c93b4e6cd5b543f5e5e41e56eec68a42d80",
+        "assessments.jsonl": "dfba9b1649cd1af3e5fb882562f4b96465a59f2d190e3c17f4c95f73640393b2"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 3,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:21.670Z",
+      "bytes": 11316,
+      "frame_count": 11,
+      "assessment_count": 11,
+      "first_frame_idx": 1,
+      "last_frame_idx": 11,
+      "transport_sequences": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "4b13e9d92c79fb36e176fa551c8d0cfac360d93bdfa5f0215248b961caa8ce72",
+        "assessments.jsonl": "f9f645b3bd803762ae09ecee71d35c8a67d6dd6627b0b7a2f0d0b611d7f43a75"
+      }
+    },
+    {
+      "schema_version": 1,
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "sequence": 2,
+      "status": "completed",
+      "closed_at": "2026-10-06T21:06:21.567Z",
+      "bytes": 977,
+      "frame_count": 1,
+      "assessment_count": 1,
+      "first_frame_idx": 0,
+      "last_frame_idx": 0,
+      "transport_sequences": [
+        2
+      ],
+      "admission": "accepted",
+      "consumption": "written",
+      "publication": "finalized",
+      "durable_confirmation": "worker_ack",
+      "sha256": {
+        "frames.jsonl": "5517594fa66242d995dc14a085572ebb4bfcf89b40c677abdcf27d093231fea4",
+        "assessments.jsonl": "d8d83b908d28693b85f960a8c653ddc3ee48137f9f4ac978e29f75626e20290b"
+      }
+    }
+  ],
+  "loss_summaries": [
+    {
+      "schema_version": 1,
+      "record_id": "3c9598b549264e779fdd26b9fa352460-loss-2955bccf118c1cfd4f3b36b6",
+      "event_id": "3c9598b549264e779fdd26b9fa352460-loss-2955bccf118c1cfd4f3b36b6",
+      "run_id": "3c9598b549264e779fdd26b9fa352460",
+      "ts_utc": "2026-10-06T21:05:41.265357+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:contention": 5
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.265357+00:00",
+        "last_loss_source_s": 132.9,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "3c9598b549264e779fdd26b9fa352460-loss-5a6e2c20a2c0062d783027b4",
+      "event_id": "3c9598b549264e779fdd26b9fa352460-loss-5a6e2c20a2c0062d783027b4",
+      "run_id": "3c9598b549264e779fdd26b9fa352460",
+      "ts_utc": "2026-10-06T21:05:41.265357+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:contention": 4
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.265357+00:00",
+        "last_loss_source_s": 132.36666666666667,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "3c9598b549264e779fdd26b9fa352460-loss-e42d6096d3aeb466b7436069",
+      "event_id": "3c9598b549264e779fdd26b9fa352460-loss-e42d6096d3aeb466b7436069",
+      "run_id": "3c9598b549264e779fdd26b9fa352460",
+      "ts_utc": "2026-10-06T21:05:41.265357+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:contention": 3
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.265357+00:00",
+        "last_loss_source_s": 131.16666666666666,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "3c9598b549264e779fdd26b9fa352460-loss-d57c8e87ad0267279f0bc1dd",
+      "event_id": "3c9598b549264e779fdd26b9fa352460-loss-d57c8e87ad0267279f0bc1dd",
+      "run_id": "3c9598b549264e779fdd26b9fa352460",
+      "ts_utc": "2026-10-06T21:05:41.265357+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:contention": 2
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.265357+00:00",
+        "last_loss_source_s": 115.1,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "3c9598b549264e779fdd26b9fa352460-loss-3c8eb293f4bf42055836983d",
+      "event_id": "3c9598b549264e779fdd26b9fa352460-loss-3c8eb293f4bf42055836983d",
+      "run_id": "3c9598b549264e779fdd26b9fa352460",
+      "ts_utc": "2026-10-06T21:05:41.265357+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:contention": 1
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.265357+00:00",
+        "last_loss_source_s": 109.2,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "501d465be1a34230b39676f56855b69e-loss-92464f460e283711b382f9e2",
+      "event_id": "501d465be1a34230b39676f56855b69e-loss-92464f460e283711b382f9e2",
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "ts_utc": "2026-10-06T21:05:41.483275+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:full": 1240,
+          "events:full": 20,
+          "console:full": 18
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+        "last_loss_source_s": 143.13333333333333,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "501d465be1a34230b39676f56855b69e-loss-9f92a3593016b1feed74efee",
+      "event_id": "501d465be1a34230b39676f56855b69e-loss-9f92a3593016b1feed74efee",
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "ts_utc": "2026-10-06T21:05:41.483275+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:full": 1239,
+          "events:full": 20,
+          "console:full": 18
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+        "last_loss_source_s": 143.1,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    },
+    {
+      "schema_version": 1,
+      "record_id": "501d465be1a34230b39676f56855b69e-loss-221877c91e324d4c46e1f4fc",
+      "event_id": "501d465be1a34230b39676f56855b69e-loss-221877c91e324d4c46e1f4fc",
+      "run_id": "501d465be1a34230b39676f56855b69e",
+      "ts_utc": "2026-10-06T21:05:41.483275+00:00",
+      "kind": "persistence_loss_summary",
+      "data": {
+        "dropped": {
+          "telemetry:full": 1238,
+          "events:full": 20,
+          "console:full": 18
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+        "last_loss_source_s": 143.03333333333333,
+        "unknown_outcomes": 0,
+        "historical": true
+      }
+    }
+  ]
+}

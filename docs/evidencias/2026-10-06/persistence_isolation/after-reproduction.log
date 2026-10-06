@@ -1,0 +1,5 @@
+test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks)
+Open/write/finalize recorder blocks, event write block, independent apps. ... ok
+
+Extracted from the final full-suite run.
+Ran 203 tests; OK.

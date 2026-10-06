@@ -1,0 +1,55 @@
+test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks)
+Open/write/finalize recorder blocks, event write block, independent apps. ... 
+  test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='logger_event')
+Open/write/finalize recorder blocks, event write block, independent apps. ... FAIL
+  test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='open')
+Open/write/finalize recorder blocks, event write block, independent apps. ... FAIL
+  test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='write')
+Open/write/finalize recorder blocks, event write block, independent apps. ... FAIL
+  test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='finalize')
+Open/write/finalize recorder blocks, event write block, independent apps. ... FAIL
+
+======================================================================
+FAIL: test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='logger_event')
+Open/write/finalize recorder blocks, event write block, independent apps.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/salte-persistence-before-cvvarv0s/tests/test_persistence_reproduction.py", line 107, in test_publish_progresses_during_real_40_second_io_blocks
+    self.assertGreater(counts[phase], 1000, counts)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 13 not greater than 1000 : {'logger_event': 13, 'open': 87, 'write': 87, 'finalize': 88}
+
+======================================================================
+FAIL: test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='open')
+Open/write/finalize recorder blocks, event write block, independent apps.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/salte-persistence-before-cvvarv0s/tests/test_persistence_reproduction.py", line 107, in test_publish_progresses_during_real_40_second_io_blocks
+    self.assertGreater(counts[phase], 1000, counts)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 87 not greater than 1000 : {'logger_event': 13, 'open': 87, 'write': 87, 'finalize': 88}
+
+======================================================================
+FAIL: test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='write')
+Open/write/finalize recorder blocks, event write block, independent apps.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/salte-persistence-before-cvvarv0s/tests/test_persistence_reproduction.py", line 107, in test_publish_progresses_during_real_40_second_io_blocks
+    self.assertGreater(counts[phase], 1000, counts)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 87 not greater than 1000 : {'logger_event': 13, 'open': 87, 'write': 87, 'finalize': 88}
+
+======================================================================
+FAIL: test_publish_progresses_during_real_40_second_io_blocks (test_persistence_reproduction.TestPersistenceReproduction.test_publish_progresses_during_real_40_second_io_blocks) (phase='finalize')
+Open/write/finalize recorder blocks, event write block, independent apps.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/salte-persistence-before-cvvarv0s/tests/test_persistence_reproduction.py", line 107, in test_publish_progresses_during_real_40_second_io_blocks
+    self.assertGreater(counts[phase], 1000, counts)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 88 not greater than 1000 : {'logger_event': 13, 'open': 87, 'write': 87, 'finalize': 88}
+
+----------------------------------------------------------------------
+Ran 1 test in 50.020s
+
+FAILED (failures=4)

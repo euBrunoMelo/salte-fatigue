@@ -17,7 +17,9 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from camera_routing import DEFAULT_CAMERA_ID_CONTAINS, camera_index_for_id  # noqa: E402
-from danger_video_recorder import DangerVideoRecorder  # noqa: E402
+from async_danger_recorder import AsyncDangerVideoRecorder as DangerVideoRecorder  # noqa: E402
+from async_structured_logger import AsyncConsoleHandler, AsyncStructuredLogger as StructuredLogger  # noqa: E402
+from persistence_transport import HealthSocket, Receipt  # noqa: E402
 from eye_closure import (  # noqa: E402
     DEFAULT_CLOSED_EAR_THRESHOLD, EyeClosureConfig, validate_closed_ear_threshold,
 )
@@ -42,7 +44,6 @@ from runtime_observability import (  # noqa: E402
 from structured_logger import (  # noqa: E402
     DEFAULT_MAX_SEGMENT_AGE_S,
     DEFAULT_MAX_SEGMENT_BYTES,
-    StructuredLogger,
 )
 
 logger = logging.getLogger("SALTE.host")
@@ -255,6 +256,12 @@ def _add_output_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--danger-post-roll-sec", type=float, default=6.0)
     parser.add_argument("--danger-cooldown-sec", type=float, default=30.0)
     parser.add_argument("--no-danger-record", action="store_true")
+    parser.add_argument("--persistence-record-mib", type=int, default=32)
+    parser.add_argument("--persistence-image-mib", type=int, default=128)
+    parser.add_argument("--persistence-status-socket", default="@salte-fatigue-status")
+    parser.add_argument("--danger-gap-tolerance-sec", type=float, default=.5)
+    parser.add_argument("--danger-boundary-tolerance-sec", type=float, default=None)
+    parser.add_argument("--danger-encoder-allowance-mib", type=int, default=64)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -310,7 +317,34 @@ class RuntimeApplication:
             args.log_assessment_every,
             args.max_segment_age_s,
             args.max_segment_bytes,
+            budget_bytes=args.persistence_record_mib * 1024 * 1024,
         )
+        self._console_handler = AsyncConsoleHandler(self.slog)
+        self._previous_handlers = logging.getLogger().handlers[:]
+        logging.getLogger().handlers = [self._console_handler]
+        try:
+            self._initialize_components(args, logs_root)
+        except BaseException:
+            for name in ("recorder", "camera", "backend"):
+                component = getattr(self, name, None)
+                if component is not None:
+                    try:
+                        component.close()
+                    except Exception:
+                        pass
+            self.slog.close(.5)
+            logging.getLogger().handlers = self._previous_handlers
+            raise
+        self.stop = False
+        self.frames_seen = 0
+        self.last_health = time.monotonic()
+        self.last_frame_at = time.monotonic()
+        self.last_state = FatigueState.UNKNOWN
+        self.active_critical_event_id: Optional[str] = None
+        self.local_status = {"frames_seen": 0, "fatigue_state": "unknown", "source_timestamp_s": None}
+        self.status_service = HealthSocket(args.persistence_status_socket, self.persistence_snapshot)
+
+    def _initialize_components(self, args, logs_root):
         self.backend = MediaPipeBackend(args.task_model, fps=self.fps)
         self.extractor = RealTimeFeatureExtractor(self.backend, RTExtractorConfig(fps=self.fps))
         self.camera = CameraBackend(
@@ -331,13 +365,13 @@ class RuntimeApplication:
             self.fps, (args.width, args.height), args.danger_pre_roll_sec,
             args.danger_post_roll_sec, args.danger_cooldown_sec, not args.no_danger_record,
             run_id=self.slog.run_id,
+            image_budget_bytes=args.persistence_image_mib * 1024 * 1024,
+            control_budget_bytes=self.slog.control_budget,
+            gap_tolerance_s=args.danger_gap_tolerance_sec,
+            boundary_tolerance_s=args.danger_boundary_tolerance_sec,
+            event_logger=self.slog,
+            encoder_allowance_bytes=args.danger_encoder_allowance_mib * 1024 * 1024,
         )
-        self.stop = False
-        self.frames_seen = 0
-        self.last_health = time.monotonic()
-        self.last_frame_at = time.monotonic()
-        self.last_state = FatigueState.UNKNOWN
-        self.active_critical_event_id: Optional[str] = None
 
     def _on_video_loop(self, loop_index: int) -> None:
         self.runtime.reset()
@@ -378,20 +412,21 @@ class RuntimeApplication:
         self, frame: np.ndarray, features: RTFrameFeatures, assessment: RuntimeAssessment
     ) -> None:
         self.frames_seen += 1
+        # Current local state is published independently of every persistence queue.
+        self.local_status = {"frames_seen": self.frames_seen, "fatigue_state": assessment.fatigue.state.value,
+                             "source_timestamp_s": assessment.observation.timestamp_s}
         transition = self._prepare_state_change(assessment)
         if transition is not None:
-            event_path = self._persist_state_change(assessment, transition)
-            if event_path is None and transition[1] == FatigueState.CRITICAL:
-                self.active_critical_event_id = None
+            self._persist_state_change(assessment, transition)
         self.recorder.on_frame(
-            frame.copy(),
+            frame,
             assessment.observation.timestamp_s,
             assessment.fatigue.state,
             self.active_critical_event_id,
         )
         self._log_frame(assessment)
         if self.args.display:
-            _draw_hud(frame, features, assessment)
+            _draw_hud(frame, features, assessment, self.persistence_snapshot())
             cv2.imshow("SALTE EAR/PERCLOS", frame)
             self.stop = (cv2.waitKey(1) & 0xFF) == ord("q")
         self._health_log()
@@ -420,14 +455,20 @@ class RuntimeApplication:
         self,
         result: RuntimeAssessment,
         transition: tuple[FatigueState, FatigueState, str],
-    ) -> Optional[Path]:
+    ) -> Receipt:
         previous, state, event_id = transition
         logger.info("Fadiga: %s -> %s", previous.label, state.label)
         return self.slog.log_event("fatigue_state_change", {
             "previous": previous.value, "current": state.value,
             "previous_label": previous.label, "current_label": state.label,
             "frame_idx": result.observation.frame_idx,
+            "source_timestamp_s": result.observation.timestamp_s,
         }, event_id=event_id)
+
+    def persistence_snapshot(self) -> dict:
+        return {"current": dict(self.local_status), "logger": self.slog.snapshot(),
+                "recorder": self.recorder.snapshot(),
+                "status_socket_error": getattr(getattr(self, "status_service", None), "error", None)}
 
     def _health_log(self) -> None:
         now = time.monotonic()
@@ -456,19 +497,25 @@ class RuntimeApplication:
         )
 
     def _close(self) -> None:
-        self.recorder.close()
+        deadline = time.monotonic() + 5.
+        self.recorder.request_close()
         self.camera.close()
         self.backend.close()
         self.slog.log_run_end({
             "frames_seen": self.frames_seen, "fatigue_state": self.last_state.value,
             "fatigue_label": self.last_state.label,
+            "recorder_snapshot_at_end_admission": self.recorder.snapshot(),
         })
-        self.slog.close()
+        self.slog.channel.request_close()
+        self.recorder.close(max(0., deadline - time.monotonic()))
+        self.slog.close(max(0., deadline - time.monotonic()))
+        self.status_service.close()
+        logging.getLogger().handlers = self._previous_handlers
         if self.args.display:
             cv2.destroyAllWindows()
 
 
-def _draw_hud(frame: np.ndarray, features: RTFrameFeatures, result: RuntimeAssessment) -> None:
+def _draw_hud(frame: np.ndarray, features: RTFrameFeatures, result: RuntimeAssessment, health=None) -> None:
     state = result.fatigue.state
     colors = {
         FatigueState.UNKNOWN: (100, 100, 100), FatigueState.SAFE: (0, 180, 0),
@@ -482,6 +529,10 @@ def _draw_hud(frame: np.ndarray, features: RTFrameFeatures, result: RuntimeAsses
     eye_text = f"L={features.ear_l:.3f} R={features.ear_r:.3f} eyes={result.quality.valid_eye_count}"
     cv2.putText(frame, eye_text, (10, 64), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
     cv2.putText(frame, f"attention={attention.value}", (10, 86), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+    if health:
+        technical = f"storage: log={health['logger']['state']} video={health['recorder']['state']}"
+        drops = sum(health["logger"].get("dropped", {}).values()) + sum(health["recorder"].get("dropped", {}).values())
+        cv2.putText(frame, f"{technical} drops={drops}", (10, 108), cv2.FONT_HERSHEY_SIMPLEX, .45, (255, 255, 255), 1)
 
 
 def main(argv: Optional[list[str]] = None) -> int:

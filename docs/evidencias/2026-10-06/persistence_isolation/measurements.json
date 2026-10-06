@@ -1,0 +1,215 @@
+{
+  "host": "Linux-7.0.0-34-generic-x86_64-with-glibc2.43",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "numpy": "2.4.6",
+  "opencv": "4.13.0",
+  "scope": "PC local; no camera/MediaPipe/Pi",
+  "default_budget_delivery": {
+    "p50_ms": 0.18137200004275655,
+    "p95_ms": 0.43142260037711816,
+    "p99_ms": 0.6538839810673379,
+    "max_ms": 7.0655950003128964,
+    "parent_cpu_seconds": 0.23499216600000006,
+    "calls": 1000,
+    "copy_seconds": 0.14760632900288329,
+    "copies": 1000,
+    "record_budget_bytes": 33554432,
+    "image_budget_bytes": 134217728,
+    "prebuffer_descriptors": 91
+  },
+  "default_budget_memory": {
+    "parent": {
+      "Rss_kib": 240016,
+      "Pss_kib": 204722,
+      "Pss_Anon_kib": 59540,
+      "Pss_File_kib": 12374,
+      "Pss_Shmem_kib": 132808
+    },
+    "logger": {
+      "Rss_kib": 54952,
+      "Pss_kib": 36562,
+      "Pss_Anon_kib": 18304,
+      "Pss_File_kib": 2822,
+      "Pss_Shmem_kib": 15436
+    },
+    "recorder": {
+      "Rss_kib": 65604,
+      "Pss_kib": 35150,
+      "Pss_Anon_kib": 25684,
+      "Pss_File_kib": 9162,
+      "Pss_Shmem_kib": 304
+    }
+  },
+  "stalled_memory": {
+    "parent": {
+      "Rss_kib": 240672,
+      "Pss_kib": 202190,
+      "Pss_Anon_kib": 63984,
+      "Pss_File_kib": 7464,
+      "Pss_Shmem_kib": 130742
+    },
+    "logger": {
+      "Rss_kib": 37756,
+      "Pss_kib": 19641,
+      "Pss_Anon_kib": 18232,
+      "Pss_File_kib": 1209,
+      "Pss_Shmem_kib": 200
+    },
+    "recorder": {
+      "Rss_kib": 69320,
+      "Pss_kib": 31619,
+      "Pss_Anon_kib": 26376,
+      "Pss_File_kib": 5201,
+      "Pss_Shmem_kib": 42
+    }
+  },
+  "double_40_second_stall": {
+    "p50_ms": 0.34502150083426386,
+    "p95_ms": 0.6483023001237597,
+    "p99_ms": 1.00681816082215,
+    "max_ms": 4.344873999798438,
+    "frames_seen": 1410,
+    "parent_cpu_seconds": 1.0082341590000001,
+    "wall_seconds": 44.0,
+    "peak_reserved_image_bytes": 133632000,
+    "final": {
+      "current": {
+        "frames_seen": 1410,
+        "fatigue_state": "safe",
+        "source_timestamp_s": 146.96666666666667
+      },
+      "logger": {
+        "state": "closed_incomplete",
+        "heartbeat": 9535.215746669,
+        "phase": "idle",
+        "durable": {
+          "events": 142,
+          "telemetry": 185
+        },
+        "consumed": {
+          "events": 142,
+          "console": 68,
+          "telemetry": 186
+        },
+        "last_durable_ack": {
+          "category": "telemetry",
+          "sequence": 185,
+          "path": "/tmp/salte-isolation-ck_m_7z2/logs/runs/2026/10/06/501d465be1a34230b39676f56855b69e/segments/000182",
+          "confirmed_utc": "2026-10-06T21:06:25.452Z"
+        },
+        "error": null,
+        "generation": 0,
+        "loss_summary": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/501d465be1a34230b39676f56855b69e-loss-92464f460e283711b382f9e2.json",
+        "memory": {
+          "Rss_kib": 37976,
+          "Pss_kib": 19859,
+          "Pss_Anon_kib": 18448,
+          "Pss_File_kib": 1209,
+          "Pss_Shmem_kib": 202
+        },
+        "last_incident": {},
+        "pid": null,
+        "recovery_attempts": 0,
+        "dropped": {
+          "telemetry:full": 1240,
+          "events:full": 20,
+          "console:full": 18
+        },
+        "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+        "unknown_outcomes": 2,
+        "queues": {
+          "events": {
+            "count": 1,
+            "capacity": 7,
+            "reserved_bytes": 4128,
+            "capacity_bytes": 28896
+          },
+          "console": {
+            "count": 0,
+            "capacity": 7,
+            "reserved_bytes": 0,
+            "capacity_bytes": 14560
+          },
+          "telemetry": {
+            "count": 1,
+            "capacity": 54,
+            "reserved_bytes": 8224,
+            "capacity_bytes": 444096
+          }
+        }
+      },
+      "recorder": {
+        "state": "closed",
+        "heartbeat": 9535.196781905,
+        "phase": "closed",
+        "durable": {
+          "controls": 316
+        },
+        "consumed": {
+          "video": 315,
+          "controls": 316
+        },
+        "last_durable_ack": {
+          "category": "controls",
+          "sequence": 316,
+          "path": "/tmp/salte-isolation-ck_m_7z2/video/2026/10/06/4ebdc9d99f37480f8812cada5a19fe9c-part0-0",
+          "confirmed_utc": "2026-10-06T21:06:24.671Z"
+        },
+        "error": null,
+        "generation": 0,
+        "loss_summary": "/tmp/salte-isolation-ck_m_7z2/video/loss-audit/501d465be1a34230b39676f56855b69e-41f96c54ad97fc1055d10ae7.json",
+        "memory": {
+          "Rss_kib": 205664,
+          "Pss_kib": 102004,
+          "Pss_Anon_kib": 31156,
+          "Pss_File_kib": 5556,
+          "Pss_Shmem_kib": 65292
+        },
+        "baseline_memory": {
+          "Rss_kib": 65180,
+          "Pss_kib": 34626,
+          "Pss_Anon_kib": 25676,
+          "Pss_File_kib": 8948,
+          "Pss_Shmem_kib": 2
+        },
+        "encoder_allowance_bytes": 67108864,
+        "last_incident": {
+          "incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+          "artifact_id": "4ebdc9d99f37480f8812cada5a19fe9c-part0-0",
+          "file_finalized": true,
+          "durably_published": true,
+          "coverage_complete": false,
+          "path": "/tmp/salte-isolation-ck_m_7z2/video/2026/10/06/4ebdc9d99f37480f8812cada5a19fe9c-part0-0"
+        },
+        "pid": null,
+        "recovery_attempts": 0,
+        "dropped": {
+          "video:full": 1146
+        },
+        "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+        "unknown_outcomes": 0,
+        "queues": {
+          "controls": {
+            "count": 0,
+            "capacity": 18,
+            "reserved_bytes": 0,
+            "capacity_bytes": 74304
+          },
+          "video": {
+            "count": 0,
+            "capacity": 145,
+            "reserved_bytes": 0,
+            "capacity_bytes": 4640
+          }
+        },
+        "fsm": "MONITORING",
+        "image_capacity_bytes": 134217728,
+        "active_incident_id": null,
+        "image_reserved_bytes": 0,
+        "copies": 264,
+        "copy_seconds": 0.07150508200174954
+      },
+      "status_socket_error": null
+    }
+  }
+}

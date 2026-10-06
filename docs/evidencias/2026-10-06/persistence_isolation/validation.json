@@ -1,0 +1,26 @@
+{
+  "baseline_head": "541fa2fc919c9944d577ffa7c3ebb0c1b2565943",
+  "reproduction_test_sha256": "bd78924c150913fe668624c156f307d1a021e68024330f2e6df0e151cc4a777d",
+  "reproduction_unchanged": true,
+  "before_functional_failures": 4,
+  "after_full_suite_tests": 203,
+  "after_full_suite": "OK",
+  "python_311": "syntax compatibility only; no 3.11 interpreter installed locally",
+  "source_sha256": {
+    "persistence_transport.py": "1f78ba666bb4926d395810da7eeb17580697942bcad3063c78d7e4f95c25c305",
+    "persistence_worker.py": "a8d5f4efd63895f05a2b567fdb38dc294c4ead7e8a2f0b0e2cfc0e47b072c6c2",
+    "recorder_persistence_worker.py": "2a06ca71917111bee13712b2cd26a9c88e9ee46c4aa9b867dc7c6481a88dc778",
+    "async_structured_logger.py": "8820363b9b7a46586b397038b836fed91c7e09d88e9192da4519a47e3ebaf525",
+    "async_danger_recorder.py": "54807250c3a0b9044ae8444cc99d396f68c9ecccdfb4b9e213e5c289f0e941a7",
+    "run_host.py": "80870cd8c0511942d5d6aa2e01191de040ad121e12eb82dcc936539b634abf3c",
+    "tests/test_async_persistence.py": "20829e4db94e21d1db93dc7a536a646058a553291284f544936f418e832cef21",
+    "tests/test_persistence_reproduction.py": "bd78924c150913fe668624c156f307d1a021e68024330f2e6df0e151cc4a777d",
+    "ops/validate_persistence_isolation.py": "590d0c76763e247d6dab1e47b713c4c63e5d5360b1592fc36f06b8656eb51efb",
+    "Dockerfile": "3b58ffc0cdd0be74d26706accad61b7ea161315e872ae8e16c13bf390617384f",
+    "README.md": "1a01fd58b3577c78e6f08034d9677ea20772c6bd3ddcfb34dea90a63d88fb975",
+    "docs/PERSISTENCE_ISOLATION.md": "983da37c1472158176c16e56f853202fba17b6b2a1a3153b93aea18a7006927f",
+    "tests/test_structured_logger.py": "ab122a8de48acf9dcfa19bac0764c77a942fd6eb9b17fd43e510be76271fecaf"
+  },
+  "raspberry_access_or_deployment": false,
+  "review_patches_apply_and_reproduce_sources": true
+}

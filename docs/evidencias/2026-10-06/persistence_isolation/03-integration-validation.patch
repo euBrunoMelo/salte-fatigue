@@ -1,0 +1,1076 @@
+diff --git a/run_host.py b/run_host.py
+index e9d783f..9ef69d9 100644
+--- a/run_host.py
++++ b/run_host.py
+@@ -17,7 +17,9 @@ HERE = Path(__file__).resolve().parent
+ sys.path.insert(0, str(HERE))
+ 
+ from camera_routing import DEFAULT_CAMERA_ID_CONTAINS, camera_index_for_id  # noqa: E402
+-from danger_video_recorder import DangerVideoRecorder  # noqa: E402
++from async_danger_recorder import AsyncDangerVideoRecorder as DangerVideoRecorder  # noqa: E402
++from async_structured_logger import AsyncConsoleHandler, AsyncStructuredLogger as StructuredLogger  # noqa: E402
++from persistence_transport import HealthSocket, Receipt  # noqa: E402
+ from eye_closure import (  # noqa: E402
+     DEFAULT_CLOSED_EAR_THRESHOLD, EyeClosureConfig, validate_closed_ear_threshold,
+ )
+@@ -42,7 +44,6 @@ from runtime_observability import (  # noqa: E402
+ from structured_logger import (  # noqa: E402
+     DEFAULT_MAX_SEGMENT_AGE_S,
+     DEFAULT_MAX_SEGMENT_BYTES,
+-    StructuredLogger,
+ )
+ 
+ logger = logging.getLogger("SALTE.host")
+@@ -255,6 +256,12 @@ def _add_output_args(parser: argparse.ArgumentParser) -> None:
+     parser.add_argument("--danger-post-roll-sec", type=float, default=6.0)
+     parser.add_argument("--danger-cooldown-sec", type=float, default=30.0)
+     parser.add_argument("--no-danger-record", action="store_true")
++    parser.add_argument("--persistence-record-mib", type=int, default=32)
++    parser.add_argument("--persistence-image-mib", type=int, default=128)
++    parser.add_argument("--persistence-status-socket", default="@salte-fatigue-status")
++    parser.add_argument("--danger-gap-tolerance-sec", type=float, default=.5)
++    parser.add_argument("--danger-boundary-tolerance-sec", type=float, default=None)
++    parser.add_argument("--danger-encoder-allowance-mib", type=int, default=64)
+ 
+ 
+ def build_parser() -> argparse.ArgumentParser:
+@@ -310,7 +317,34 @@ class RuntimeApplication:
+             args.log_assessment_every,
+             args.max_segment_age_s,
+             args.max_segment_bytes,
++            budget_bytes=args.persistence_record_mib * 1024 * 1024,
+         )
++        self._console_handler = AsyncConsoleHandler(self.slog)
++        self._previous_handlers = logging.getLogger().handlers[:]
++        logging.getLogger().handlers = [self._console_handler]
++        try:
++            self._initialize_components(args, logs_root)
++        except BaseException:
++            for name in ("recorder", "camera", "backend"):
++                component = getattr(self, name, None)
++                if component is not None:
++                    try:
++                        component.close()
++                    except Exception:
++                        pass
++            self.slog.close(.5)
++            logging.getLogger().handlers = self._previous_handlers
++            raise
++        self.stop = False
++        self.frames_seen = 0
++        self.last_health = time.monotonic()
++        self.last_frame_at = time.monotonic()
++        self.last_state = FatigueState.UNKNOWN
++        self.active_critical_event_id: Optional[str] = None
++        self.local_status = {"frames_seen": 0, "fatigue_state": "unknown", "source_timestamp_s": None}
++        self.status_service = HealthSocket(args.persistence_status_socket, self.persistence_snapshot)
++
++    def _initialize_components(self, args, logs_root):
+         self.backend = MediaPipeBackend(args.task_model, fps=self.fps)
+         self.extractor = RealTimeFeatureExtractor(self.backend, RTExtractorConfig(fps=self.fps))
+         self.camera = CameraBackend(
+@@ -331,13 +365,13 @@ class RuntimeApplication:
+             self.fps, (args.width, args.height), args.danger_pre_roll_sec,
+             args.danger_post_roll_sec, args.danger_cooldown_sec, not args.no_danger_record,
+             run_id=self.slog.run_id,
++            image_budget_bytes=args.persistence_image_mib * 1024 * 1024,
++            control_budget_bytes=self.slog.control_budget,
++            gap_tolerance_s=args.danger_gap_tolerance_sec,
++            boundary_tolerance_s=args.danger_boundary_tolerance_sec,
++            event_logger=self.slog,
++            encoder_allowance_bytes=args.danger_encoder_allowance_mib * 1024 * 1024,
+         )
+-        self.stop = False
+-        self.frames_seen = 0
+-        self.last_health = time.monotonic()
+-        self.last_frame_at = time.monotonic()
+-        self.last_state = FatigueState.UNKNOWN
+-        self.active_critical_event_id: Optional[str] = None
+ 
+     def _on_video_loop(self, loop_index: int) -> None:
+         self.runtime.reset()
+@@ -378,20 +412,21 @@ class RuntimeApplication:
+         self, frame: np.ndarray, features: RTFrameFeatures, assessment: RuntimeAssessment
+     ) -> None:
+         self.frames_seen += 1
++        # Current local state is published independently of every persistence queue.
++        self.local_status = {"frames_seen": self.frames_seen, "fatigue_state": assessment.fatigue.state.value,
++                             "source_timestamp_s": assessment.observation.timestamp_s}
+         transition = self._prepare_state_change(assessment)
+         if transition is not None:
+-            event_path = self._persist_state_change(assessment, transition)
+-            if event_path is None and transition[1] == FatigueState.CRITICAL:
+-                self.active_critical_event_id = None
++            self._persist_state_change(assessment, transition)
+         self.recorder.on_frame(
+-            frame.copy(),
++            frame,
+             assessment.observation.timestamp_s,
+             assessment.fatigue.state,
+             self.active_critical_event_id,
+         )
+         self._log_frame(assessment)
+         if self.args.display:
+-            _draw_hud(frame, features, assessment)
++            _draw_hud(frame, features, assessment, self.persistence_snapshot())
+             cv2.imshow("SALTE EAR/PERCLOS", frame)
+             self.stop = (cv2.waitKey(1) & 0xFF) == ord("q")
+         self._health_log()
+@@ -420,15 +455,21 @@ class RuntimeApplication:
+         self,
+         result: RuntimeAssessment,
+         transition: tuple[FatigueState, FatigueState, str],
+-    ) -> Optional[Path]:
++    ) -> Receipt:
+         previous, state, event_id = transition
+         logger.info("Fadiga: %s -> %s", previous.label, state.label)
+         return self.slog.log_event("fatigue_state_change", {
+             "previous": previous.value, "current": state.value,
+             "previous_label": previous.label, "current_label": state.label,
+             "frame_idx": result.observation.frame_idx,
++            "source_timestamp_s": result.observation.timestamp_s,
+         }, event_id=event_id)
+ 
++    def persistence_snapshot(self) -> dict:
++        return {"current": dict(self.local_status), "logger": self.slog.snapshot(),
++                "recorder": self.recorder.snapshot(),
++                "status_socket_error": getattr(getattr(self, "status_service", None), "error", None)}
++
+     def _health_log(self) -> None:
+         now = time.monotonic()
+         if now - self.last_health < 10.0:
+@@ -456,19 +497,25 @@ class RuntimeApplication:
+         )
+ 
+     def _close(self) -> None:
+-        self.recorder.close()
++        deadline = time.monotonic() + 5.
++        self.recorder.request_close()
+         self.camera.close()
+         self.backend.close()
+         self.slog.log_run_end({
+             "frames_seen": self.frames_seen, "fatigue_state": self.last_state.value,
+             "fatigue_label": self.last_state.label,
++            "recorder_snapshot_at_end_admission": self.recorder.snapshot(),
+         })
+-        self.slog.close()
++        self.slog.channel.request_close()
++        self.recorder.close(max(0., deadline - time.monotonic()))
++        self.slog.close(max(0., deadline - time.monotonic()))
++        self.status_service.close()
++        logging.getLogger().handlers = self._previous_handlers
+         if self.args.display:
+             cv2.destroyAllWindows()
+ 
+ 
+-def _draw_hud(frame: np.ndarray, features: RTFrameFeatures, result: RuntimeAssessment) -> None:
++def _draw_hud(frame: np.ndarray, features: RTFrameFeatures, result: RuntimeAssessment, health=None) -> None:
+     state = result.fatigue.state
+     colors = {
+         FatigueState.UNKNOWN: (100, 100, 100), FatigueState.SAFE: (0, 180, 0),
+@@ -482,6 +529,10 @@ def _draw_hud(frame: np.ndarray, features: RTFrameFeatures, result: RuntimeAsses
+     eye_text = f"L={features.ear_l:.3f} R={features.ear_r:.3f} eyes={result.quality.valid_eye_count}"
+     cv2.putText(frame, eye_text, (10, 64), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+     cv2.putText(frame, f"attention={attention.value}", (10, 86), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
++    if health:
++        technical = f"storage: log={health['logger']['state']} video={health['recorder']['state']}"
++        drops = sum(health["logger"].get("dropped", {}).values()) + sum(health["recorder"].get("dropped", {}).values())
++        cv2.putText(frame, f"{technical} drops={drops}", (10, 108), cv2.FONT_HERSHEY_SIMPLEX, .45, (255, 255, 255), 1)
+ 
+ 
+ def main(argv: Optional[list[str]] = None) -> int:
+diff --git a/Dockerfile b/Dockerfile
+index 32ef486..340fb11 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -109,6 +109,11 @@ COPY fatigue_runtime.py       /app/
+ COPY atomic_persistence.py    /app/
+ COPY structured_logger.py     /app/
+ COPY danger_video_recorder.py /app/
++COPY persistence_transport.py /app/
++COPY persistence_worker.py    /app/
++COPY recorder_persistence_worker.py /app/
++COPY async_structured_logger.py /app/
++COPY async_danger_recorder.py /app/
+ 
+ # Unico modelo neural do runtime: MediaPipe FaceLandmarker.
+ COPY face_landmarker.task /app/
+diff --git a/README.md b/README.md
+index 4c35627..9e0684a 100644
+--- a/README.md
++++ b/README.md
+@@ -57,6 +57,15 @@ a zero/`false`. Invalidez ou gap impedem finalização através da interrupção
+ Pose bruta continua nos logs; opções dependentes de pose neutra foram retiradas.
+ A FSM temporal EAR/PERCLOS foi mantida, sem adotar três faixas diretas de EAR.
+ 
++Logs e incidentes usam processos escritores independentes. A avaliação entrega
++registros e frames somente a buffers em RAM; saturação rejeita novos dados e
++registra perdas, mantendo o estado ocular e os alertas atuais no HUD e no socket
++local `@salte-fatigue-status`. Aceitação na fila não confirma persistência.
++O padrão reserva 32 MiB para registros/controle e 128 MiB para imagens, incluindo
++pré-roll e frames em trânsito. `--no-danger-record` não cria processo, pool ou
++pré-buffer de vídeo. Consulte [o contrato de persistência](docs/PERSISTENCE_ISOLATION.md)
++para limites, saúde, cobertura e validação local.
++
+ Para atualizar o FATIGUE no Raspberry, verificar antes os erros do NVMe e guardar
+ os arquivos e a imagem anteriores. Timeouts de armazenamento ou bloqueios de
+ escrita impedem o build e a implantação remotos.
+diff --git a/docs/PERSISTENCE_ISOLATION.md b/docs/PERSISTENCE_ISOLATION.md
+new file mode 100644
+index 0000000..2039da3
+--- /dev/null
++++ b/docs/PERSISTENCE_ISOLATION.md
+@@ -0,0 +1,154 @@
++# Persistência isolada da avaliação
++
++`RuntimeApplication` usa `AsyncStructuredLogger` e `AsyncDangerVideoRecorder`.
++Os escritores síncronos anteriores permanecem para compatibilidade dos testes
++de formato e publicação; o runtime de produção não os chama no loop.
++EAR, PERCLOS, recuperação crítica, câmera e codecs não foram alterados.
++Esta entrega não instala nem reinicia serviços no Raspberry.
++
++## Admissão e confirmação
++
++O produtor gera IDs e timestamps de origem. `Receipt.accepted` informa apenas
++admissão; não é um caminho de arquivo. `receipt_state()` do logger distingue
++`rejected`, `enqueued`, `consumed`, `persisted` e `outcome_unknown`. A última
++confirmação durável está na saúde do escritor. Confirmações já observadas
++continuam válidas após a troca de processo.
++
++O logger escreve JSONL em diretórios `.partial`. Publica segmentos com hashes,
++manifesto e `fsync`, preservando pares frame/assessment e amostragem. Eventos e
++metadados usam IDs imutáveis. Uma repetição após perda de confirmação verifica
++o conteúdo existente e sincroniza o diretório antes de confirmar; não substitui
++o arquivo. `run-end` espera os pares admitidos anteriormente e informa perdas
++e a situação do vídeo observada na admissão do encerramento. Não confirma uma
++execução encerrada sem lacunas se essa informação ainda estiver pendente.
++
++O recorder distingue admissão, submissão ao encoder, número de frames realmente
++decodificados na validação, finalização, confirmação durável e cobertura.
++`file_finalized=true` não implica `coverage_complete=true`. A confirmação
++durável aparece em `last_incident.durably_published` após publicação e `fsync`.
++O arquivo final registra `durable_confirmation=worker_ack`, sem tratar a
++admissão como confirmação. `logical_event_ids` são referências de correlação
++ainda não confirmadas; `event_ids` não é preenchido com referências da fila.
++
++## Memória e saturação
++
++| Recurso | Padrão | Configuração |
++|---|---:|---|
++| Registros, controles, índices, saúde, scratch e notificações | 32 MiB | `--persistence-record-mib` |
++| Todas as imagens próprias em pré-buffer, fila e processamento | 128 MiB | `--persistence-image-mib` |
++| Crescimento do espaço virtual do encoder/validador após inicialização | 64 MiB | `--danger-encoder-allowance-mib` |
++| Quantidade máxima de pares de telemetria | 16.384 | limite interno |
++| Quantidade máxima de eventos / mensagens de console | 512 / 512 | limites internos |
++| Quantidade máxima de comandos do recorder | 256 | limite interno |
++
++Os limites de bytes prevalecem sobre quantidades. Slots fixos têm payloads de
++8.192 bytes (pares), 4.096 (eventos/controles) e 2.048 (console), além de 32 bytes
++de índice. Partições reservadas impedem telemetria e vídeo de consumir espaço
++de eventos. Entradas grandes ou profundas são rejeitadas antes de formar cópias
++JSON grandes. Scratch de serialização, hashes, índices Python e notificações
++tem reserva própria dentro do orçamento de registros. Os sockets de aviso têm
++buffers pequenos e transportam somente um byte, sem imagens ou JSON.
++
++`memfd`/`mmap` permitem uma única cópia da câmera para um slot privado. A reserva
++precede `np.copyto`; o produtor não guarda o buffer da câmera para esperar disco.
++O encoder recebe uma view somente de leitura. Não há fila com feeder ou cópias
++de imagem no IPC. Nenhum lock de metadados é mantido durante disco/encoder.
++Locks entre processos usam descrições de arquivo distintas e a aquisição no
++produtor é não bloqueante; contenção também é uma rejeição explícita.
++
++A 640×480×3, cada frame ocupa 921.600 bytes; cabem 145 slots no pool padrão.
++O pré-roll de três segundos a 30 fps retém aproximadamente 90–91 frames,
++delimitados por timestamps. Isso deixa cerca de 1,8 segundo de capacidade
++adicional. Um bloqueio de 40 segundos causa perdas controladas; aumentar RAM
++para escondê-lo não faz parte da solução.
++
++Dados aceitos não são removidos para admitir dados novos. Slots de log ficam
++retidos até confirmação durável; slots de imagem são liberados após consumo,
++que ainda não confirma persistência. BEGIN/END têm capacidade reservada juntos.
++Sem capacidade para começar um incidente, o vídeo fica indisponível e o
++evento correspondente tenta o canal independente de logs. Cada frame recusado
++continua passando pela avaliação ocular. A saúde contém contadores por
++categoria/motivo, primeira perda, resultados desconhecidos e última confirmação.
++O escritor publica resumos explícitos de perdas ao retomar, fora das filas
++saturadas. Frames expirados normalmente do pré-roll não contam como descarte.
++
++Os 160 MiB são orçamento de dados próprios de persistência, não RSS total.
++Python, bibliotecas, câmera/MediaPipe e codecs têm consumo separado. A saúde
++expõe RSS e PSS (anônimo, arquivos e memória compartilhada), além da base do
++recorder. Não somar RSS dos processos para contar arenas compartilhadas.
++O recorder aplica `RLIMIT_AS` à base virtual já inicializada mais a reserva
++configurada. O validador usa um thread FFmpeg e mantém mp4v/XVID. A opção
++`CAP_PROP_N_THREADS` existe desde o OpenCV 4.8 usado pela imagem
++([fonte oficial](https://github.com/opencv/opencv/blob/4.8.0/modules/videoio/include/opencv2/videoio.hpp)).
++
++## Janelas e cobertura
++
++Pré-roll, CRITICAL, pós-roll e cooldown são decisões do produtor usando tempo
++de origem. O escritor não recalcula fadiga nem usa atraso de consumo como
++tempo do incidente. Cada arquivo tem `timestamps.jsonl`, com ID do incidente,
++sequência de admissão e timestamp de cada frame submetido ao encoder.
++
++Metadados guardam janela solicitada, trigger, primeiro/último timestamp real,
++admitidos/consumidos/verificados, perdas, motivos, quantidade e maior gap.
++Cobertura completa exige contabilização conhecida, começo e fim cobertos,
++intervalos internos válidos e ausência de perdas. A tolerância de gap do vídeo
++é independente do detector: `--danger-gap-tolerance-sec` (padrão 0,5 s).
++Bordas usam um período do fps configurado, ou
++`--danger-boundary-tolerance-sec`. Valores e tolerâncias ficam no metadado.
++Timestamps repetidos, regressivos ou não finitos são recusados sem alongar
++janelas. IDs de eventos por incidente são limitados; excesso marca cobertura
++incompleta em vez de acumular referências sem limite.
++
++Morte/erro durante gravação deixa a tentativa interrompida como `.partial`.
++Frames retidos podem formar outra parte imutável do mesmo incidente; cobertura
++fica incompleta. Uma publicação já finalizada com confirmação perdida é
++reconciliada, sem produzir outro vídeo. A exclusão de `.partial` no sync
++continua válida. Consumidores devem validar hashes e metadados, e avaliar
++`coverage_complete` separadamente da existência do vídeo.
++
++## Saúde, recuperação e encerramento
++
++O HUD e um socket Unix abstrato exibem estado ocular atual e falhas técnicas
++separadamente. O socket atende o mesmo UID, sem arquivo de status ou porta de
++rede, dentro do namespace local. Nome configurável para múltiplas instâncias:
++`--persistence-status-socket @nome`. Exemplo de leitura no mesmo namespace:
++
++```python
++import json, socket
++with socket.socket(socket.AF_UNIX) as client:
++    client.settimeout(1)
++    client.connect("\0salte-fatigue-status")
++    print(json.loads(client.recv(65536)))
++```
++
++O snapshot não espera filas nem disco. Um escritor sem progresso por dez
++segundos aparece como `stalled`. Não há substituição de processo vivo bloqueado.
++Após morte confirmada, o supervisor tenta no máximo duas substituições, com
++esperas de 1 e 5 segundos. Erros de I/O também têm duas tentativas de recuperação;
++esgotamento preserva dados admitidos em RAM e mantém falha explícita até o
++encerramento. Nenhuma recuperação reinicia a FSM ocular. Console atrasado leva
++timestamp original e `historical=true`, e não aciona alerta atual.
++
++O fechamento dos escritores tem prazo global de cinco segundos no aplicativo,
++incluindo terminação. Pendências não recebem confirmação durável nem indicação
++de história completa. A morte do processo principal termina seus escritores;
++não há joins automáticos sem prazo. `--no-danger-record` cria zero processos,
++arenas, pré-buffer, encoders, scans ou cópias destinadas ao vídeo.
++
++## Validação local
++
++```bash
++PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v
++PYTHONDONTWRITEBYTECODE=1 .venv/bin/python ops/validate_persistence_isolation.py \
++  --output docs/evidencias/2026-10-06/persistence_isolation
++```
++
++As reproduções usam `RuntimeApplication._publish()` e `FatigueRuntime` reais,
++sem câmera/MediaPipe. O mesmo teste e hash reproduzem bloqueio de 40 segundos
++em eventos, abertura, escrita e finalização: quatro falhas na base anterior e
++aprovação após a mudança. O ensaio integrado bloqueia simultaneamente os dois
++escritores por 40 segundos, força filas cheias e lê a saúde durante a falha.
++Mede p50/p95/p99/máximo, CPU de entrega/cópia e PSS separado. Resultados são do
++PC informado no artefato; não constituem benchmark ou implantação no Raspberry.
++Diffs por logger, recorder e integração, logs e campos serializados ficam na
++[pasta de evidências](evidencias/2026-10-06/persistence_isolation/).
+diff --git a/tests/test_structured_logger.py b/tests/test_structured_logger.py
+index e7f8717..4ec443a 100644
+--- a/tests/test_structured_logger.py
++++ b/tests/test_structured_logger.py
+@@ -442,7 +442,7 @@ class TestRunHostLogging(unittest.TestCase):
+         )
+         self.assertIsNone(application.active_critical_event_id)
+ 
+-    def test_recorder_does_not_receive_unpersisted_event_id(self) -> None:
++    def test_recorder_receives_logical_reference_when_event_admission_fails(self) -> None:
+         logger = FailingCorrelatingLogger()
+         recorder = CapturingRecorder()
+         application = RuntimeApplication.__new__(RuntimeApplication)
+@@ -461,8 +461,8 @@ class TestRunHostLogging(unittest.TestCase):
+ 
+         application._publish(np.zeros((48, 64, 3), dtype=np.uint8), features, critical)
+ 
+-        self.assertEqual(recorder.event_ids, [None])
+-        self.assertIsNone(application.active_critical_event_id)
++        self.assertEqual(recorder.event_ids, ["logical-1"])
++        self.assertEqual(application.active_critical_event_id, "logical-1")
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/tests/test_async_persistence.py b/tests/test_async_persistence.py
+new file mode 100644
+index 0000000..ea521f8
+--- /dev/null
++++ b/tests/test_async_persistence.py
+@@ -0,0 +1,384 @@
++"""Real-process persistence contracts, independent from camera/MediaPipe."""
++import json
++import os
++import socket
++import tempfile
++import time
++import unittest
++from pathlib import Path
++from unittest.mock import patch
++
++import numpy as np
++import _bootstrap  # noqa
++from async_danger_recorder import AsyncDangerVideoRecorder
++from async_structured_logger import AsyncStructuredLogger
++from persistence_transport import BUSY, FREE, HEALTH_SIZE, HealthSocket, READY
++from runtime_models import FatigueState
++
++
++def until(predicate, timeout=4.):
++    deadline = time.monotonic() + timeout
++    while time.monotonic() < deadline:
++        result = predicate()
++        if result:
++            return result
++        time.sleep(.01)
++    raise AssertionError("condition timed out")
++
++
++class TestAsyncLogger(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.root = Path(self.tmp.name)
++        self.loggers = []
++
++    def tearDown(self):
++        for logger in self.loggers:
++            logger.close(.5)
++        self.tmp.cleanup()
++
++    def make(self, **kwargs):
++        logger = AsyncStructuredLogger(self.root, budget_bytes=1024 * 1024, max_segment_age_s=.04, **kwargs)
++        self.loggers.append(logger)
++        return logger
++
++    def test_admission_is_not_a_path_or_durable_ack(self):
++        logger = self.make(fault={"phase": "event_write", "delay_s": .3})
++        receipt = logger.log_event("transition", {"source_timestamp_s": 100.})
++        self.assertTrue(receipt.accepted)
++        self.assertEqual(logger.receipt_state(receipt), "enqueued")
++        until(lambda: logger.receipt_state(receipt) == "persisted")
++        record = next(self.root.glob("events/**/*.json"))
++        self.assertEqual(json.loads(record.read_text())["data"]["source_timestamp_s"], 100.)
++
++    def test_full_rejects_new_and_keeps_every_accepted_id(self):
++        logger = self.make(fault={"phase": "event_write", "delay_s": .5})
++        lane = logger.channel.lanes["events"]
++        receipts = [logger.log_event("test", {"ordinal": i}) for i in range(lane.count + 4)]
++        accepted = [receipt for receipt in receipts if receipt.accepted]
++        self.assertEqual(len(accepted), lane.count)
++        self.assertTrue(logger.snapshot()["first_loss_utc"])
++        self.assertEqual(logger.snapshot()["dropped"]["events:full"], 4)
++        until(lambda: all(logger.receipt_state(receipt) == "persisted" for receipt in accepted))
++        records = [json.loads(path.read_text()) for path in self.root.glob("events/**/*.json")]
++        self.assertEqual({record["record_id"] for record in records if record["kind"] == "test"},
++                         {receipt.record_id for receipt in accepted})
++        until(lambda: any(json.loads(path.read_text())["kind"] == "persistence_loss_summary"
++                          for path in self.root.glob("events/**/*.json")))
++
++    def test_reserved_event_lane_survives_full_telemetry_and_console(self):
++        logger = self.make(fault={"phase": "open", "delay_s": .5})
++        for name in ("telemetry", "console"):
++            lane = logger.channel.lanes[name]
++            for i in range(lane.count + 3):
++                if name == "telemetry":
++                    logger.log_frame_and_assessment({"frame_idx": i}, {"frame_idx": i})
++                else:
++                    logger.channel.submit(name, {"message": "pending"})
++        receipt = logger.log_event("still_admitted")
++        self.assertTrue(receipt.accepted)
++        self.assertIn("telemetry:full", logger.snapshot()["dropped"])
++        self.assertIn("console:full", logger.snapshot()["dropped"])
++        until(lambda: logger.receipt_state(receipt) == "persisted")
++
++    def test_oversize_and_contention_are_explicit_nonblocking_rejections(self):
++        logger = self.make()
++        receipt = logger.log_event("large", {"message": "x" * 10000})
++        self.assertFalse(receipt.accepted)
++        self.assertEqual(receipt.reason, "bytes")
++        import fcntl
++        other = os.open(f"/proc/self/fd/{logger.arena.fd}", os.O_RDWR)
++        try:
++            fcntl.flock(other, fcntl.LOCK_EX)
++            started = time.perf_counter()
++            receipt = logger.log_event("locked")
++            self.assertLess(time.perf_counter() - started, .01)
++            self.assertEqual(receipt.reason, "contention")
++        finally:
++            os.close(other)
++
++    def test_worker_death_after_publication_reconciles_same_immutable_id(self):
++        logger = self.make(fault={"phase": "event_ack", "exit": True})
++        receipt = logger.log_event("critical", {"source_timestamp_s": 123.})
++        until(lambda: logger.receipt_state(receipt) == "persisted", 6.)
++        events = [json.loads(path.read_text()) for path in self.root.glob("events/**/*.json")]
++        matching = [record for record in events if record["record_id"] == receipt.record_id]
++        self.assertEqual(len(matching), 1)
++        self.assertEqual(logger.snapshot()["recovery_attempts"], 1)
++
++    def test_confirmed_receipts_remain_confirmed_across_worker_restart(self):
++        logger = self.make()
++        receipt = logger.log_event("confirmed_before_restart")
++        until(lambda: logger.receipt_state(receipt) == "persisted")
++        logger.channel.process.kill()
++        until(lambda: logger.snapshot()["generation"] == 1 and logger.snapshot()["state"] == "ready", 6.)
++        self.assertEqual(logger.receipt_state(receipt), "persisted")
++        next_receipt = logger.log_event("confirmed_after_restart")
++        until(lambda: logger.receipt_state(next_receipt) == "persisted")
++
++    def test_partial_write_failure_retries_without_duplicate_telemetry(self):
++        logger = self.make(fault={"phase": "write", "raise": True})
++        for i in range(5):
++            logger.log_frame_and_assessment({"frame_idx": i}, {"frame_idx": i})
++        until(lambda: logger.snapshot().get("durable", {}).get("telemetry") == 5)
++        frames = [json.loads(line) for path in self.root.glob("runs/**/frames.jsonl")
++                  if not any(part.endswith(".partial") for part in path.parts)
++                  for line in path.read_text().splitlines()]
++        self.assertEqual([record["frame_idx"] for record in frames], list(range(5)))
++        self.assertTrue(list(self.root.glob("runs/**/*.partial")))
++
++    def test_end_barrier_waits_for_all_admitted_pairs_and_records_loss(self):
++        logger = self.make(fault={"phase": "finalize", "delay_s": .2})
++        for i in range(3):
++            logger.log_frame_and_assessment({"frame_idx": i}, {"frame_idx": i})
++        logger.log_event("too_large", {"x": "x" * 10000})
++        end = logger.log_run_end({"frames_seen": 3})
++        until(lambda: logger.receipt_state(end) == "persisted")
++        payload = json.loads(next(self.root.glob("runs/**/run-end.json")).read_text())
++        self.assertFalse(payload["data"]["history_complete"])
++        frames = [line for path in self.root.glob("runs/**/frames.jsonl") for line in path.read_text().splitlines()]
++        self.assertEqual(len(frames), 3)
++
++    def test_close_with_blocked_writer_is_bounded_and_not_durable(self):
++        logger = self.make(fault={"phase": "event_write", "delay_s": 40.})
++        receipt = logger.log_event("pending")
++        until(lambda: logger.snapshot().get("phase") == "event_write")
++        started = time.monotonic()
++        snapshot = logger.close(.2)
++        self.assertLess(time.monotonic() - started, .4)
++        self.assertGreater(snapshot["unknown_outcomes"], 0)
++        self.assertNotEqual(logger.receipt_state(receipt), "persisted")
++
++    def test_replacement_attempts_are_bounded_to_two(self):
++        logger = self.make(fault={"phase": "event_ack", "exit": True, "generation": "all"})
++        receipt = logger.log_event("never_acknowledged")
++        until(lambda: logger.snapshot()["recovery_attempts"] == 2 and logger.snapshot()["state"] == "dead", 9.)
++        self.assertNotEqual(logger.receipt_state(receipt), "persisted")
++        self.assertEqual(len([path for path in self.root.glob("events/**/*.json") if path.stem == receipt.record_id]), 1)
++
++    def test_disk_recovery_attempts_are_bounded_without_replacing_live_worker(self):
++        logger = self.make(fault={"phase": "open", "raise": True, "repeat": True})
++        receipt = logger.log_event("retained")
++        until(lambda: logger.snapshot().get("recovery_exhausted"), 9.)
++        snapshot = logger.snapshot()
++        self.assertEqual(snapshot["io_recovery_attempts"], 2)
++        self.assertEqual(snapshot["recovery_attempts"], 0)
++        self.assertIsNotNone(snapshot["pid"])
++        self.assertEqual(logger.receipt_state(receipt), "enqueued")
++
++    def test_sampling_size_limit_and_jsonl_manifest_fields(self):
++        logger = AsyncStructuredLogger(self.root, log_frame_every=2, log_assessment_every=3,
++                                       budget_bytes=1024 * 1024, max_segment_age_s=.04, max_segment_bytes=512)
++        self.loggers.append(logger)
++        for i in range(7):
++            logger.log_frame_and_assessment({"frame_idx": i}, {"frame_idx": i})
++        rejected = logger.log_frame_and_assessment({"frame_idx": 0, "x": "x" * 600}, {"frame_idx": 0})
++        self.assertEqual(rejected.reason, "segment_bytes")
++        logger.close(2.)
++        frames = [json.loads(line)["frame_idx"] for path in sorted(self.root.glob("runs/**/frames.jsonl")) for line in path.read_text().splitlines()]
++        assessments = [json.loads(line)["frame_idx"] for path in sorted(self.root.glob("runs/**/assessments.jsonl")) for line in path.read_text().splitlines()]
++        self.assertEqual(frames, [0, 2, 4, 6])
++        self.assertEqual(assessments, [0, 3, 6])
++        for path in self.root.glob("runs/**/manifest.json"):
++            record = json.loads(path.read_text())
++            self.assertLessEqual(record["bytes"], 512)
++            self.assertEqual(record["publication"], "finalized")
++            self.assertIn("sha256", record)
++
++
++class TestAsyncRecorder(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.root = Path(self.tmp.name)
++        self.recorders = []
++        self.frame = np.zeros((24, 32, 3), np.uint8)
++
++    def tearDown(self):
++        for recorder in self.recorders:
++            recorder.close(.5)
++        self.tmp.cleanup()
++
++    def make(self, **kwargs):
++        options = dict(pre_roll_sec=.2, post_roll_sec=.1, cooldown_sec=0., image_budget_bytes=self.frame.nbytes * 32)
++        options.update(kwargs)
++        recorder = AsyncDangerVideoRecorder(self.root, 10, (32, 24), **options)
++        self.recorders.append(recorder)
++        return recorder
++
++    def feed(self, recorder, timeline, critical_indices):
++        for i, timestamp in enumerate(timeline):
++            recorder.on_frame(self.frame, timestamp, FatigueState.CRITICAL if i in critical_indices else FatigueState.SAFE, "logical-event")
++            time.sleep(.002)
++
++    def metadata(self):
++        until(lambda: list(self.root.glob("**/metadata.json")))
++        return [json.loads(path.read_text()) for path in self.root.glob("**/metadata.json")]
++
++    def test_disabled_has_no_worker_arena_prebuffer_scan_or_copy(self):
++        with patch("async_danger_recorder.Arena", side_effect=AssertionError("allocation")), \
++             patch.object(Path, "rglob", side_effect=AssertionError("scan")):
++            recorder = self.make(enabled=False)
++            recorder.on_frame(self.frame, 100., FatigueState.CRITICAL)
++            self.assertIsNone(recorder.channel)
++            self.assertFalse(hasattr(recorder, "prebuffer"))
++            self.assertEqual(recorder.snapshot()["copies"], 0)
++            self.assertEqual(list(self.root.iterdir()), [])
++
++    def test_private_frame_survives_source_mutation(self):
++        recorder = self.make(fault={"phase": "open", "delay_s": .2})
++        self.frame.fill(120)
++        self.feed(recorder, (100., 100.1, 100.2, 100.3, 100.4, 100.5), {2, 3})
++        self.frame.fill(0)
++        self.metadata()
++        import cv2
++        video = next(self.root.glob("**/video.mp4"))
++        capture = cv2.VideoCapture(str(video))
++        try:
++            ok, decoded = capture.read()
++            self.assertTrue(ok)
++            self.assertGreater(decoded.mean(), 100.)
++        finally:
++            capture.release()
++
++    def test_finalized_durable_file_can_have_incomplete_coverage(self):
++        recorder = self.make(pre_roll_sec=0., image_budget_bytes=self.frame.nbytes * 3,
++                             fault={"phase": "open", "delay_s": .3})
++        self.feed(recorder, [100. + i * .1 for i in range(10)], {0, 1, 2, 3, 4, 5})
++        metadata = self.metadata()[0]
++        self.assertTrue(metadata["file_finalized"])
++        self.assertFalse(metadata["coverage_complete"])
++        self.assertGreater(metadata["dropped_frames"].get("full", 0), 0)
++        until(lambda: recorder.snapshot().get("last_incident", {}).get("durably_published"))
++        self.assertEqual(metadata["event_ids"], [])
++        self.assertEqual(metadata["logical_event_ids"], ["logical-event"])
++
++    def test_source_gap_and_missing_boundaries_are_independent(self):
++        recorder = self.make(pre_roll_sec=.4, post_roll_sec=.2)
++        self.feed(recorder, (100., 100.1, 100.7, 100.8, 101.2), {0, 1, 2})
++        metadata = self.metadata()[0]
++        self.assertIn("source_gap", metadata["coverage_reasons"])
++        self.assertIn("missing_start", metadata["coverage_reasons"])
++        self.assertIn("missing_end", metadata["coverage_reasons"])
++        self.assertEqual(metadata["gap_count"], 1)
++        self.assertAlmostEqual(metadata["max_gap_s"], .6)
++
++    def test_variable_fps_successive_incidents_keep_source_windows_and_ids(self):
++        recorder = self.make(post_roll_sec=.2)
++        self.feed(recorder, (10., 10.07, 10.15, 10.23, 10.35, 10.41, 10.6, 10.67,
++                             10.8, 10.92, 11.03, 11.15, 11.25, 11.4), {3, 4, 8, 9})
++        until(lambda: len(list(self.root.glob("**/metadata.json"))) == 2)
++        metadata = sorted(self.metadata(), key=lambda item: item["source_started_s"])
++        self.assertNotEqual(metadata[0]["incident_id"], metadata[1]["incident_id"])
++        self.assertAlmostEqual(metadata[0]["requested_window"]["end_s"], 10.61)
++        self.assertAlmostEqual(metadata[1]["requested_window"]["end_s"], 11.23)
++        self.assertAlmostEqual(metadata[0]["actual_last_source_s"], 10.6)
++        for path in self.root.glob("**/timestamps.jsonl"):
++            rows = [json.loads(line) for line in path.read_text().splitlines()]
++            self.assertEqual(len({row["incident_id"] for row in rows}), 1)
++            self.assertTrue(all(row["source_timestamp_s"] >= 10. for row in rows))
++
++    def test_repeated_regressive_nonfinite_timestamps_do_not_extend_windows(self):
++        recorder = self.make(pre_roll_sec=0.)
++        self.feed(recorder, (100., 100., 99., float("nan"), 100.1, 100.2, 100.3), {0, 1, 2, 3})
++        metadata = self.metadata()[0]
++        self.assertEqual(metadata["dropped_frames"]["timestamp_invalid"], 3)
++        self.assertAlmostEqual(metadata["source_finished_s"], 100.2)
++        self.assertFalse(metadata["coverage_complete"])
++
++    def test_process_death_retains_queued_frames_and_marks_recovery_incomplete(self):
++        recorder = self.make(pre_roll_sec=0., fault={"phase": "write", "exit": True})
++        self.feed(recorder, (100., 100.1, 100.2, 100.3), {0, 1})
++        metadata = self.metadata()[0]
++        self.assertIn("writer_interrupted", metadata["coverage_reasons"])
++        self.assertEqual(metadata["consumed_frames"], metadata["admitted_frames"])
++        self.assertTrue(list(self.root.glob("**/*.partial")))
++        self.assertEqual(recorder.snapshot()["recovery_attempts"], 1)
++
++    def test_ack_lost_after_video_publication_is_reconciled_without_duplicate(self):
++        recorder = self.make(pre_roll_sec=0., fault={"phase": "video_ack", "exit": True})
++        self.feed(recorder, (100., 100.1, 100.2, 100.3), {0, 1})
++        until(lambda: recorder.snapshot().get("last_incident", {}).get("durably_published"), 6.)
++        self.assertEqual(len(self.metadata()), 1)
++        self.assertTrue(self.metadata()[0]["coverage_complete"])
++
++    def test_final_publication_exception_reconciles_without_duplicate_video(self):
++        recorder = self.make(pre_roll_sec=0., fault={"phase": "video_ack", "raise": True})
++        self.feed(recorder, (100., 100.1, 100.2, 100.3), {0, 1})
++        until(lambda: recorder.snapshot().get("last_incident", {}).get("durably_published"), 6.)
++        self.assertEqual(len(self.metadata()), 1)
++        self.assertEqual(recorder.snapshot()["recovery_attempts"], 0)
++
++    def test_full_frame_arena_rejects_before_copy(self):
++        recorder = self.make(pre_roll_sec=0., image_budget_bytes=self.frame.nbytes * 2,
++                             fault={"phase": "open", "delay_s": .5})
++        recorder.on_frame(self.frame, 100., FatigueState.CRITICAL)
++        recorder.on_frame(self.frame, 100.1, FatigueState.CRITICAL)
++        with patch("async_danger_recorder.np.copyto", side_effect=AssertionError("copy after saturation")):
++            receipt = recorder.try_submit_frame(self.frame, 100.2, FatigueState.CRITICAL)
++        self.assertFalse(receipt.accepted)
++        self.assertEqual(receipt.reason, "full")
++        self.assertEqual(recorder.copy_count, 2)
++
++    def test_blocked_recorder_does_not_hold_logger_disk_locks(self):
++        recorder = self.make(pre_roll_sec=0., fault={"phase": "open", "delay_s": 40.})
++        recorder.on_frame(self.frame, 100., FatigueState.CRITICAL)
++        until(lambda: recorder.snapshot().get("phase") == "open")
++        logger = AsyncStructuredLogger(self.root / "logs", budget_bytes=1024 * 1024)
++        try:
++            receipt = logger.log_event("current_alert", {"source_timestamp_s": 100.})
++            until(lambda: logger.receipt_state(receipt) == "persisted", 1.)
++            self.assertEqual(recorder.snapshot()["phase"], "open")
++        finally:
++            logger.close(.5)
++
++    def test_close_pending_does_not_claim_finalized_or_durable(self):
++        recorder = self.make(pre_roll_sec=0., fault={"phase": "finalize", "delay_s": 40.})
++        self.feed(recorder, (100., 100.1, 100.2, 100.3), {0, 1})
++        until(lambda: recorder.snapshot().get("phase") == "finalize")
++        started = time.monotonic()
++        snapshot = recorder.close(.2)
++        self.assertLess(time.monotonic() - started, .4)
++        self.assertGreater(snapshot["unknown_outcomes"], 0)
++        self.assertFalse(snapshot.get("last_incident", {}).get("durably_published", False))
++        self.assertFalse(list(self.root.glob("**/metadata.json")))
++
++    def test_unavailable_incident_uses_independent_event_channel(self):
++        logger = AsyncStructuredLogger(self.root / "logs", budget_bytes=1024 * 1024)
++        try:
++            recorder = self.make(pre_roll_sec=0., event_logger=logger)
++            from persistence_transport import RESERVED
++            for i in range(recorder.controls.count):
++                recorder.controls.set_header(i, RESERVED)
++            recorder.on_frame(self.frame, 100., FatigueState.CRITICAL)
++            self.assertIsNone(recorder.active)
++            self.assertEqual(recorder.copy_count, 0)
++            until(lambda: any(json.loads(path.read_text())["kind"] == "incident_video_unavailable"
++                              for path in (self.root / "logs").glob("events/**/*.json")))
++            self.assertIn("controls:full", recorder.snapshot()["dropped"])
++            for i in range(recorder.controls.count):
++                recorder.controls.set_header(i, FREE)
++        finally:
++            logger.close(.5)
++
++    def test_boundary_and_gap_tolerances_are_configured_and_inclusive(self):
++        recorder = self.make(pre_roll_sec=0., post_roll_sec=0., gap_tolerance_s=.75, boundary_tolerance_s=.05)
++        self.feed(recorder, (100., 100.75, 101.5), {0, 1})
++        metadata = self.metadata()[0]
++        self.assertEqual(metadata["gap_count"], 0)
++        self.assertTrue(metadata["coverage_complete"])
++        self.assertEqual(metadata["gap_tolerance_s"], .75)
++        self.assertEqual(metadata["boundary_tolerance_s"], .05)
++
++
++class TestHealthSocket(unittest.TestCase):
++    def test_abstract_socket_snapshot_needs_no_disk_or_queue(self):
++        status = {"current": {"fatigue_state": "critical"}, "dropped": {"video:full": 42}}
++        address = f"@salte-test-{os.getpid()}-{time.monotonic_ns()}"
++        service = HealthSocket(address, lambda: status)
++        try:
++            with socket.socket(socket.AF_UNIX) as client:
++                client.settimeout(1.)
++                client.connect("\0" + address[1:])
++                self.assertEqual(json.loads(client.recv(65536)), status)
++        finally:
++            service.close()
+diff --git a/tests/test_persistence_reproduction.py b/tests/test_persistence_reproduction.py
+new file mode 100644
+index 0000000..5085c17
+--- /dev/null
++++ b/tests/test_persistence_reproduction.py
+@@ -0,0 +1,111 @@
++"""The same production-boundary reproduction runs before and after the change."""
++import inspect
++import tempfile
++import threading
++import time
++import unittest
++from pathlib import Path
++from types import SimpleNamespace
++
++import numpy as np
++import _bootstrap  # noqa
++import run_host
++from fatigue_runtime import FatigueRuntime
++from feature_extractor_rt import RTFrameFeatures
++from runtime_models import EyeFrameObservation, FatigueState
++
++
++class TestPersistenceReproduction(unittest.TestCase):
++    def test_publish_progresses_during_real_40_second_io_blocks(self):
++        """Open/write/finalize recorder blocks, event write block, independent apps."""
++        applications = []
++        threads = []
++        errors = []
++        counts = {}
++        phases = ("logger_event", "open", "write", "finalize")
++        with tempfile.TemporaryDirectory() as tmp:
++            for phase in phases:
++                root = Path(tmp) / phase
++                kwargs = {}
++                asynchronous = "fault" in inspect.signature(run_host.StructuredLogger).parameters
++                if asynchronous and phase == "logger_event":
++                    kwargs["fault"] = {"phase": "event_write", "delay_s": 40.}
++                slog = run_host.StructuredLogger(root / "logs", max_segment_age_s=.1, **kwargs)
++                if not asynchronous and phase == "logger_event":
++                    original = slog._write_atomic
++                    def blocked(path, record, original=original):
++                        time.sleep(40.)
++                        return original(path, record)
++                    slog._write_atomic = blocked
++                kwargs = {"run_id": slog.run_id}
++                async_recorder = "fault" in inspect.signature(run_host.DangerVideoRecorder).parameters
++                if async_recorder and phase != "logger_event":
++                    kwargs["fault"] = {"phase": phase, "delay_s": 40.}
++                recorder = run_host.DangerVideoRecorder(root / "video", 30, (640, 480),
++                                                        .2, .2, 0., phase != "logger_event", **kwargs)
++                if not async_recorder and phase != "logger_event":
++                    if phase == "open":
++                        original = recorder._try_open_writer
++                        def block_open(original=original):
++                            time.sleep(40.)
++                            return original()
++                        recorder._try_open_writer = block_open
++                    else:
++                        original = recorder._open_codec
++                        class Proxy:
++                            def __init__(self, writer, phase):
++                                self.writer, self.phase, self.fired = writer, phase, False
++                            def write(self, frame):
++                                if self.phase == "write" and not self.fired:
++                                    self.fired = True
++                                    time.sleep(40.)
++                                return self.writer.write(frame)
++                            def release(self):
++                                if self.phase == "finalize" and not self.fired:
++                                    self.fired = True
++                                    time.sleep(40.)
++                                return self.writer.release()
++                        def open_proxy(filename, codec, original=original, phase=phase):
++                            writer = original(filename, codec)
++                            return Proxy(writer, phase) if writer is not None else None
++                        recorder._open_codec = open_proxy
++                app = run_host.RuntimeApplication.__new__(run_host.RuntimeApplication)
++                app.slog, app.recorder = slog, recorder
++                app.args = SimpleNamespace(display=False)
++                app.frames_seen, app.last_health = 0, 10**20
++                app.last_state, app.active_critical_event_id = FatigueState.UNKNOWN, None
++                applications.append(app)
++                counts[phase] = 0
++                def produce(app=app, phase=phase):
++                    try:
++                        runtime = FatigueRuntime()
++                        frame = np.zeros((480, 640, 3), np.uint8)
++                        started = time.monotonic()
++                        index = 0
++                        while time.monotonic() - started < 43.:
++                            source = 100. + index / 30.
++                            ear = .3 if phase == "finalize" and index >= 65 else .1
++                            assessment = runtime.evaluate(EyeFrameObservation(source, index, True, ear, ear))
++                            features = RTFrameFeatures(source * 1000, index, ear, ear, True)
++                            app._publish(frame, features, assessment)
++                            counts[phase] += 1
++                            index += 1
++                            time.sleep(1. / 30.)
++                    except Exception as exc:
++                        errors.append(repr(exc))
++                thread = threading.Thread(target=produce, daemon=True)
++                threads.append(thread)
++                thread.start()
++            for thread in threads:
++                thread.join(50.)
++            for app in applications:
++                app.recorder.close()
++                app.slog.close()
++            self.assertFalse(errors, errors)
++            for phase in phases:
++                with self.subTest(phase=phase):
++                    self.assertGreater(counts[phase], 1000, counts)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/ops/validate_persistence_isolation.py b/ops/validate_persistence_isolation.py
+new file mode 100644
+index 0000000..8a780e3
+--- /dev/null
++++ b/ops/validate_persistence_isolation.py
+@@ -0,0 +1,162 @@
++"""Local acceptance evidence: real 40 s double stall, memory and delivery CPU.
++
++Run with the repository venv, without camera or deployment. Artifacts are local.
++"""
++from __future__ import annotations
++
++import argparse
++import json
++import os
++import platform
++import socket
++import sys
++import tempfile
++import time
++from pathlib import Path
++from types import SimpleNamespace
++
++sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++import numpy as np
++import cv2
++from async_danger_recorder import AsyncDangerVideoRecorder
++from async_structured_logger import AsyncStructuredLogger
++from fatigue_runtime import FatigueRuntime
++from feature_extractor_rt import RTFrameFeatures
++from persistence_transport import HealthSocket
++from run_host import RuntimeApplication
++from runtime_models import EyeFrameObservation, FatigueState
++
++
++def percentiles(values):
++    values = np.asarray(values) * 1000.
++    return {"p50_ms": float(np.percentile(values, 50)), "p95_ms": float(np.percentile(values, 95)),
++            "p99_ms": float(np.percentile(values, 99)), "max_ms": float(values.max())}
++
++
++def memory(pid):
++    result = {}
++    for line in Path(f"/proc/{pid}/smaps_rollup").read_text().splitlines():
++        key, _, value = line.partition(":")
++        if key in ("Rss", "Pss", "Pss_Anon", "Pss_File", "Pss_Shmem"):
++            result[key + "_kib"] = int(value.split()[0])
++    return result
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--output", type=Path, required=True)
++    args = parser.parse_args()
++    args.output.mkdir(parents=True, exist_ok=True)
++    report = {"host": platform.platform(), "python": sys.version,
++              "numpy": np.__version__, "opencv": cv2.__version__, "scope": "PC local; no camera/MediaPipe/Pi"}
++    with tempfile.TemporaryDirectory(prefix="salte-isolation-") as tmp:
++        root = Path(tmp)
++        frame = np.zeros((480, 640, 3), np.uint8)
++        # Default 160 MiB budget and the complete prebuffer/copy path, 1000 calls.
++        logger = AsyncStructuredLogger(root / "benchmark-logs")
++        recorder = AsyncDangerVideoRecorder(root / "benchmark-video", 30, (640, 480),
++                                            control_budget_bytes=logger.control_budget)
++        time.sleep(.3)
++        durations = []
++        cpu = time.process_time()
++        for i in range(1000):
++            started = time.perf_counter()
++            recorder.on_frame(frame, 100. + i / 30., FatigueState.SAFE)
++            logger.log_frame_and_assessment({"frame_idx": i, "timestamp_s": 100. + i / 30.},
++                                            {"frame_idx": i, "fatigue_state": "safe"})
++            durations.append(time.perf_counter() - started)
++        report["default_budget_delivery"] = {**percentiles(durations), "parent_cpu_seconds": time.process_time() - cpu,
++                                               "calls": 1000, "copy_seconds": recorder.copy_seconds,
++                                               "copies": recorder.copy_count, "record_budget_bytes": 32 * 1024 * 1024,
++                                               "image_budget_bytes": recorder.images.size,
++                                               "prebuffer_descriptors": len(recorder.prebuffer)}
++        report["default_budget_memory"] = {"parent": memory(os.getpid()),
++                                            "logger": memory(logger.channel.process.pid),
++                                            "recorder": memory(recorder.channel.process.pid)}
++        recorder.close(1.)
++        logger.close(1.)
++
++        # Smaller record budget forces both channels full; image arena stays at
++        # default 128 MiB so 40 s cannot be hidden by enlarging video memory.
++        logger = AsyncStructuredLogger(root / "logs", budget_bytes=1024 * 1024,
++                                       max_segment_age_s=.1, fault={"phase": "write", "delay_s": 40.})
++        recorder = AsyncDangerVideoRecorder(root / "video", 30, (640, 480), 3., .1, 0.,
++                                            control_budget_bytes=logger.control_budget,
++                                            fault={"phase": "write", "delay_s": 40.}, event_logger=logger,
++                                            run_id=logger.run_id)
++        app = RuntimeApplication.__new__(RuntimeApplication)
++        app.slog, app.recorder = logger, recorder
++        app.args = SimpleNamespace(display=False)
++        app.frames_seen, app.last_health = 0, 10**20
++        app.last_state, app.active_critical_event_id = FatigueState.UNKNOWN, None
++        app.local_status = {"frames_seen": 0, "fatigue_state": "unknown"}
++        address = f"@salte-acceptance-{os.getpid()}"
++        service = HealthSocket(address, app.persistence_snapshot)
++        runtime = FatigueRuntime()
++        samples, occupancies, snapshots = [], [], []
++        def feed(index, ear):
++            ts = 100. + index / 30.
++            result = runtime.evaluate(EyeFrameObservation(ts, index, True, ear, ear))
++            features = RTFrameFeatures(ts * 1000., index, ear, ear, True)
++            started = time.perf_counter()
++            app._publish(frame, features, result)
++            samples.append(time.perf_counter() - started)
++        for i in range(90):
++            feed(i, .3)
++        for i in range(25):
++            logger.log_event("queued_before_loss", {"ordinal": i, "source_timestamp_s": 100.})
++            logger.channel.submit("console", {"source_utc": logger.timestamp(), "message": "historical admission probe", "historical": True})
++        started, cpu = time.monotonic(), time.process_time()
++        index = 90
++        next_tick = started
++        sample_second = -1
++        while time.monotonic() - started < 44.:
++            elapsed = time.monotonic() - started
++            feed(index, .3 if elapsed >= 42. else .1)
++            index += 1
++            second = int(elapsed)
++            if second != sample_second:
++                sample_second = second
++                snapshot = app.persistence_snapshot()
++                snapshots.append({"elapsed_s": elapsed, **snapshot})
++                occupancies.append(snapshot["recorder"]["image_reserved_bytes"])
++                if second in (10, 20, 30):
++                    with socket.socket(socket.AF_UNIX) as client:
++                        client.settimeout(.5)
++                        client.connect("\0" + address[1:])
++                        response = json.loads(client.recv(65536))
++                        assert response["current"]["fatigue_state"] == "critical"
++                        assert response["current"]["frames_seen"] > 300
++                if second == 30:
++                    report["stalled_memory"] = {"parent": memory(os.getpid()),
++                                                 "logger": memory(logger.channel.process.pid),
++                                                 "recorder": memory(recorder.channel.process.pid)}
++            next_tick += 1. / 30.
++            time.sleep(max(0., next_tick - time.monotonic()))
++        parent_cpu = time.process_time() - cpu
++        service.close()
++        recorder.close(2.)
++        logger.log_run_end({"frames_seen": app.frames_seen})
++        logger.close(2.)
++        final = app.persistence_snapshot()
++        assert final["logger"]["dropped"].get("telemetry:full", 0) > 0
++        assert final["recorder"]["dropped"].get("video:full", 0) > 0
++        assert max(occupancies) <= 128 * 1024 * 1024
++        assert any(snapshot["logger"]["state"] == "stalled" and snapshot["recorder"]["state"] == "stalled" for snapshot in snapshots)
++        assert final["logger"]["last_durable_ack"] is not None
++        assert final["recorder"]["last_incident"]["durably_published"]
++        assert not final["recorder"]["last_incident"]["coverage_complete"]
++        report["double_40_second_stall"] = {**percentiles(samples), "frames_seen": app.frames_seen,
++                                            "parent_cpu_seconds": parent_cpu, "wall_seconds": 44.,
++                                            "peak_reserved_image_bytes": max(occupancies), "final": final}
++        (args.output / "health-timeline.json").write_text(json.dumps(snapshots, indent=2) + "\n")
++        metadata = [json.loads(path.read_text()) for path in (root / "video").glob("**/metadata.json")]
++        manifests = [json.loads(path.read_text()) for path in (root / "logs").glob("**/manifest.json")]
++        losses = [json.loads(path.read_text()) for path in root.glob("**/*.json") if "loss" in path.name]
++        (args.output / "serialized-artifacts.json").write_text(json.dumps({"metadata": metadata, "manifests": manifests, "loss_summaries": losses}, indent=2) + "\n")
++    (args.output / "measurements.json").write_text(json.dumps(report, indent=2) + "\n")
++    print(json.dumps(report, indent=2))
++
++
++if __name__ == "__main__":
++    main()

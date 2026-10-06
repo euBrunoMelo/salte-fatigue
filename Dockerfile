@@ -109,6 +109,11 @@ COPY fatigue_runtime.py       /app/
 COPY atomic_persistence.py    /app/
 COPY structured_logger.py     /app/
 COPY danger_video_recorder.py /app/
+COPY persistence_transport.py /app/
+COPY persistence_worker.py    /app/
+COPY recorder_persistence_worker.py /app/
+COPY async_structured_logger.py /app/
+COPY async_danger_recorder.py /app/
 
 # Unico modelo neural do runtime: MediaPipe FaceLandmarker.
 COPY face_landmarker.task /app/

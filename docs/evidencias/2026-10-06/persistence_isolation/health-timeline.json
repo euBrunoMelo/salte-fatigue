@@ -1,0 +1,5290 @@
+[
+  {
+    "elapsed_s": 7.128001016099006e-06,
+    "current": {
+      "frames_seen": 91,
+      "fatigue_state": "safe",
+      "source_timestamp_s": 103.0
+    },
+    "logger": {
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "last_incident": {},
+      "state": "starting",
+      "pid": 21310,
+      "generation": 0,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 37,
+        "events:full": 19,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 14560,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "last_incident": {},
+      "state": "starting",
+      "pid": 21313,
+      "generation": 0,
+      "recovery_attempts": 0,
+      "dropped": {},
+      "first_loss_utc": null,
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 0,
+          "capacity": 18,
+          "reserved_bytes": 0,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 91,
+          "capacity": 145,
+          "reserved_bytes": 2912,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "MONITORING",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": null,
+      "image_reserved_bytes": 83865600,
+      "copies": 91,
+      "copy_seconds": 0.03350112299085595
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 1.000095017001513,
+    "current": {
+      "frames_seen": 121,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 104.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 67,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.197512073,
+      "phase": "open",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {},
+      "first_loss_utc": null,
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 91,
+          "capacity": 145,
+          "reserved_bytes": 2912,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 83865600,
+      "copies": 121,
+      "copy_seconds": 0.04839915499360359
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 2.0000631540005998,
+    "current": {
+      "frames_seen": 151,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 105.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 97,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {},
+      "first_loss_utc": null,
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 121,
+          "capacity": 145,
+          "reserved_bytes": 3872,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 111513600,
+      "copies": 151,
+      "copy_seconds": 0.05847217900191026
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 3.0002815349998855,
+    "current": {
+      "frames_seen": 181,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 106.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 127,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 6
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 4.000258170000961,
+    "current": {
+      "frames_seen": 211,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 107.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 157,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 36
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 5.000066257000071,
+    "current": {
+      "frames_seen": 241,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 108.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 187,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 66
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 6.000282583001535,
+    "current": {
+      "frames_seen": 271,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 109.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 217,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 96
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 7.0001537060015835,
+    "current": {
+      "frames_seen": 301,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 110.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 247,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 126
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 8.000271732000328,
+    "current": {
+      "frames_seen": 331,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 111.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 277,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 156
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 9.000275619000604,
+    "current": {
+      "frames_seen": 361,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 112.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 307,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 186
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 10.000056816999859,
+    "current": {
+      "frames_seen": 391,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 113.0
+    },
+    "logger": {
+      "state": "working",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 337,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 216
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 11.000272638000752,
+    "current": {
+      "frames_seen": 421,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 114.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 367,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 246
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 12.000072454000474,
+    "current": {
+      "frames_seen": 451,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 115.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 397,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 276
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 13.000314266000714,
+    "current": {
+      "frames_seen": 481,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 116.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 427,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 306
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 14.000268936000793,
+    "current": {
+      "frames_seen": 511,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 117.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 457,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 336
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 15.000192894000065,
+    "current": {
+      "frames_seen": 541,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 118.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 487,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 366
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 16.000272170000244,
+    "current": {
+      "frames_seen": 571,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 119.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 517,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 396
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 17.000139102001413,
+    "current": {
+      "frames_seen": 601,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 120.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 547,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 426
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 18.000063254999986,
+    "current": {
+      "frames_seen": 631,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 121.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 577,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 456
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 19.000274460000583,
+    "current": {
+      "frames_seen": 661,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 122.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 607,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 486
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 20.000112427000204,
+    "current": {
+      "frames_seen": 691,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 123.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 637,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 516
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 21.00029888500103,
+    "current": {
+      "frames_seen": 721,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 124.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 667,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 546
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 22.00018238800112,
+    "current": {
+      "frames_seen": 751,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 125.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 697,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 576
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 23.00019140800032,
+    "current": {
+      "frames_seen": 781,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 126.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 727,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 606
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 24.000318940001307,
+    "current": {
+      "frames_seen": 811,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 127.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 757,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 636
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 25.000139791000038,
+    "current": {
+      "frames_seen": 841,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 128.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 787,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 666
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 26.000085157000285,
+    "current": {
+      "frames_seen": 871,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 129.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 817,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 696
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 27.000251393001236,
+    "current": {
+      "frames_seen": 901,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 130.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 847,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 726
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 28.00031788100023,
+    "current": {
+      "frames_seen": 931,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 131.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 877,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 756
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 29.00006268300058,
+    "current": {
+      "frames_seen": 961,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 132.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 907,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 786
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 30.00017722800112,
+    "current": {
+      "frames_seen": 991,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 133.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 937,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 816
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 31.000199545000214,
+    "current": {
+      "frames_seen": 1021,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 134.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 967,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 846
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 32.00033845800135,
+    "current": {
+      "frames_seen": 1051,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 135.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 997,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 876
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 33.00010607600052,
+    "current": {
+      "frames_seen": 1081,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 136.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1027,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 906
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 34.00013194100029,
+    "current": {
+      "frames_seen": 1111,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 137.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1057,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 936
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 35.000082636001025,
+    "current": {
+      "frames_seen": 1141,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 138.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1087,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 966
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 36.00013433300046,
+    "current": {
+      "frames_seen": 1171,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 139.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1117,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 996
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 37.00030182699993,
+    "current": {
+      "frames_seen": 1201,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 140.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1147,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1026
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 38.00016432099983,
+    "current": {
+      "frames_seen": 1231,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 141.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1177,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1056
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 39.00026540200088,
+    "current": {
+      "frames_seen": 1261,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 142.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1207,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1086
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 40.00013633200069,
+    "current": {
+      "frames_seen": 1291,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 143.0
+    },
+    "logger": {
+      "state": "stalled",
+      "heartbeat": 9491.255106524,
+      "phase": "write",
+      "durable": {
+        "events": 1
+      },
+      "consumed": {
+        "events": 1,
+        "console": 57
+      },
+      "last_durable_ack": {
+        "category": "events",
+        "sequence": 1,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/d41b60c417e0467084b684af5928e99f.json",
+        "confirmed_utc": "2026-10-06T21:05:41.564Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 37152,
+        "Pss_kib": 20917,
+        "Pss_Anon_kib": 18220,
+        "Pss_File_kib": 2697,
+        "Pss_Shmem_kib": 0
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1237,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 7,
+          "capacity": 7,
+          "reserved_bytes": 28896,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 6,
+          "capacity": 7,
+          "reserved_bytes": 12480,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 54,
+          "capacity": 54,
+          "reserved_bytes": 444096,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1116
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 41.000133397001264,
+    "current": {
+      "frames_seen": 1321,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 144.0
+    },
+    "logger": {
+      "state": "ready",
+      "heartbeat": 9532.195456886,
+      "phase": "idle",
+      "durable": {
+        "events": 69,
+        "telemetry": 92
+      },
+      "consumed": {
+        "events": 69,
+        "console": 68,
+        "telemetry": 95
+      },
+      "last_durable_ack": {
+        "category": "telemetry",
+        "sequence": 92,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/runs/2026/10/06/501d465be1a34230b39676f56855b69e/segments/000089",
+        "confirmed_utc": "2026-10-06T21:06:22.375Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/501d465be1a34230b39676f56855b69e-loss-92464f460e283711b382f9e2.json",
+      "memory": {
+        "Rss_kib": 37760,
+        "Pss_kib": 19645,
+        "Pss_Anon_kib": 18236,
+        "Pss_File_kib": 1209,
+        "Pss_Shmem_kib": 200
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1240,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 0,
+          "capacity": 7,
+          "reserved_bytes": 0,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 0,
+          "capacity": 7,
+          "reserved_bytes": 0,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 4,
+          "capacity": 54,
+          "reserved_bytes": 32896,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "stalled",
+      "heartbeat": 9492.209416354,
+      "phase": "write",
+      "durable": {},
+      "consumed": {},
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": null,
+      "memory": {
+        "Rss_kib": 38604,
+        "Pss_kib": 22276,
+        "Pss_Anon_kib": 19660,
+        "Pss_File_kib": 2616,
+        "Pss_Shmem_kib": 0
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1146
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 145,
+          "capacity": 145,
+          "reserved_bytes": 4640,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 133632000,
+      "copies": 175,
+      "copy_seconds": 0.06083089599815139
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 42.0000992460009,
+    "current": {
+      "frames_seen": 1351,
+      "fatigue_state": "critical",
+      "source_timestamp_s": 145.0
+    },
+    "logger": {
+      "state": "ready",
+      "heartbeat": 9533.195700617,
+      "phase": "idle",
+      "durable": {
+        "events": 69,
+        "telemetry": 124
+      },
+      "consumed": {
+        "events": 69,
+        "console": 68,
+        "telemetry": 125
+      },
+      "last_durable_ack": {
+        "category": "telemetry",
+        "sequence": 124,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/runs/2026/10/06/501d465be1a34230b39676f56855b69e/segments/000121",
+        "confirmed_utc": "2026-10-06T21:06:23.441Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/501d465be1a34230b39676f56855b69e-loss-92464f460e283711b382f9e2.json",
+      "memory": {
+        "Rss_kib": 37836,
+        "Pss_kib": 19719,
+        "Pss_Anon_kib": 18308,
+        "Pss_File_kib": 1209,
+        "Pss_Shmem_kib": 202
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1240,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 0,
+          "capacity": 7,
+          "reserved_bytes": 0,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 0,
+          "capacity": 7,
+          "reserved_bytes": 0,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 2,
+          "capacity": 54,
+          "reserved_bytes": 16448,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9533.197127644,
+      "phase": "write",
+      "durable": {},
+      "consumed": {
+        "video": 211
+      },
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": "/tmp/salte-isolation-ck_m_7z2/video/loss-audit/501d465be1a34230b39676f56855b69e-41f96c54ad97fc1055d10ae7.json",
+      "memory": {
+        "Rss_kib": 73764,
+        "Pss_kib": 34912,
+        "Pss_Anon_kib": 28852,
+        "Pss_File_kib": 5538,
+        "Pss_Shmem_kib": 522
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1146
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 85,
+          "capacity": 145,
+          "reserved_bytes": 2720,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "RECORDING_ACTIVE",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": "4ebdc9d99f37480f8812cada5a19fe9c",
+      "image_reserved_bytes": 78336000,
+      "copies": 205,
+      "copy_seconds": 0.06475282400606375
+    },
+    "status_socket_error": null
+  },
+  {
+    "elapsed_s": 43.00006302300062,
+    "current": {
+      "frames_seen": 1381,
+      "fatigue_state": "safe",
+      "source_timestamp_s": 146.0
+    },
+    "logger": {
+      "state": "ready",
+      "heartbeat": 9534.19539057,
+      "phase": "idle",
+      "durable": {
+        "events": 142,
+        "telemetry": 153
+      },
+      "consumed": {
+        "events": 142,
+        "console": 68,
+        "telemetry": 156
+      },
+      "last_durable_ack": {
+        "category": "telemetry",
+        "sequence": 153,
+        "path": "/tmp/salte-isolation-ck_m_7z2/logs/runs/2026/10/06/501d465be1a34230b39676f56855b69e/segments/000150",
+        "confirmed_utc": "2026-10-06T21:06:24.385Z"
+      },
+      "error": null,
+      "generation": 0,
+      "loss_summary": "/tmp/salte-isolation-ck_m_7z2/logs/events/2026/10/06/501d465be1a34230b39676f56855b69e-loss-92464f460e283711b382f9e2.json",
+      "memory": {
+        "Rss_kib": 37916,
+        "Pss_kib": 19799,
+        "Pss_Anon_kib": 18388,
+        "Pss_File_kib": 1209,
+        "Pss_Shmem_kib": 202
+      },
+      "last_incident": {},
+      "pid": 21310,
+      "recovery_attempts": 0,
+      "dropped": {
+        "telemetry:full": 1240,
+        "events:full": 20,
+        "console:full": 18
+      },
+      "first_loss_utc": "2026-10-06T21:05:41.483275+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "events": {
+          "count": 0,
+          "capacity": 7,
+          "reserved_bytes": 0,
+          "capacity_bytes": 28896
+        },
+        "console": {
+          "count": 0,
+          "capacity": 7,
+          "reserved_bytes": 0,
+          "capacity_bytes": 14560
+        },
+        "telemetry": {
+          "count": 4,
+          "capacity": 54,
+          "reserved_bytes": 32896,
+          "capacity_bytes": 444096
+        }
+      }
+    },
+    "recorder": {
+      "state": "working",
+      "heartbeat": 9534.197068141,
+      "phase": "write",
+      "durable": {},
+      "consumed": {
+        "video": 304
+      },
+      "last_durable_ack": null,
+      "error": null,
+      "generation": 0,
+      "loss_summary": "/tmp/salte-isolation-ck_m_7z2/video/loss-audit/501d465be1a34230b39676f56855b69e-41f96c54ad97fc1055d10ae7.json",
+      "memory": {
+        "Rss_kib": 157992,
+        "Pss_kib": 78142,
+        "Pss_Anon_kib": 31104,
+        "Pss_File_kib": 5556,
+        "Pss_Shmem_kib": 41482
+      },
+      "baseline_memory": {
+        "Rss_kib": 65180,
+        "Pss_kib": 34626,
+        "Pss_Anon_kib": 25676,
+        "Pss_File_kib": 8948,
+        "Pss_Shmem_kib": 2
+      },
+      "encoder_allowance_bytes": 67108864,
+      "last_incident": {},
+      "pid": 21313,
+      "recovery_attempts": 0,
+      "dropped": {
+        "video:full": 1146
+      },
+      "first_loss_utc": "2026-10-06T21:05:44.340489+00:00",
+      "unknown_outcomes": 0,
+      "queues": {
+        "controls": {
+          "count": 2,
+          "capacity": 18,
+          "reserved_bytes": 8256,
+          "capacity_bytes": 74304
+        },
+        "video": {
+          "count": 22,
+          "capacity": 145,
+          "reserved_bytes": 704,
+          "capacity_bytes": 4640
+        }
+      },
+      "fsm": "MONITORING",
+      "image_capacity_bytes": 134217728,
+      "active_incident_id": null,
+      "image_reserved_bytes": 20275200,
+      "copies": 235,
+      "copy_seconds": 0.06825608700091834
+    },
+    "status_socket_error": null
+  }
+]

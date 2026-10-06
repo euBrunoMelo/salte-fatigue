@@ -1,0 +1,16 @@
+Implementação local da persistência isolada, 2026-10-06.
+Base anterior: 541fa2fc919c9944d577ffa7c3ebb0c1b2565943.
+Mesma reprodução e mesmo hash: quatro cenários com bloqueios de 40 s falham antes e passam depois.
+Suíte final: 203 testes, OK, incluindo formatos/imutabilidade/sync e EAR/PERCLOS.
+Dois escritores independentes; admissão não bloqueante; rejeição de novos dados; saúde em RAM/HUD/socket abstrato.
+Orçamento padrão: 32 MiB registros/controles + 128 MiB imagens; crescimento virtual encoder limitado separadamente a 64 MiB após a base.
+Sem recorder: zero processo, arena, pré-buffer, encoder, scan ou cópia de vídeo.
+Entrega com orçamento padrão, PC local: p50=0.181, p95=0.431, p99=0.654, máximo=7.066 ms; 1000 chamadas, CPU=0.235 s, cópias=0.148 s.
+Bloqueio simultâneo de 40 s, registro reduzido a 1 MiB para forçar saturação, imagem mantida em 128 MiB:
+1410 avaliações; p99 entrega=1.007 ms; máximo=4.345 ms; CPU parental=1.008 s em 44 s.
+Pico de imagens próprias=133632000 bytes, 145 slots; perdas explícitas log={'telemetry:full': 1240, 'events:full': 20, 'console:full': 18}, vídeo={'video:full': 1146}.
+Saúde acessível durante falha; vídeo finalizado e confirmado durável com cobertura incompleta; resumos de perdas persistidos.
+PSS/RSS e base dos trabalhadores disponíveis em measurements.json; não somar RSS das arenas compartilhadas.
+Benchmarks usam Linux x86_64/Python 3.14.4/OpenCV 4.13.0; não são benchmark do Pi. Sintaxe Python 3.11 validada, execução 3.11 não realizada.
+Diffs separados: 01-logger.patch, 02-recorder.patch, 03-integration-validation.patch.
+Nenhum acesso, implantação, reinício ou alteração no Raspberry nesta etapa.
