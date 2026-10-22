@@ -8,7 +8,7 @@ Executar na raiz deste diretorio:
 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests -v
 .venv/bin/python -m py_compile run_host.py calibrate_eyes.py feature_extractor_rt.py observation_adapter.py runtime_models.py runtime_observability.py eye_quality_gate.py eye_calibration.py eye_closure.py perclos_rt.py fatigue_fsm.py attention_fsm.py fatigue_runtime.py atomic_persistence.py structured_logger.py danger_video_recorder.py
 docker compose config
-bash -n sync/monitoramento-sync.sh sync/install-monitoramento-sync.sh sync/99-monitoramento-sync
+bash ops/validate_shell.sh
 
 O pacote produtivo deve conter apenas os modulos atuais e face_landmarker.task.
 

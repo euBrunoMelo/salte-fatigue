@@ -1,15 +1,24 @@
-<<'EOF'
-     .venv/
-     __pycache__/
-     *.pyc
-     .claude/
-     .ai-jail
-     logs/
-     runs/
-     config/eye_calibration.json
-     .env
-     .env.*
-     *.mp4
-     *.avi
-     *.264
-     EOF
+/.venv/
+__pycache__/
+*.pyc
+/.ai-jail
+/logs/
+/runs/
+/config/eye_calibration.json
+
+# F05: recordings are generated; evidence and test fixtures are versionable.
+*.mp4
+*.avi
+*.264
+!/docs/evidencias/**/*.mp4
+!/docs/evidencias/**/*.avi
+!/docs/evidencias/**/*.264
+!/tests/fixtures/**/*.mp4
+!/tests/fixtures/**/*.avi
+!/tests/fixtures/**/*.264
+
+# Keep environment protection after the video exceptions, including evidence.
+.env
+.env.*
+!.env.example
+!.env.*.example
